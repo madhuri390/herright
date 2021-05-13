@@ -1,0 +1,43 @@
+extends base
+
+block content 
+    //- main.main 
+    //-     .card-container
+    //-         each product in products
+    //-             .card
+    //-                 .card__header
+    //-                     .card__picture
+    //-                         .card__picture-overlay &nbsp;
+    //-                         img.card__picture-img(src=`/img/products/${product.imageCover}`, alt='product 1' )
+    //-                     h3.heading-tertirary
+    //-                         span=product.name
+    .container 
+        .row
+            .col-lg-9.col-md-9
+                        .product-list
+                            .row
+                                each product in products
+                                    .col-lg-4.col-md-6
+                                        .equal-column-content.text-center(style='padding:15px;margin:10px;height:0%;')
+                                            div(class='product__item')
+                                                .hover-product
+                                                    ul(class='product__hover')
+                                                        li
+                                                            a.image-popup(href='./shopping_img/${itemimg[0]}')
+                                                            span(class='arrow_expand')
+                                                    img.img-fluid.image(style='cursor:pointer; width:262px; height:368px; float:left'  src=`/img/products/${product.imageCover}` )
+                                                div(class='product__item__text')
+                                                    h6
+                                                        a(href='#')=product.name
+                                                    div(class='product__price')=product.price
+
+    script(src='js/jquery-3.3.1.min.js')
+    script(src='js/bootstrap.min.js')
+    script(src='js/jquery.magnific-popup.min.js')
+    script(src='js/jquery-ui.min.js')
+    script(src='js/mixitup.min.js')
+    script(src='js/jquery.countdown.min.js')
+    script(src='js/jquery.slicknav.js')
+    script(src='js/owl.carousel.min.js')
+    script(src='js/jquery.nicescroll.min.js')
+    script(src='js/main.js')

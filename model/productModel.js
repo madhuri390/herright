@@ -76,6 +76,7 @@ const productSchema = new mongoose.Schema(
         message: 'Choose between:kurta, sets,tops,jumpsuits,pallazos',
       },
     },
+    slug: String,
     color: {
       type: String,
       required: [true, 'A product must have color'],
@@ -86,7 +87,11 @@ const productSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
-
+productSchema.index({ slug: 1 });
+productSchema.pre('save', function (next) {
+  this.slug = slugify(this.name, { lower: true });
+  next();
+});
 const Product = mongoose.model('Product', productSchema);
 
 module.exports = Product;

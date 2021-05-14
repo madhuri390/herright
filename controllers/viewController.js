@@ -15,21 +15,19 @@ exports.getOverview = catchAsync(async (req, res) => {
     products,
   });
 });
-// exports.getTour = catchAsync(async (req, res, next) => {
-//   //1)Get data from the requested data and also reviews and guides
-//   const tour = await Tour.findOne({ slug: req.params.slug }).populate({
-//     path: 'reviews',
-//     field: 'review rating user',
-//   });
-//   if (!tour) return next(new AppError('There is no tour with this name', 404));
-//   //2)Build template
+exports.getProduct = catchAsync(async (req, res, next) => {
+  //1)Get data from the requested data and also reviews and guides
+  const product = await Product.findOne({ slug: req.params.slug });
+  if (!product)
+    return next(new AppError('There is no product with this name', 404));
+  //2)Build template
 
-//   //3)Render
-//   res.status(200).render('tour', {
-//     title: `${tour.name} Tour`,
-//     tour,
-//   });
-// });
+  //3)Render
+  res.status(200).render('product', {
+    title: `${product.name}`,
+    product,
+  });
+});
 
 // exports.getLoginForm = (req, res) => {
 //   res.status(200).render('login', {

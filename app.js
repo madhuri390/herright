@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const productRouter = require('./routes/productRoutes');
 const viewRouter = require('./routes/viewRoutes');
+const userRouter = require('./routes/userRoutes');
 const app = express();
 //Global Middle wares
 app.set('view engine', 'pug');
@@ -37,4 +38,5 @@ app.use((req, res, next) => {
 });
 app.use('/', viewRouter);
 app.use('/api/v1/products', productRouter);
+app.use('/api/v1/users', userRouter);
 module.exports = app;

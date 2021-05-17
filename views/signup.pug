@@ -17,7 +17,7 @@ block content
         .col-lg-6.offset-lg-3
           .register-form
             h2=Register
-            form(onsubmit='return false;')
+            form.form--signup
               .group-input
                 label(for='username') Username*
                 input#username(type='text' autocomplete='off')
@@ -61,7 +61,10 @@ block content
                 .group-input
                   label(for='city') Landmark (optional)
                   input#landmark(type='text' autocomplete='off')
-                button.site-btn.register-btn(type='submit' style='background:color;' onclick='register();') Register
+                button.site-btn.register-btn(type='submit' style='background:color;' ) Register
                 .formResult
                   .switch-login
                     a.or-login(href='#') Or Login
+    script(type="module" src='/js/index.js')
+    script(type="module" src='/js/signup.js')
+

@@ -19,8 +19,14 @@ block content
                     .carousel-inner
                         .carousel-item.active
                             img.d-block(src=`/img/products/${product.images[0]}` style="max-width:100%;" alt='First slide')
-                        .carousel-item
-                            img.d-block(src=`/img/products/${product.images[1]}` alt='Second slide' style="max-width:100%;" )
+                        
+                        
+                        - for (var i = 0; i < product.images.length; ++i) {
+                        
+                        
+                            .carousel-item
+                                img.d-block(src=`/img/products/${product.images[i]}` alt='Second slide' style="max-width:100%;" )
+                        -}
                     a.carousel-control-prev(href='#carouselExampleControls' role='button' data-slide='prev')
                         span.carousel-control-prev-icon(aria-hidden='true')
                         span.sr-only Previous

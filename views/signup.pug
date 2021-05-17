@@ -1,0 +1,67 @@
+extends base
+
+block content 
+  // Breadcrumb Section Begin
+  .breacrumb-section(style='padding-top:100px;')
+    .container(style='margin-top:0px;')
+      .row
+        .col-lg-12
+          .breadcrumb-text
+            a(href='shop.php')
+              i(class='icon_bag_alt' style='width:20px')
+              | Register
+            span
+  .register-login-section.spad
+    .container
+      .row
+        .col-lg-6.offset-lg-3
+          .register-form
+            h2=Register
+            form(onsubmit='return false;')
+              .group-input
+                label(for='username') Username*
+                input#username(type='text' autocomplete='off')
+                .showFeedBack
+              .group-input
+                label(for='password') Password*
+                input#password(type='password')
+                .showFeedBack
+              .group-input
+                label(for='confirmpass') Confirm Password*
+                input#confirmpass(type='password')
+                .showFeedBack
+              .group-input
+                label(for='contact') Contact Number*
+                input#contact(type='text' autocomplete='off')
+                .showFeedBack
+              .group-input
+                label(for='email') Email Address*
+                input#email(type='email' autocomplete='off')
+                .showFeedBack
+              h6 Address Info
+                br
+                .group-input
+                  label(for='zip') Pincode*
+                  input#pincode(type='text')
+                  .showFeedBack
+                .group-input
+                  label(for='zip') City*
+                  input#city(type='text')
+                  .showFeedBack
+                .group-input
+                  label(for='city') State*
+                  input#state(type='text' autocomplete='off')
+                  .showFeedBack
+                .group-input
+                  label(for='city') Locality / Area / Street *
+                  input#locality(type='text' autocomplete='off')
+                .group-input
+                  label(for='city') Flat no / Building Name*
+                  input#flat(type='text' autocomplete='off')
+                .group-input
+                  label(for='city') Landmark (optional)
+                  input#landmark(type='text' autocomplete='off')
+                button.site-btn.register-btn(type='submit' style='background:color;' onclick='register();') Register
+                .formResult
+                  .switch-login
+                    a.or-login(href='#') Or Login

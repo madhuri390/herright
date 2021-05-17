@@ -5,6 +5,7 @@ const viewController = require('./../controllers/viewController');
 const router = express.Router();
 router.get('/', viewController.getOverview);
 router.get('/product/:slug', viewController.getProduct);
+router.get('/signup', viewController.signup);
 // router.get('/login', authController.isLoggedIn, viewController.getLoginForm);
 // router.get('/me', authController.protect, viewController.getAccount);
 // router.get('/my-bookings', authController.protect, viewController.getMyTours);

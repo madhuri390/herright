@@ -18,53 +18,63 @@ block content
           .register-form
             h2=Register
             form.form--signup
-              .group-input
-                label(for='username') Username*
-                input#username(type='text' autocomplete='off')
-                .showFeedBack
-              .group-input
-                label(for='password') Password*
-                input#password(type='password')
-                .showFeedBack
-              .group-input
-                label(for='confirmpass') Confirm Password*
-                input#confirmpass(type='password')
-                .showFeedBack
-              .group-input
-                label(for='contact') Contact Number*
-                input#contact(type='text' autocomplete='off')
-                .showFeedBack
-              .group-input
-                label(for='email') Email Address*
-                input#email(type='email' autocomplete='off')
-                .showFeedBack
-              h6 Address Info
-                br
-                .group-input
-                  label(for='zip') Pincode*
-                  input#pincode(type='text')
-                  .showFeedBack
-                .group-input
-                  label(for='zip') City*
-                  input#city(type='text')
-                  .showFeedBack
-                .group-input
-                  label(for='city') State*
-                  input#state(type='text' autocomplete='off')
-                  .showFeedBack
-                .group-input
-                  label(for='city') Locality / Area / Street *
-                  input#locality(type='text' autocomplete='off')
-                .group-input
-                  label(for='city') Flat no / Building Name*
-                  input#flat(type='text' autocomplete='off')
-                .group-input
-                  label(for='city') Landmark (optional)
-                  input#landmark(type='text' autocomplete='off')
-                button.site-btn.register-btn(type='submit' style='background:color;' ) Register
-                .formResult
-                  .switch-login
-                    a.or-login(href='#') Or Login
-    script(type="module" src='/js/index.js')
-    script(type="module" src='/js/signup.js')
+              .form__group
+                label.form__label(for='email') Email address
+                input#email.form__input(type='email', placeholder='you@example.com', required)
+              .form__group.ma-bt-md
+                label.form__label(for='password') Password
+                input#password.form__input(type='password', placeholder='••••••••', required, minlength='8')
+              .form__group
+                button.btn.btn--green Login
+
+              //- .group-input
+              //-   label(for='username') Username*
+              //-   input#username(type='text' autocomplete='off')
+              //-   .showFeedBack
+              //- .group-input
+              //-   label(for='password') Password*
+              //-   input#password(type='password')
+              //-   .showFeedBack
+              //- .group-input
+              //-   label(for='confirmpass') Confirm Password*
+              //-   input#confirmpass(type='password')
+              //-   .showFeedBack
+              //- .group-input
+              //-   label(for='contact') Contact Number*
+              //-   input#contact(type='text' autocomplete='off')
+              //-   .showFeedBack
+              //- .group-input
+              //-   label(for='email') Email Address*
+              //-   input#email(type='email' autocomplete='off')
+              //-   .showFeedBack
+              //- h6 Address Info
+              //-   br
+              //-   .group-input
+              //-     label(for='zip') Pincode*
+              //-     input#pincode(type='text')
+              //-     .showFeedBack
+              //-   .group-input
+              //-     label(for='zip') City*
+              //-     input#city(type='text')
+              //-     .showFeedBack
+              //-   .group-input
+              //-     label(for='city') State*
+              //-     input#state(type='text' autocomplete='off')
+              //-     .showFeedBack
+              //-   .group-input
+              //-     label(for='city') Locality / Area / Street *
+              //-     input#locality(type='text' autocomplete='off')
+              //-   .group-input
+              //-     label(for='city') Flat no / Building Name*
+              //-     input#flat(type='text' autocomplete='off')
+              //-   .group-input
+              //-     label(for='city') Landmark (optional)
+              //-     input#landmark(type='text' autocomplete='off')
+              //-   button.site-btn.register-btn(type='submit' style='background:color;' ) Register
+              //-   .formResult
+              //-     .switch-login
+              //-       a.or-login(href='#') Or Login
+              //- script(type="module" src='/js/index.js')
+              script(type="module" src='/js/signup.js')
+              script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js")
 

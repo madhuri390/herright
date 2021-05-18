@@ -32,12 +32,20 @@ const createSendToken = (user, statusCode, res) => {
   });
 };
 exports.signup = catchAsync(async (req, res, next) => {
+  console.log(req.body);
   const newUser = await User.create({
     name: req.body.name,
     email: req.body.email,
     role: req.body.role,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
+    phoneNumber: req.body.phoneNumber,
+    state: req.body.state,
+    pincode: req.body.pincode,
+    city: req.body.city,
+    locality: req.body.locality,
+    flat: req.body.flat,
+    landmark: req.body.landmark,
   });
   const url = `${req.protocol}://${req.get('host')}/me`;
   console.log(url);

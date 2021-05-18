@@ -1,17 +1,46 @@
-const signupForm = document.querySelector('.form--signup');
-console.log(signupForm);
-const name = document.getElementById('username').value;
-const password = document.getElementById('password').value;
-const passwordConfirm = document.getElementById('confirmpass').value;
-const phoneNumber = document.getElementById('contact').value;
-const email = document.getElementById('email').value;
-const pincode = document.getElementById('pincode').value;
-const city = document.getElementById('city').value;
-const state = document.getElementById('state').value;
-const flat = document.getElementById('flat').value;
-const locality = document.getElementById('locality').value;
-const landmark = document.getElementById('landmark').value;
-console.log(pincode);
+import axios from 'axios';
+import { showAlert } from './alert';
+export const signup = async (
+  name,
+  password,
+  passwordConfirm,
+  phoneNumber,
+  email,
+  pincode,
+  city,
+  state,
+  flat,
+  locality,
+  landmark
+) => {
+  try {
+    const res = await axios({
+      method: 'POST',
+      url: 'http://127.0.0.1:8000/api/v1/users/signup',
+      data: {
+        name,
+        password,
+        passwordConfirm,
+        phoneNumber,
+        email,
+        pincode,
+        city,
+        state,
+        locality,
+        flat,
+        landmark,
+      },
+    });
+    if (res.data.status === 'success') {
+      showAlert('success', 'Login Successfully');
+      window.setTimeout(() => {
+        location.assign('/');
+      }, 1500);
+    }
+  } catch (err) {
+    showAlert('error', err.response.data.message);
+  }
+};
 // import { showAlert } from './alert';
 // export const signup = async (
 //   name,

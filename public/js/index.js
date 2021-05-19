@@ -1,7 +1,11 @@
 import '@babel/polyfill';
 import { signup } from './signup';
+import { login } from './login';
+//import {addToCart} from './'
 //DOM Elements
 const signupForm = document.querySelector('.form--signup');
+const loginForm = document.querySelector('.form--login');
+const addtocartBtn = document.getElementById('add-to-cart');
 
 //Values
 
@@ -35,14 +39,16 @@ if (signupForm) {
     );
   });
 }
-// if (loginForm) {
-//   loginForm.addEventListener('submit', (e) => {
-//     e.preventDefault();
-//     const email = document.getElementById('email').value;
-//     const password = document.getElementById('password').value;
-//     login(email, password);
-//   });
-// }
+
+//login
+if (loginForm) {
+  loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    login(email, password);
+  });
+}
 // if (logoutBtn) {
 //   logoutBtn.addEventListener('click', logout);
 // }
@@ -75,9 +81,10 @@ if (signupForm) {
 //   });
 // }
 
-// if (bookBtn)
-//   bookBtn.addEventListener('click', (e) => {
-//     e.target.textContent = 'Processing...';
-//     const { tourId } = e.target.dataset;
-//     bookTour(tourId);
-//   });
+if (addtocartBtn)
+  addtocartBtn.addEventListener('click', (e) => {
+    e.target.textContent = 'Processing...';
+    const { productId } = e.target.dataset;
+    console.log(productId);
+    //addToCart(productId);
+  });

@@ -1,10 +1,11 @@
 import '@babel/polyfill';
 import { signup } from './signup';
-import { login } from './login';
+import { login, logout } from './login';
 //import {addToCart} from './'
 //DOM Elements
 const signupForm = document.querySelector('.form--signup');
 const loginForm = document.querySelector('.form--login');
+const logoutBtn = document.querySelector('.nav__el--logout');
 const addtocartBtn = document.getElementById('add-to-cart');
 
 //Values
@@ -46,12 +47,13 @@ if (loginForm) {
     e.preventDefault();
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+
     login(email, password);
   });
 }
-// if (logoutBtn) {
-//   logoutBtn.addEventListener('click', logout);
-// }
+if (logoutBtn) {
+  logoutBtn.addEventListener('click', logout);
+}
 // if (userDataForm) {
 //   userDataForm.addEventListener('submit', (e) => {
 //     e.preventDefault();

@@ -5,8 +5,7 @@ const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 
 exports.getOverview = catchAsync(async (req, res) => {
-  //1)Get all tours data
-  console.log(req.user);
+  //1)Get all products data
   const products = await Product.find();
   //2)Build the template
 

@@ -38,9 +38,13 @@ header.header(style='position: fixed; z-index: 1030;width: 100%;')
                             a(href='contact.php') Contact
             .col-lg-3
                 div(class='header__right' style='')
-                    div(class='header__right__auth' style='')
-                        a(href='login.php' style='font-size:15px;') Login
-                        a(href='register.php' style='font-size:15px;') Register
+                    if user
+                        div(class='header__right__auth' style='text-deocration:none;')
+                            a.nav__el.nav__el--logout Log out 
+                    else 
+                        div(class='header__right__auth' style='')
+                            a(href='/login' style='font-size:15px;') Login
+                            a(href='/signup' style='font-size:15px;') Register
                     ul(class='header__right__widget')
                         li
                             span(class='icon_search search-switch')

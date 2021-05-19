@@ -18,9 +18,8 @@ const cartSchema = new mongooose.Schema({
 });
 bookingSchema.pre(/^find/, function (next) {
   this.populate('userId').populate('product');
-
   next();
 });
-const Cart = mongooose.model('Booking', cartSchema);
+const Cart = mongooose.model('Cart', cartSchema);
 
 module.exports = Cart;

@@ -1,7 +1,7 @@
 import '@babel/polyfill';
 import { signup } from './signup';
 import { login, logout } from './login';
-//import {addToCart} from './'
+import { addToCart } from './addToCart';
 //DOM Elements
 const signupForm = document.querySelector('.form--signup');
 const loginForm = document.querySelector('.form--login');
@@ -54,6 +54,7 @@ if (loginForm) {
 if (logoutBtn) {
   logoutBtn.addEventListener('click', logout);
 }
+
 // if (userDataForm) {
 //   userDataForm.addEventListener('submit', (e) => {
 //     e.preventDefault();
@@ -88,5 +89,5 @@ if (addtocartBtn)
     e.target.textContent = 'Processing...';
     const { productId } = e.target.dataset;
     console.log(productId);
-    //addToCart(productId);
+    addToCart(productId);
   });

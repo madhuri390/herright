@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const productRouter = require('./routes/productRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const userRouter = require('./routes/userRoutes');
+const cartRouter = require('./routes/cartRoutes');
 const app = express();
 const cookieParser = require('cookie-parser');
 
@@ -41,6 +42,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use('/', viewRouter);
+app.use('/api/v1/cart', cartRouter);
 app.use('/api/v1/products', productRouter);
 app.use('/api/v1/users', userRouter);
 module.exports = app;

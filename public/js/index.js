@@ -90,4 +90,5 @@ if (addtocartBtn)
     const { productId } = e.target.dataset;
     console.log(productId);
     addToCart(productId);
+    e.target.textContent = 'Added to the cart!';
   });

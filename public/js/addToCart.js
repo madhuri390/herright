@@ -4,7 +4,7 @@ export const addToCart = async (productId) => {
   try {
     const res = await axios({
       method: 'POST',
-      url: 'http://127.0.0.1:8000/api/v1/cart',
+      url: 'http://127.0.0.1:3000/api/v1/cart',
       data: {
         productId,
       },

@@ -16,7 +16,7 @@ const cartSchema = new mongooose.Schema({
     default: Date.now(),
   },
 });
-bookingSchema.pre(/^find/, function (next) {
+cartSchema.pre(/^find/, function (next) {
   this.populate('userId').populate('product');
   next();
 });

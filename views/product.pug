@@ -19,11 +19,11 @@ block content
                     .carousel-inner
                         .carousel-item.active
                             img.d-block(src=`/img/products/${product.images[0]}` style="max-width:100%;" alt='First slide')
-                        
-                        
+
+
                         - for (var i = 0; i < product.images.length; ++i) {
-                        
-                        
+
+
                             .carousel-item
                                 img.d-block(src=`/img/products/${product.images[i]}` alt='Second slide' style="max-width:100%;" )
                         -}
@@ -37,5 +37,13 @@ block content
                 h1=product.name 
                 p=product.price 
                 p=product.description
+                select#size.sorting(name='size' style='margin-right: 20px;max-width: 300px;margin-left: 20px;padding:10px;font-size: 16px;color: #4c4c4c;max-width: 300px;border-radius: 0;border: 1px solid #ECEDEE;height: 40px;line-height: 35px;')
+                    option(value='' selected) Choose an option
+                    option(value='XS') XS
+                    option(value='S') S
+                    option(value='M') M
+                    option(value='L') L
+                    option(value='XL') XL
+                br
                 button.btn.btn--green.span-all-rows#add-to-cart(data-product-id=`${product.id}`) Add to cart
 

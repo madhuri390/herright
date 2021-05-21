@@ -8,6 +8,7 @@ router.get('/', viewController.getOverview);
 router.get('/product/:slug', viewController.getProduct);
 router.get('/signup', viewController.signup);
 router.get('/login', viewController.getLoginForm);
+router.get('/cart', authController.protect, viewController.getCartDetails);
 // router.get('/me', authController.protect, viewController.getAccount);
 // router.get('/my-bookings', authController.protect, viewController.getMyTours);
 // router.post(

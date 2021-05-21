@@ -7,7 +7,7 @@ const signupForm = document.querySelector('.form--signup');
 const loginForm = document.querySelector('.form--login');
 const logoutBtn = document.querySelector('.nav__el--logout');
 const addtocartBtn = document.getElementById('add-to-cart');
-
+const decrement = document.getElementById('decrement');
 //Values
 
 //Delegation
@@ -88,7 +88,18 @@ if (addtocartBtn)
   addtocartBtn.addEventListener('click', (e) => {
     e.target.textContent = 'Processing...';
     const { productId } = e.target.dataset;
-    console.log(productId);
-    addToCart(productId);
-    e.target.textContent = 'Added to the cart!';
+    var size = document.getElementById('size').value;
+    // console.log(productId, size);
+    if (!size) {
+      alert('Please select a size...');
+    } else {
+      addToCart(productId, size);
+      e.target.textContent = 'Added to the cart!';
+    }
   });
+if (decrement) {
+  decrement.addEventListener('click', (e) => {
+    const { productId, productSize } = e.target.dataset;
+    console.log(productId, productSize);
+  });
+}

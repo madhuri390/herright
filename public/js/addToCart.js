@@ -1,12 +1,13 @@
 import axios from 'axios';
 import { showAlert } from './alert';
-export const addToCart = async (productId) => {
+export const addToCart = async (productId, size) => {
   try {
     const res = await axios({
       method: 'POST',
       url: 'http://127.0.0.1:3000/api/v1/cart',
       data: {
         productId,
+        size,
       },
     });
     if (res.data.status === 'success') {

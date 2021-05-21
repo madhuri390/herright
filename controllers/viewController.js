@@ -1,4 +1,5 @@
 const Product = require('../model/productModel');
+const Cart = require('../model/cartModel');
 // const User = require('../model/userModel');
 // const Booking = require('../model/bookingModel');
 const AppError = require('../utils/appError');
@@ -15,6 +16,7 @@ exports.getOverview = catchAsync(async (req, res) => {
     products,
   });
 });
+
 exports.getProduct = catchAsync(async (req, res, next) => {
   //1)Get data from the requested data and also reviews and guides
   const product = await Product.findOne({ slug: req.params.slug });
@@ -40,6 +42,18 @@ exports.getLoginForm = (req, res) => {
     title: 'Log into your account',
   });
 };
+
+exports.getCartDetails = catchAsync(async (req, res) => {
+  const userId = req.user.id;
+  //console.log(userId);
+  const cartItems = await Cart.find({ userId });
+  console.log(cartItems);
+
+  res.status(200).render('cart', {
+    title: 'All cart items',
+    cartItems,
+  });
+});
 // exports.getAccount = (req, res) => {
 //   res.status(200).render('account', {
 //     title: 'Your account',

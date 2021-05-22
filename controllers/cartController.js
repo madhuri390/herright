@@ -1,5 +1,6 @@
 const Cart = require('./../model/cartModel');
 const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/appError');
 exports.addToCart = catchAsync(async (req, res, next) => {
   const productId = req.body.productId;
   const userId = req.user.id;
@@ -31,6 +32,10 @@ exports.decrement = catchAsync(async (req, res, next) => {
     await Cart.updateMany(
       { userId, productId, size },
       { $inc: { quantity: -1 } }
+    );
+  } else {
+    return next(
+      new AppError('Cannot decrement.Something went wrong!Please try again.')
     );
   }
   res.status(200).json({

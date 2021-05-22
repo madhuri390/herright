@@ -9158,8 +9158,8 @@ var signupForm = document.querySelector('.form--signup');
 var loginForm = document.querySelector('.form--login');
 var logoutBtn = document.querySelector('.nav__el--logout');
 var addtocartBtn = document.getElementById('add-to-cart');
-var decrementBtn = document.getElementById('decrement');
-var incrementBtn = document.getElementById('increment'); //Values
+var decrementBtn = document.querySelectorAll('.decrement');
+var incrementBtn = document.querySelectorAll('.increment'); //Values
 //Delegation
 
 if (signupForm) {
@@ -9253,27 +9253,24 @@ if (addtocartBtn) addtocartBtn.addEventListener('click', function (e) {
   }
 });
 
-if (decrementBtn) {
-  decrementBtn.addEventListener('click', function (e) {
+for (var i = 0; i < decrementBtn.length; i++) {
+  decrementBtn[i].addEventListener('click', function (e) {
     var _e$target$dataset = e.target.dataset,
         productId = _e$target$dataset.productId,
         productSize = _e$target$dataset.productSize;
     (0, _addToCart.decrement)(productId, productSize);
-    var input_quantity = document.getElementsByClassName('input-quantity')[0].value;
-    document.getElementsByClassName('input-quantity')[0].innerHTML = input_quantity - 1;
-    document.getElementsByClassName('input-quantity')[0].value = input_quantity - 1;
+    var input_quantity = document.getElementById("".concat(productId, "-").concat(productSize)).value;
+    document.getElementById("".concat(productId, "-").concat(productSize)).value = parseInt(input_quantity) - 1;
   });
 }
 
-if (incrementBtn) {
-  incrementBtn.addEventListener('click', function (e) {
+for (var _i = 0; _i < incrementBtn.length; _i++) {
+  incrementBtn[_i].addEventListener('click', function (e) {
     var _e$target$dataset2 = e.target.dataset,
         productId = _e$target$dataset2.productId,
         productSize = _e$target$dataset2.productSize;
     (0, _addToCart.increment)(productId, productSize);
-    console.log(productId, productSize);
     var input_quantity = document.getElementById("".concat(productId, "-").concat(productSize)).value;
-    document.getElementById("".concat(productId, "-").concat(productSize)).innerHTML = parseInt(input_quantity) + 1;
     document.getElementById("".concat(productId, "-").concat(productSize)).value = parseInt(input_quantity) + 1;
   });
 }
@@ -9305,7 +9302,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51576" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63500" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

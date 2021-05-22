@@ -18,9 +18,9 @@ block content
                     p.mb-2=`Color:${item.productId.color}`
                     p.mb-2=`Category:${item.productId.category}`
                     p.mb-3=`Size:${item.size}`
-                    .btn-increment-decrement(id='decrement' data-product-Id=`${item.productId.id}`,data-product-size=`${item.size}`) -
+                    .btn-increment-decrement(class='decrement' data-product-Id=`${item.productId.id}`,data-product-size=`${item.size}`) -
                     input.input-quantity(id=`${item.productId.id}-${item.size}` value=`${item.quantity}`)
-                    .btn-increment-decrement(id='increment' data-product-Id=`${item.productId.id}`,data-product-size=`${item.size}`)  +
+                    .btn-increment-decrement(class='increment' data-product-Id=`${item.productId.id}`,data-product-size=`${item.size}`)  +
             
                     // Quantity
                 .row

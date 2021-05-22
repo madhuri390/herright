@@ -6,7 +6,6 @@ const Product = require('../model/productModel');
 const handleFactory = require('../controllers/handlerFactory');
 const multiStorage = multer.memoryStorage();
 const multiFilter = (req, file, cb) => {
-  console.log(file);
   if (file.mimetype.split('/')[0] === 'image') {
     cb(null, true);
   } else {

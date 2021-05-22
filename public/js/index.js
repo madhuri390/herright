@@ -7,8 +7,9 @@ const signupForm = document.querySelector('.form--signup');
 const loginForm = document.querySelector('.form--login');
 const logoutBtn = document.querySelector('.nav__el--logout');
 const addtocartBtn = document.getElementById('add-to-cart');
-const decrementBtn = document.getElementById('decrement');
-const incrementBtn = document.getElementById('increment');
+const decrementBtn = document.querySelectorAll('.decrement');
+const incrementBtn = document.querySelectorAll('.increment');
+
 //Values
 
 //Delegation
@@ -98,28 +99,25 @@ if (addtocartBtn)
       e.target.textContent = 'Added to the cart!';
     }
   });
-if (decrementBtn) {
-  decrementBtn.addEventListener('click', (e) => {
+
+for (let i = 0; i < decrementBtn.length; i++) {
+  decrementBtn[i].addEventListener('click', (e) => {
     const { productId, productSize } = e.target.dataset;
     decrement(productId, productSize);
-    var input_quantity =
-      document.getElementsByClassName('input-quantity')[0].value;
-    document.getElementsByClassName('input-quantity')[0].innerHTML =
-      input_quantity - 1;
-    document.getElementsByClassName('input-quantity')[0].value =
-      input_quantity - 1;
-  });
-}
-if (incrementBtn) {
-  incrementBtn.addEventListener('click', (e) => {
-    const { productId, productSize } = e.target.dataset;
-    increment(productId, productSize);
-    console.log(productId, productSize);
     var input_quantity = document.getElementById(
       `${productId}-${productSize}`
     ).value;
-    document.getElementById(`${productId}-${productSize}`).innerHTML =
-      parseInt(input_quantity) + 1;
+    document.getElementById(`${productId}-${productSize}`).value =
+      parseInt(input_quantity) - 1;
+  });
+}
+for (let i = 0; i < incrementBtn.length; i++) {
+  incrementBtn[i].addEventListener('click', (e) => {
+    const { productId, productSize } = e.target.dataset;
+    increment(productId, productSize);
+    var input_quantity = document.getElementById(
+      `${productId}-${productSize}`
+    ).value;
     document.getElementById(`${productId}-${productSize}`).value =
       parseInt(input_quantity) + 1;
   });

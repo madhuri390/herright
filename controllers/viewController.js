@@ -47,7 +47,6 @@ exports.getCartDetails = catchAsync(async (req, res) => {
   const userId = req.user.id;
   //console.log(userId);
   const cartItems = await Cart.find({ userId });
-  console.log(cartItems);
 
   res.status(200).render('cart', {
     title: 'All cart items',

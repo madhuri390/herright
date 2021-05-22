@@ -1,13 +1,14 @@
 import '@babel/polyfill';
 import { signup } from './signup';
 import { login, logout } from './login';
-import { addToCart } from './addToCart';
+import { addToCart, decrement, increment } from './addToCart';
 //DOM Elements
 const signupForm = document.querySelector('.form--signup');
 const loginForm = document.querySelector('.form--login');
 const logoutBtn = document.querySelector('.nav__el--logout');
 const addtocartBtn = document.getElementById('add-to-cart');
-const decrement = document.getElementById('decrement');
+const decrementBtn = document.getElementById('decrement');
+const incrementBtn = document.getElementById('increment');
 //Values
 
 //Delegation
@@ -97,9 +98,29 @@ if (addtocartBtn)
       e.target.textContent = 'Added to the cart!';
     }
   });
-if (decrement) {
-  decrement.addEventListener('click', (e) => {
+if (decrementBtn) {
+  decrementBtn.addEventListener('click', (e) => {
     const { productId, productSize } = e.target.dataset;
+    decrement(productId, productSize);
+    var input_quantity =
+      document.getElementsByClassName('input-quantity')[0].value;
+    document.getElementsByClassName('input-quantity')[0].innerHTML =
+      input_quantity - 1;
+    document.getElementsByClassName('input-quantity')[0].value =
+      input_quantity - 1;
+  });
+}
+if (incrementBtn) {
+  incrementBtn.addEventListener('click', (e) => {
+    const { productId, productSize } = e.target.dataset;
+    increment(productId, productSize);
     console.log(productId, productSize);
+    var input_quantity = document.getElementById(
+      `${productId}-${productSize}`
+    ).value;
+    document.getElementById(`${productId}-${productSize}`).innerHTML =
+      parseInt(input_quantity) + 1;
+    document.getElementById(`${productId}-${productSize}`).value =
+      parseInt(input_quantity) + 1;
   });
 }

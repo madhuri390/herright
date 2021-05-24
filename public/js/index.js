@@ -1,7 +1,7 @@
 import '@babel/polyfill';
 import { signup } from './signup';
 import { login, logout } from './login';
-import { addToCart, decrement, increment } from './addToCart';
+import { addToCart, decrement, increment, remove } from './addToCart';
 //DOM Elements
 const signupForm = document.querySelector('.form--signup');
 const loginForm = document.querySelector('.form--login');
@@ -9,7 +9,8 @@ const logoutBtn = document.querySelector('.nav__el--logout');
 const addtocartBtn = document.getElementById('add-to-cart');
 const decrementBtn = document.querySelectorAll('.decrement');
 const incrementBtn = document.querySelectorAll('.increment');
-
+const card = document.querySelectorAll('.display-card');
+const trashBtn = document.querySelectorAll('.trash');
 //Values
 
 //Delegation
@@ -107,6 +108,10 @@ for (let i = 0; i < decrementBtn.length; i++) {
     var input_quantity = document.getElementById(
       `${productId}-${productSize}`
     ).value;
+    if (document.getElementById(`${productId}-${productSize}`).value == 1) {
+      card[i].innerHTML = '';
+      //removeitem(cardno);
+    }
     document.getElementById(`${productId}-${productSize}`).value =
       parseInt(input_quantity) - 1;
   });
@@ -120,5 +125,13 @@ for (let i = 0; i < incrementBtn.length; i++) {
     ).value;
     document.getElementById(`${productId}-${productSize}`).value =
       parseInt(input_quantity) + 1;
+  });
+}
+for (let i = 0; i < trashBtn.length; i++) {
+  trashBtn[i].addEventListener('click', (e) => {
+    const { productId, productSize } = e.target.dataset;
+    console.log(productId, productSize);
+    remove(productId, productSize);
+    card[i].innerHTML = '';
   });
 }

@@ -10,4 +10,6 @@ router
 router
   .route('/increment')
   .post(authController.protect, cartController.increment);
+
+router.route('/remove').post(authController.protect, cartController.remove);
 module.exports = router;

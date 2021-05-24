@@ -4,7 +4,7 @@ export const addToCart = async (productId, size) => {
   try {
     const res = await axios({
       method: 'POST',
-      url: 'http://127.0.0.1:8000/api/v1/cart',
+      url: 'http://127.0.0.1:3000/api/v1/cart',
       data: {
         productId,
         size,
@@ -24,7 +24,7 @@ export const decrement = async (productId, size) => {
   try {
     const res = await axios({
       method: 'POST',
-      url: 'http://127.0.0.1:8000/api/v1/cart/decrement',
+      url: 'http://127.0.0.1:3000/api/v1/cart/decrement',
       data: {
         productId,
         size,
@@ -41,7 +41,7 @@ export const increment = async (productId, size) => {
   try {
     const res = await axios({
       method: 'POST',
-      url: 'http://127.0.0.1:8000/api/v1/cart/increment',
+      url: 'http://127.0.0.1:3000/api/v1/cart/increment',
       data: {
         productId,
         size,
@@ -49,6 +49,23 @@ export const increment = async (productId, size) => {
     });
     if (res.data.status === 'success') {
       showAlert('success', 'Increment');
+    }
+  } catch (err) {
+    showAlert('error', err.response.data.message);
+  }
+};
+export const remove = async (productId, size) => {
+  try {
+    const res = await axios({
+      method: 'POST',
+      url: 'http://127.0.0.1:3000/api/v1/cart/remove',
+      data: {
+        productId,
+        size,
+      },
+    });
+    if (res.data.status === 'success') {
+      showAlert('success', 'Remove');
     }
   } catch (err) {
     showAlert('error', err.response.data.message);

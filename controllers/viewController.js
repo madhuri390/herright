@@ -43,6 +43,12 @@ exports.getLoginForm = (req, res) => {
   });
 };
 
+exports.getIndex = (req, res) => {
+  res.status(200).render('index', {
+    title: 'Log into your account',
+  });
+};
+
 exports.getCartDetails = catchAsync(async (req, res) => {
   const userId = req.user.id;
   //console.log(userId);

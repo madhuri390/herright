@@ -3,13 +3,35 @@ extends base
 block content
     main.main
         .login-form
-            h2.heading-secondary.ma-bt-lg Log into your account
-            form.form.form--login
-                .form__group
-                    label.form__label(for='email') Email address
-                    input#email.form__input(type='email', placeholder='you@example.com', required)
-                .form__group.ma-bt-md
-                    label.form__label(for='password') Password
-                    input#password.form__input(type='password', placeholder='••••••••', required, minlength='8')
-                .form__group
-                    button.btn.btn--green Login
+            h2.heading-secondary.ma-bt-lg(style='margin-top:80px') Log into your account
+            center 
+                form.form.form--login
+                    .form__group
+                        label.form__label(for='email' style='display: block;font-size: 18px;color: #252525;') Email address *
+                        input#email.form__input(type='email', placeholder='you@example.com', style='border: 1px solid #ebebeb;height: 50px;width: 40%;padding-left: 20px;padding-right: 15px;', required)
+                    br
+                    .form__group.ma-bt-md
+                        label.form__label(for='password' style='display: block;font-size: 18px;color: #252525;') Password *
+                        input#password.form__input(type='password', placeholder='••••••••', required, style='border: 1px solid #ebebeb;height: 50px;width: 40%;padding-left: 20px;padding-right: 15px;', minlength='8')
+                    .form__group
+                        button.btn.btn--green Login
+                        //-button.site-btn.login-btn(type='submit' style='background:black;width:250px;margin-top:30px' onclick='login();') Login
+                        
+        //-.register-login-section.spad
+            .container
+                .row
+                    .col-lg-6.offset-lg-3
+                        .login-form
+                        h2 Login
+                        form(onsubmit='return false;')
+                            .group-input
+                            label(for='email' placeholder='enter your email id') Email address *
+                            input#email(type='email')
+                            .group-input
+                            label(for='password' placeholder='enter password') Password *
+                            input#password(type='password')
+                            br
+                            button.site-btn.login-btn(type='submit' style='background:black;' onclick='login();') Sign In
+                        .formResult
+                            .switch-login
+                                a.or-login(href='./register.php') Or Create An Account-//

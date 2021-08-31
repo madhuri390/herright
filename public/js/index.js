@@ -13,6 +13,8 @@ const card = document.querySelectorAll('.display-card');
 const trashBtn = document.querySelectorAll('.trash');
 //Values
 
+//hiiiiiiii
+
 //Delegation
 if (signupForm) {
   signupForm.addEventListener('submit', async (e) => {

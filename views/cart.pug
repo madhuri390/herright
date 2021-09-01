@@ -2,12 +2,13 @@ extends base
 
 
 block content 
-    
+    -let totalAmount=0
     each item in cartItems
         .card.p-4(class='display-card')
             .row
                 // Cart Images div
                 div(class='col-md-2 col-11 mx-auto  d-flex justify-content-center align-items-center  product_img')
+<<<<<<< Updated upstream
                 a(href=`/product/${item.productId.slug}`)
                     img(src=`/img/products/${item.productId.imageCover}` style='max-width: 140px; margin-right: 50px; margin-left: 20px' alt=item.productId.name)
                 // Product Details
@@ -34,3 +35,54 @@ block content
                     h5
                         span#itemval=item.productId.price
     
+=======
+                    a(href=`/product/${item.productId.slug}`)
+                    img(src=`/img/products/${item.productId.imageCover}` style='max-width: 140px; margin-right: 50px; margin-left: 20px' alt=item.productId.name)
+                // Product Details
+                .col-md-8.col-11.mx-auto.px-4.mt-2.justify-content-center
+                    .row
+                        // product name
+                        .col-8.card-title
+                        h3(class='mb-4 product_name' style=' color: black;font-size: 1.4rem;text-transform: capitalize;font-weight: 500;')=item.productId.name
+                        p.mb-2=`Color:${item.productId.color}`
+                        p.mb-2=`Category:${item.productId.category}`
+                        p.mb-3=`Size:${item.size}`
+                        .btn-increment-decrement(class='decrement' data-product-Id=`${item.productId.id}`,data-product-size=`${item.size}`,data-product-price=`${item.productId.price}`) -
+                        input.input-quantity(id=`${item.productId.id}-${item.size}` value=`${item.quantity}`)
+                        .btn-increment-decrement(class='increment' data-product-Id=`${item.productId.id}`,data-product-size=`${item.size}`,data-product-price=`${item.productId.price}`)  +
+                
+                        // Quantity
+                    .row
+                        div(class='col-8 d-flex justify-content-between remove_wish')
+                        p
+                            i.fa.fa-trash-o(class='trash' data-product-Id=`${item.productId.id}`,data-product-size=`${item.size}` style='cursor:pointer;' )
+                        p.wishlist
+                            i.fa.fa-heart(style='cursor:pointer;')
+                        div(class='col-4 d-flex justify-content-end price_money')
+                        h5(id=`${item.productId.id}-${item.size}-price`)
+                            span#itemval=item.price
+                            -totalAmount=totalAmount+item.price
+                           
+                            
+    .wrapper
+        .row
+            .col-12.products               
+                .returnback(style='float:left;margin-top:9%;')
+                    button.site-btn.login-btn(style='border-radius:10px;')
+                        a(href='./' style='color: white;') CONTINUE SHOPPING
+                .totalAmt
+                    .displayprice(style='margin-left:0px;float:right;')
+                        .proceed-checkout(style='width=1000px')
+                            ul(style='border-radius: 10px;')
+                                li.subtotal
+                                    | Subtotal 
+                                    span(id='subtotal')
+                                        =totalAmount
+                                li.cart-total
+                                    | Total 
+                                    span(id='subtotal')
+                                        =totalAmount
+                            .order-btn
+                                button.site-btn.login-btn(style='border-radius:10px;' onclick='proceedcheckout();')
+                                    a(href=`/checkout/${user._id}`) PROCEED TO CHECK OUT
+>>>>>>> Stashed changes

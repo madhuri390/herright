@@ -1,0 +1,423 @@
+extends base
+
+block content
+    //- head
+    //-   meta(charset='UTF-8')
+    //-   meta(name='description' content='Ashion Template')
+    //-   meta(name='keywords' content='Ashion, unica, creative, html')
+    //-   meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    //-   meta(http-equiv='X-UA-Compatible' content='ie=edge')
+    //-   title Fashion
+    //-   // Google Font
+    //-   link(href='https://fonts.googleapis.com/css2?family=Cookie&display=swap' rel='stylesheet')
+    //-   link(href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap' rel='stylesheet')
+    //-   // Css Styles
+    //-   link(rel='stylesheet' href='css/bootstrap.min.css' type='text/css')
+    //-   link(rel='stylesheet' href='css/font-awesome.min.css' type='text/css')
+    //-   link(rel='stylesheet' href='css/elegant-icons.css' type='text/css')
+    //-   link(rel='stylesheet' href='css/jquery-ui.min.css' type='text/css')
+    //-   link(rel='stylesheet' href='css/magnific-popup.css' type='text/css')
+    //-   link(rel='stylesheet' href='css/owl.carousel.min.css' type='text/css')
+    //-   link(rel='stylesheet' href='css/slicknav.min.css' type='text/css')
+    //-   link(rel='stylesheet' href='css/style.css' type='text/css')
+    //-   link(rel='stylesheet' href='css/styleherright.css' type='text/css')
+    //-   link(rel='stylesheet' href='css/shopstyle.css' type='text/css')
+    //-   link(rel='stylesheet' href='css/shop_details.css' type='text/css')
+    //- // Page Preloder
+    //- #preloder
+    //-   .loader
+    //- // Offcanvas Menu Begin
+    //- .offcanvas-menu-overlay
+    //- .offcanvas-menu-wrapper(style='margin-top:65px;')
+    //-   .offcanvas__close +
+    //-   ul.offcanvas__widget
+    //-     li
+    //-       span.icon_search.search-switch
+    //-     li
+    //-       a(href='wishlist.php')
+    //-         span.icon_heart_alt
+    //-         span.heart
+    //-     li
+    //-       a(href='cart')
+    //-         span.icon_bag_alt
+    //-         span.cart
+    //-   #mobile-menu-wrap
+    //-   .offcanvas__auth
+    //-     a(href='login.php') Login
+    //-     a(href='register.php') Register
+    //- // Offcanvas Menu End
+    //- // Header Section Begin
+    //- header.header(style='position: fixed; z-index: 1030;width: 100%;')
+    //-   .container-fluid
+    //-     .row(style='background: #ffffff;')
+    //-       .col-xl-3.col-lg-2
+    //-         .header__logo
+    //-           a(href='./index.php')
+    //-             img(src='img/font1.png' style='width:90%' alt='')
+    //-       .col-xl-6.col-lg-7
+    //-         nav.header__menu
+    //-           ul
+    //-             li.active
+    //-               a(href='index.php') Home
+    //-             li
+    //-               a(href='blog.html') About
+    //-             li
+    //-               a(href='shop.php') Shop
+    //-             li
+    //-               a(href='contact.html') Contact
+    //-       .col-lg-3
+    //-         .header__right
+    //-           .header__right__auth
+    //-             a(href='login.php') Login
+    //-             a(href='register.php') Register
+    //-           ul.header__right__widget
+    //-             li
+    //-               span.icon_search.search-switch
+    //-             li
+    //-               a(href='wishlist.php')
+    //-                 span.icon_heart_alt
+    //-                 span.heart
+    //-             li
+    //-               a(href='cart')
+    //-                 span.icon_bag_alt
+    //-                 span.cart
+    //-     .canvas__open
+    //-       i.fa.fa-bars
+    //- // Header Section End
+    // Breadcrumb Begin
+    //- .breadcrumb-option(style='padding-top:90px;')
+    //- .container
+    //-     .row
+    //-     .col-lg-12
+    //-         .breadcrumb__links(style='border-bottom: 1px solid #ebebeb;    padding: 15px 0;')
+    //-         a(href='./index.php')
+    //-             i.fa.fa-home
+    //-             |  Home
+    //-         span Information
+    //- // Breadcrumb End
+    // Shopping Cart Section Begin
+    section.checkout-section.spad
+    .container
+        .checkout-form
+        .row
+            .col-lg-6(style='overflow: auto;\
+            /* border: 2px solid; */\
+            height: 516;\
+            height: 516.38px;')
+            .row
+                .form-check
+                input#exampleRadios1.form-check-input(style='width:auto;height: 46px;border: 2px solid #ebebeb;margin-bottom: 25px;padding-left: 15px;' type='radio' name='exampleRadios' value='<? $i; ?>' checked='')
+                label.form-check-label(for='exampleRadios1')
+                    h5.card-header Address 
+                    .card-body
+                    h5.card-title=`${user.name}`
+                    p.card-text=`${user.flat}`,`${user.city}`,`${user.state}`,`${user.pincode}`
+                    p.card-text(id='landmark')=`${user.landmark}`
+                    p.card-text(id='phone')=`${user.phoneNumber}`
+                br
+                br
+                .col-lg-12
+                .create-item
+                    label(for='acc-create')
+                    | Add new preference
+                    input#acc-create(type='checkbox' onclick='myFunction();')
+                    span.checkmark
+    -let totalAmount=0
+    each item in cartItems
+        .card.p-4(class='display-card')
+            .row
+                // Cart Images div
+                div(class='col-md-2 col-11 mx-auto  d-flex justify-content-center align-items-center  product_img')
+                    a(href=`/product/${item.productId.slug}`)
+                    img(src=`/img/products/${item.productId.imageCover}` style='max-width: 140px; margin-right: 50px; margin-left: 20px' alt=item.productId.name)
+                // Product Details
+                .col-md-8.col-11.mx-auto.px-4.mt-2.justify-content-center
+                    .row
+                        // product name
+                        .col-8.card-title
+                        h3(class='mb-4 product_name' style=' color: black;font-size: 1.4rem;text-transform: capitalize;font-weight: 500;')=`${item.productId.name} x ${item.quantity}` 
+                        p.mb-2=`Color:${item.productId.color}`
+                        p.mb-2=`Category:${item.productId.category}`
+                        p.mb-3=`Size:${item.size}`
+                        p.mb-4=`Quantity:${item.quantity}`
+                        p.mb-5=`Price:${item.price}`
+                        -totalAmount=totalAmount+item.price
+  
+    .add-pre
+    .col-lg-6
+    .checkout-content
+        input(type='text' placeholder='Enter Your Coupon Code')
+    .place-order
+        h4 Your Order
+        .order-total
+        ul.order-table
+            li
+            | Product 
+            span=`${totalAmount}`
+            .show-products
+        .payment-check
+            .pc-item
+            label(for='pc-check')
+                | Cheque Payment
+                input#pc-check(type='checkbox')
+                span.checkmark
+            .pc-item
+            label(for='pc-paypal')
+                | Paypal
+                input#pc-paypal(type='checkbox')
+                span.checkmark
+        .order-btn
+            button.site-btn#place-order-btn(data-user-id=`${user._id}`) Place Order
+    //- Shopping Cart Section End
+    //-Instagram Begin
+    .instagram
+    .container-fluid
+        .row
+        .col-lg-2.col-md-4.col-sm-4.p-0
+            .instagram__item.set-bg(data-setbg='img/instagram/insta-1.jpg')
+            .instagram__text
+                i.fa.fa-instagram
+                a(href='#') @ Herright_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+            .instagram__item.set-bg(data-setbg='img/instagram/insta-2.jpg')
+            .instagram__text
+                i.fa.fa-instagram
+                a(href='#') @ Herright_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+            .instagram__item.set-bg(data-setbg='img/instagram/insta-3.jpg')
+            .instagram__text
+                i.fa.fa-instagram
+                a(href='#') @ Herright_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+            .instagram__item.set-bg(data-setbg='img/instagram/insta-4.jpg')
+            .instagram__text
+                i.fa.fa-instagram
+                a(href='#') @ Herright_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+            .instagram__item.set-bg(data-setbg='img/instagram/insta-5.jpg')
+            .instagram__text
+                i.fa.fa-instagram
+                a(href='#') @ Herright_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+            .instagram__item.set-bg(data-setbg='img/instagram/insta-6.jpg')
+            .instagram__text
+                i.fa.fa-instagram
+                a(href='#') @ Herright_shop
+    // Instagram End
+    // Footer Section Begin
+    footer.footer
+    .container
+        .row
+        .col-lg-4.col-md-6.col-sm-7
+            .footer__about
+            .footer__logo
+                a(href='./index.php')
+                img(src='img/font1.png' alt='')
+            p
+                | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                | cilisis.
+        .col-lg-2.col-md-3.col-sm-5
+            .footer__widget
+            h6 Quick links
+            ul
+                li
+                a(href='blog.php') About
+                li
+                a(href='contact.php') Contact
+        .col-lg-2.col-md-3.col-sm-4
+            .footer__widget
+            h6 Account
+            ul
+                li
+                a(href='orders.php') Checkout
+                li
+                a(href='wishlist.php') Wishlist
+        .col-lg-4.col-md-8.col-sm-8
+            .footer__newslatter
+            .footer__social
+                a(href='#')
+                i.fa.fa-facebook
+                a(href='#')
+                i.fa.fa-twitter
+                a(href='#')
+                i.fa.fa-youtube-play
+                a(href='#')
+                i.fa.fa-instagram
+                a(href='#')
+                i.fa.fa-pinterest
+        .row
+        .col-lg-12
+    // Footer Section End
+    // Search Begin
+    .search-model
+    .h-100.d-flex.align-items-center.justify-content-center
+        .search-close-switch +
+        form#search.search-model-form(action='shop.php' method='POST')
+        input#searchBox(type='text' name='searchBox' placeholder='Search here.....')
+    // Search End
+    // Modal content
+    #myModal.modal
+    .modal-content(style='max-width: 400px;')
+        span.close &times;
+        p(style=' font-size: 18px;color: #636363;font-weight: 400;line-height: 26px;margin: 0 0 15px 0;margin-left: 88px;') Please log in before you check out
+        a(href='./login.php')
+        button.site-btn.login-btn(style='margin-left: 147px;') Sign In
+    // Js Plugins
+    //- script(src='js/jquery-3.3.1.min.js')
+    //- script(src='js/bootstrap.min.js')
+    //- script(src='js/jquery.magnific-popup.min.js')
+    //- script(src='js/jquery-ui.min.js')
+    //- script(src='js/mixitup.min.js')
+    //- script(src='js/jquery.countdown.min.js')
+    //- script(src='js/jquery.slicknav.js')
+    //- script(src='js/owl.carousel.min.js')
+    //- script(src='js/jquery.nicescroll.min.js')
+    //- script(src='js/main.js')
+    //- script(src='core.js')
+    //- script(src='coredum.js')
+    //- script.
+    //-   function show_products(){
+    //-   let productContainer= document.querySelector(".show-products");
+    //-   let cartItems=localStorage.getItem('productsInCart');
+    //-   cartItems=JSON.parse(cartItems);
+    //-   let totalcost=localStorage.getItem('totalcost');
+    //-   console.log(productContainer);
+    //-   console.log(cartItems);
+    //-   productContainer.innerHTML=`
+    //-   `;
+    //-   Object.values(cartItems).map(item=> {
+    //-   console.log(item);
+    //-   var itemimg= item.image.split(" ");
+    //-   console.log(itemimg[0]);
+    //-   productContainer.innerHTML+=`
+    //-   <li class="fw-normal"> <img src="./shopping_img/${itemimg[0]}"  style="max-width:10%;">
+    //-   ${item.productname} X ${item.quantity}  <span>₹ ${item.price}</span>
+    //-   </li>
+    //-   `;
+    //-   });
+    //-   productContainer.innerHTML+=`
+    //-   <li class="fw-normal">Subtotal <span> ${totalcost} </span></li>
+    //-   <li class="total-price">Total <span> ${totalcost} </span></li>
+    //-   `;
+    //-   }
+    //-   show_products();
+    //-   function checkout()
+    //-   {
+    //-   console.log("innnnn");
+    //-   var session='<?php echo $session_value;?>';
+    //-   if(session!='null'){
+    //-   console.log('in checkout');
+    //-   let cartItems=localStorage.getItem('productsInCart');
+    //-   cartItems=JSON.parse(cartItems);
+    //-   var cart=[];
+    //-   Object.values(cartItems).map(item=> {
+    //-   var productid=item.productid;
+    //-   var cartid=item.cartid;
+    //-   var quantity=item.quantity;
+    //-   var price=item.price;
+    //-   var name=item.productname;
+    //-   var size=item.size;
+    //-   var color=item.color;
+    //-   var itemimg= item.image.split(" ");
+    //-   console.log(color);
+    //-   carts={
+    //-   productid:productid,
+    //-   cartid:cartid,
+    //-   quantity:quantity.toString(),
+    //-   price:price.toString(),
+    //-   itemimg:itemimg[0],
+    //-   name:name,
+    //-   size:size,
+    //-   color:color
+    //-   }
+    //-   cart.push(carts);
+    //-   });
+    //-   $.ajax({
+    //-   url:"checkout.php",
+    //-   method:"post",
+    //-   data:{cart:JSON.stringify(cart)},
+    //-   success:function (res) {
+    //-   console.log(res);
+    //-   }
+    //-   })
+    //-   localStorage.removeItem("totalcost");
+    //-   localStorage.removeItem("productsInCart");
+    //-   localStorage.removeItem("cartNumbers");
+    //-   window.location.href = "placed.php";
+    //-   }
+    //-   else{
+    //-   console.log('elseeeeeeeeeee');
+    //-   var modal = document.getElementById("myModal");
+    //-   var span = document.getElementsByClassName("close")[0];
+    //-   $( function() {
+    //-   modal.style.display = "block";
+    //-   } );
+    //-   span.onclick = function() {
+    //-   modal.style.display = "none";
+    //-   }
+    //-   // When the user clicks anywhere outside of the modal, close it
+    //-   window.onclick = function(event) {
+    //-   if (event.target == modal) {
+    //-   modal.style.display = "none";
+    //-   }
+    //-   }
+    //-   }
+    //-   }
+    //-   function myFunction() {
+    //-   // Get the checkbox
+    //-   console.log("checked");
+    //-   var checkBox = document.getElementById("acc-create");
+    //-   // Get the output text
+    //-   var text = document.getElementById("text");
+    //-   // If the checkbox is checked, display the output text
+    //-   if (checkBox.checked == true){
+    //-   let add_pre= document.querySelector(".add-pre");
+    //-   add_pre.innerHTML=`
+    //-   <div class="container">
+    //-   <div class="checkout-form" style="border:1px solid;">
+    //-   <div class="row">
+    //-   <div class="col-lg-6">
+    //-   <form onsubmit="return false;">
+    //-   <div class="row">
+    //-   <div class="col-lg-12">
+    //-   <label for="cun">Pincode<span>*</span></label>
+    //-   <input type="text" id="pincodepre">
+    //-   <div class="showFeedBack"></div>
+    //-   </div>
+    //-   <div class="col-lg-6">
+    //-   <label for="fir">City<span>*</span></label>
+    //-   <input type="text" id="citypre">
+    //-   <div class="showFeedBack"></div>
+    //-   </div>
+    //-   <div class="col-lg-6">
+    //-   <label for="last">State<span>*</span></label>
+    //-   <input type="text" id="statepre">
+    //-   <div class="showFeedBack"></div>
+    //-   </div>
+    //-   <div class="col-lg-12">
+    //-   <label for="street">Locality / Area / Street<span>*</span></label>
+    //-   <input type="text" id="localitypre" class="street-first">
+    //-   </div>
+    //-   <div class="col-lg-12">
+    //-   <label for="zip">Flat no / Building Name</label>
+    //-   <input type="text" id="flatpre">
+    //-   </div>
+    //-   <div class="col-lg-12">
+    //-   <label for="town">Landmark (optional)<span>*</span></label>
+    //-   <input type="text" id="landmarkpre">
+    //-   </div>
+    //-   <button type="submit" class="site-btn register-btn" style="background:color;" onclick="addpre();">Save</button>
+    //-   </form>
+    //-   </div>
+    //-   </div>
+    //-   </div>
+    //-   </div>
+    //-   <div class="formResult"></div>
+    //-   `;
+    //-   } else {
+    //-   let add_pre= document.querySelector(".add-pre");
+    //-   add_pre.innerHTML=`
+    //-   <a href="orders.php"><button type="submit" class="site-btn register-btn" style="background:color;" onclick="addpre();">Save & Continue</button></a>
+    //-   ` ;
+    //-   }
+    //-   }

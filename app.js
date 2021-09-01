@@ -5,6 +5,7 @@ const productRouter = require('./routes/productRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const userRouter = require('./routes/userRoutes');
 const cartRouter = require('./routes/cartRoutes');
+const bookingRouter = require('./routes/bookingRoutes');
 const app = express();
 const cookieParser = require('cookie-parser');
 
@@ -45,4 +46,5 @@ app.use('/', viewRouter);
 app.use('/api/v1/cart', cartRouter);
 app.use('/api/v1/products', productRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/bookings', bookingRouter);
 module.exports = app;

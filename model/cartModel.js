@@ -19,7 +19,10 @@ const cartSchema = new mongooose.Schema({
     type: Number,
     default: 1,
   },
-
+  price: {
+    type: Number,
+    required: [true, 'A Product must require a price'],
+  },
   createdAt: {
     type: Date,
     default: Date.now(),

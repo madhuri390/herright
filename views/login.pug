@@ -1,37 +1,72 @@
+//- extends base
+
+//- block content
+//-     main.main
+//-         .login-form
+//-             h2.heading-secondary.ma-bt-lg(style='margin-top:80px') Log into your account
+//-             center 
+//-                 form.form.form--login
+//-                     .form__group
+//-                         label.form__label(for='email' style='display: block;font-size: 18px;color: #252525;') Email address *
+//-                         input#email.form__input(type='email', placeholder='you@example.com', style='border: 1px solid #ebebeb;height: 50px;width: 40%;padding-left: 20px;padding-right: 15px;', required)
+//-                     br
+//-                     .form__group.ma-bt-md
+//-                         label.form__label(for='password' style='display: block;font-size: 18px;color: #252525;') Password *
+//-                         input#password.form__input(type='password', placeholder='••••••••', required, style='border: 1px solid #ebebeb;height: 50px;width: 40%;padding-left: 20px;padding-right: 15px;', minlength='8')
+//-                     .form__group
+//-                         button.btn.btn--green Login
+//-                         //-button.site-btn.login-btn(type='submit' style='background:black;width:250px;margin-top:30px' onclick='login();') Login
+                        
+//-         //-.register-login-section.spad
+//-             .container
+//-                 .row
+//-                     .col-lg-6.offset-lg-3
+//-                         .login-form
+//-                         h2 Login
+//-                         form(onsubmit='return false;')
+//-                             .group-input
+//-                             label(for='email' placeholder='enter your email id') Email address *
+//-                             input#email(type='email')
+//-                             .group-input
+//-                             label(for='password' placeholder='enter password') Password *
+//-                             input#password(type='password')
+//-                             br
+//-                             button.site-btn.login-btn(type='submit' style='background:black;' onclick='login();') Sign In
+//-                         .formResult
+//-                             .switch-login
+//-                                 a.or-login(href='./register.php') Or Create An Account-//
 extends base
 
 block content
     main.main
-        .login-form
-            h2.heading-secondary.ma-bt-lg(style='margin-top:80px') Log into your account
-            center 
-                form.form.form--login
-                    .form__group
-                        label.form__label(for='email' style='display: block;font-size: 18px;color: #252525;') Email address *
-                        input#email.form__input(type='email', placeholder='you@example.com', style='border: 1px solid #ebebeb;height: 50px;width: 40%;padding-left: 20px;padding-right: 15px;', required)
-                    br
-                    .form__group.ma-bt-md
-                        label.form__label(for='password' style='display: block;font-size: 18px;color: #252525;') Password *
-                        input#password.form__input(type='password', placeholder='••••••••', required, style='border: 1px solid #ebebeb;height: 50px;width: 40%;padding-left: 20px;padding-right: 15px;', minlength='8')
-                    .form__group
-                        button.btn.btn--green Login
-                        //-button.site-btn.login-btn(type='submit' style='background:black;width:250px;margin-top:30px' onclick='login();') Login
-                        
-        //-.register-login-section.spad
+        //-Breadcrumb Begin
+        .breadcrumb-option(style='padding-top: 1px;')
+            .container
+                .row
+                    .col-lg-12
+                        div(class='breadcrumb__links' style='border-bottom: 1px solid #ebebeb; padding: 15px 0;')
+                            a(href='/index')
+                                i.fa.fa-home
+                                | Home 
+                            a(href='/login')
+                                i(class='icon_bag_alt' style='width:20px')
+                                | Login
+
+        .register-login-section.spad
             .container
                 .row
                     .col-lg-6.offset-lg-3
                         .login-form
-                        h2 Login
-                        form(onsubmit='return false;')
-                            .group-input
-                            label(for='email' placeholder='enter your email id') Email address *
-                            input#email(type='email')
-                            .group-input
-                            label(for='password' placeholder='enter password') Password *
-                            input#password(type='password')
-                            br
-                            button.site-btn.login-btn(type='submit' style='background:black;' onclick='login();') Sign In
-                        .formResult
-                            .switch-login
-                                a.or-login(href='./register.php') Or Create An Account-//
+                            h2 Login
+                            form.form.form--login
+                                .group-input.form__group
+                                    label.form__label(for='email') Email address *
+                                    input#email.form__input(type='email', placeholder='you@example.com', required)
+                                .group-input.form__group.ma-bt-md
+                                    label.form__label(for='password') Password *
+                                    input#password.form__input(type='password', placeholder='••••••••', required, minlength='8')
+                                .form__group
+                                    button.btn.btn--green(style='background:black;text-transform:uppercase;border-radius:50px;width:100%;color:white') Login
+                            .formResult
+                                .switch-login
+                                    a.or-login(href='/signup' ) Or Create An Account

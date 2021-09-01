@@ -70,6 +70,11 @@ exports.getCheckoutDetails = catchAsync(async (req, res) => {
     cartItems,
   });
 });
+exports.getAddProduct = (req, res) => {
+  res.status(200).render('_addProduct', {
+    title: 'Adding product',
+  });
+};
 // exports.getAccount = (req, res) => {
 //   res.status(200).render('account', {
 //     title: 'Your account',

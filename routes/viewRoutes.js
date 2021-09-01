@@ -9,7 +9,6 @@ router.get(
   bookingController.createBookingCheckout,
   viewController.getOverview
 );
-console.log('crossing');
 router.use(authController.isLoggedIn);
 router.get('/product/:slug', viewController.getProduct);
 router.get('/signup', viewController.signup);
@@ -22,6 +21,7 @@ router.get(
   authController.protect,
   viewController.getCheckoutDetails
 );
+router.get('/_addProduct', viewController.getAddProduct);
 
 // router.get('/me', authController.protect, viewController.getAccount);
 // router.get('/my-bookings', authController.protect, viewController.getMyTours);

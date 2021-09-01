@@ -34,10 +34,12 @@ block content
                         span.carousel-control-next-icon(aria-hidden='true')
                         span.sr-only Next             
             .col-md-7
-                h1=product.name 
-                p=product.price 
-                p=product.description
-                select#size.sorting(name='size' style='margin-right: 20px;max-width: 300px;margin-left: 20px;padding:10px;font-size: 16px;color: #4c4c4c;max-width: 300px;border-radius: 0;border: 1px solid #ECEDEE;height: 40px;line-height: 35px;')
+                p.newarrival.text-center NEW
+                h2(style="font-weight:bold;")=product.name 
+                h5(style="font-weight:bold;margin-top:20px;color:black;")="₹ "+product.price 
+                p(style="margin-top:20px;color:black;")=product.description
+                p(style="color:black;font-weight:bold;")="Choose the size:"
+                select#size.sorting(name='size' style='max-width: 300px;margin-left: 20px;padding:10px;font-size: 16px;color: #4c4c4c;max-width: 300px;border-radius: 0;border: 1px solid #ECEDEE;height: 40px;line-height: 35px;')
                     option(value='' selected) Choose an option
                     option(value='XS') XS
                     option(value='S') S
@@ -45,5 +47,27 @@ block content
                     option(value='L') L
                     option(value='XL') XL
                 br
-                button.btn.btn--green.span-all-rows#add-to-cart(data-product-id=`${product.id}` data-product-price=`${product.price}`) Add to cart
-
+                button.btn.btn--green.span-all-rows#add-to-cart(data-product-id=`${product.id}` data-product-price=`${product.price}` style='margin-top:50px;background:black;text-transform:uppercase;border-radius:50px;width:50%;color:white') Add to cart
+                .faq-section.spad
+                    .faq-container
+                        .row
+                            .col-lg-12
+                                .faq-accordin
+                                    #accordionExample.accordion(style='margin-top:-40px;border-top: 2px solid black;padding-top: 12px;')
+                                        .card
+                                            .card-heading(style='padding:6px;')
+                                                a(data-toggle='collapse' data-target='#collapseOne')
+                                                p(style="margin-left: 26px;font-size: 24px;color:black;font-weight: bold;") DESCRIPTION
+                                                #collapseOne.collapse(data-parent='#accordionExample')
+                                                    .card-body
+                                                        p Hand micropleated ikat print maxi dress with sweetheart neckline 
+                                        .card
+                                            .card-heading(style='padding:6px;')
+                                                a(data-toggle='collapse' data-target='#collapseTwo' style='font-size:18px;font-weight:bold;')
+                                                p(style="margin-left: 26px;font-size: 24px;color:black;font-weight: bold;") ADDITIONAL INFORMATION
+                                                #collapseTwo.collapse(data-parent='#accordionExample')
+                                                    .card-body
+                                                    p
+                                                        | AVAILABILITY :: YES
+                                                        br
+                                                        | BRAND :: HERRIGHT

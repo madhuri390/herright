@@ -14,6 +14,7 @@ router.use(authController.isLoggedIn);
 router.get('/product/:slug', viewController.getProduct);
 router.get('/signup', viewController.signup);
 router.get('/login', viewController.getLoginForm);
+router.get('/index', viewController.getIndex);
 router.get('/cart', authController.protect, viewController.getCartDetails);
 router.get(
   '/checkout/:slug',

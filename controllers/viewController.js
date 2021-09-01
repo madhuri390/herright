@@ -1,5 +1,6 @@
 const Product = require('../model/productModel');
 const Cart = require('../model/cartModel');
+const Users = require('../model/userModel');
 // const User = require('../model/userModel');
 // const Booking = require('../model/bookingModel');
 const AppError = require('../utils/appError');
@@ -59,6 +60,21 @@ exports.getCartDetails = catchAsync(async (req, res) => {
     cartItems,
   });
 });
+exports.getCheckoutDetails = catchAsync(async (req, res) => {
+  const userId = req.user.id;
+  const userDetails = await Users.find({ userId });
+  const cartItems = await Cart.find({ userId });
+  res.status(200).render('checkout', {
+    title: 'All cart items',
+    userDetails,
+    cartItems,
+  });
+});
+exports.getAddProduct = (req, res) => {
+  res.status(200).render('_addProduct', {
+    title: 'Adding product',
+  });
+};
 // exports.getAccount = (req, res) => {
 //   res.status(200).render('account', {
 //     title: 'Your account',

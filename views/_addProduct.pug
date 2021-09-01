@@ -1,0 +1,101 @@
+extends base
+
+
+block content 
+    // Breadcrumb Section Begin
+    .breacrumb-section(style='padding-top:100px;')
+        .container(style='margin-top:0px;')
+            .row
+                .col-lg-12
+                    .breadcrumb-text
+                        a(href='shop.php')
+                            i(class='icon_bag_alt' style='width:20px')
+                            | AddProduct
+    .container
+        .row
+            .center(style="width:100%;padding-top:0px;")
+                h3(style='text-align:center;') Add A New Product 
+                br
+                .col-8
+                    .full.form-div(style='padding:30px; margin-top:-40px;width:150% ')
+                        .row
+                            .col-6
+                                .form-group.col-sm-10(style='max-width:30%')
+                                    label(for='profileImage') Product image
+                                    img#profileDisplay(src='/img/products/d3.jpg' onclick='triggerClick()' style='outline:2px solid black;max-width:100%;')
+                                    input(type='hidden' name='image' value='')
+                                    //-img#profileDisplay(src='shopping_img/profile.png' onclick='triggerClick()' style='outline:2px solid black;max-width:100%;')
+                                    //-input#profileImage.form-control(type='file' name='profileImage[]' onchange='displayImage(this)' style='display:none; outline:2px solid black;' multiple='')
+                                .form-group.col-sm-10
+                                        label(for='name') Name
+                                        input#name.form-control(name='name' value='')
+                                .form-group.col-sm-10
+                                    label(for='price') Price
+                                    input.form-control(name='price' value='')                                
+                                .form-group.col-sm-10
+                                    label(for='description') Description
+                                    input.form-control(name='description' value='')
+                                .form-group.col-sm-10
+                                    label(for='stock') Color
+                                    input.form-control(name='color' value='')
+                                
+                            .col-6.col-md-6
+                                .row
+                                    .form-group.col-sm-8
+                                        label(for='brand') Brand
+                                        input.form-control(name='brand' value='')                                    
+                                .row
+                                    .form-group.col-sm-8
+                                        label(for='stock') Stock
+                                        input.form-control(name='stock' value='')
+                                .row
+                                    .form-group.col-6
+                                        label(for='stock' style="margin-bottom: 30px;") Select available sizes:
+                                        br
+                                        label(for='size' style="margin-bottom: 15px;") XS
+                                        br
+                                        label(for='size' style="margin-bottom: 15px;") S
+                                        br
+                                        label(for='size' style="margin-bottom: 15px;") M
+                                        br
+                                        label(for='size' style="margin-bottom: 15px;") L
+                                        br
+                                        label(for='size' style="margin-bottom: 15px;") XL
+                                        br
+                                        label(for='size' style="margin-bottom: 15px;") XXL
+                                        br
+                                    .form-group.col-6
+                                        label(for='quantiy') Quantity
+                                        br
+                                        br
+                                        input.form-control(name='quantityxs' value='')
+                                        input.form-control(name='quantitys' value='')
+                                        input.form-control(name='quantitym' value='')
+                                        input.form-control(name='quantityl' value='')
+                                        input.form-control(name='quantityxl' value='')
+                                        input.form-control(name='quantityxxl' value='')
+                                .row
+                                    .form-group.col-6
+                                        label(for='categories') Categories
+                                        br
+                                        input(type='checkbox' name='categories[]' value='kurtas' style="margin-right:5px;")
+                                        | Kurta
+                                        br
+                                        input(type='checkbox' name='categories[]' value='sets' style="margin-right:5px;")
+                                        | Sets
+                                        br
+                                        input(type='checkbox' name='categories[]' value='anarkali' style="margin-right:5px;")
+                                        | Anarkali
+                                        br
+                                        input(type='checkbox' name='categories[]' value='Capes' style="margin-right:5px;")
+                                        | Capes
+                                        br
+                                        input(type='checkbox' name='categories[]' value='Skirts' style="margin-right:5px;")
+                                        | Skirts
+                                        br
+                                        input(type='checkbox' name='categories[]' value='Jackets' style="margin-right:5px;")
+                                        | Jackets
+                                        br
+                        .form-group
+                                button.btn.btn-info.btn-block(type='submit' name='update') Update product
+                                button.btn.btn-primary.btn-block(type='submit' name='save-user') Save product

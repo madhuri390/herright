@@ -18,7 +18,7 @@
         a(href='register.php') Register
 // Offcanvas Menu End
 // Header Section Begin
-header.header(style='position: fixed; z-index: 1030;width: 100%;')
+header.header(style='position: fixed; z-index: 1030;width: 107%;')
     .container-fluid(style='width:95%;')
         .row(style='background: #ffffff;')
             //.col-xl-3.col-lg-2
@@ -29,15 +29,15 @@ header.header(style='position: fixed; z-index: 1030;width: 100%;')
                 nav(class='header__menu' style='margin-left:50px;')
                     ul
                         li(style='padding:0 15px;')
-                            a(href='index.php') Home
+                            a(href='index') Home
                         li(style='padding:0 15px;')
-                            a(href='blog.php') About
+                            a(href='blog') About
                         li.active(style='padding:0 15px;')
-                            a(href='shop.php') Shop
+                            a(href='') Shop
                         li(style='padding:0 15px;')
-                            a(href='contact.php') Contact
+                            a(href='contact') Contact
             .col-lg-3
-                div(class='header__right' style='')
+                div(class='header__right' style="margin-right:21%;")
                     if user
                         div(class='header__right__auth' style='text-deocration:none;')
                             a.nav__el.nav__el--logout Log out 
@@ -50,23 +50,14 @@ header.header(style='position: fixed; z-index: 1030;width: 100%;')
                             span(class='icon_search search-switch')
                         li
                             a(href='wishlist.php')
-                            span(class='icon_heart_alt')
-                            span.heart
+                                span(class='icon_heart_alt')
+                                span.heart
                         li
-                            a(href='shop_details.php')
-                            span(class='icon_bag_alt')
-                            span.cart
+                            a(href='cart')
+                                span(class='icon_bag_alt')
+                                span.cart
+                                
         div(class='canvas__open')
             i.fa.fa-bars
 // Header Section End
-// Breadcrumb Begin
-.breadcrumb-option(style='padding-top: 1px;')
-    .container
-        .row
-            .col-lg-12
-                div(class='breadcrumb__links' style='border-bottom: 1px solid #ebebeb; padding: 15px 0;')
-                    a(href='./index.php')
-                        i.fa.fa-home
-                        | Home
-                        span Shop
-// Breadcrumb End
+

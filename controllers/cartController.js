@@ -6,7 +6,6 @@ exports.addToCart = catchAsync(async (req, res, next) => {
   const userId = req.user.id;
   const size = req.body.size;
   const price = req.body.price;
-  console.log(price);
   const results = await Cart.find({ userId, productId, size });
 
   if (results.length > 0) {
@@ -38,12 +37,10 @@ exports.decrement = catchAsync(async (req, res, next) => {
   const size = req.body.size;
   const price = req.body.price;
   const results = await Cart.find({ userId, productId, size });
-  console.log(results[0].quantity);
 
   if (results.length > 0) {
     //console.log('already existing');
     if (results[0].quantity == 1) {
-      console.log('should be deleted');
       await Cart.deleteOne({ userId, productId, size });
     } else {
       await Cart.updateMany(
@@ -75,7 +72,6 @@ exports.increment = catchAsync(async (req, res, next) => {
   const productPrice = req.body.price;
   const results = await Cart.find({ userId, productId, size });
   let Tprice = 0;
-  console.log(results.length);
   if (results.length > 0) {
     //console.log('already existing');
     await Cart.updateMany(
@@ -91,7 +87,6 @@ exports.increment = catchAsync(async (req, res, next) => {
     //   },
     // ]);
   }
-  console.log(Tprice);
   res.status(200).json({
     status: 'success',
     // data: Tprice,

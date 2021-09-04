@@ -8,15 +8,11 @@ const AppError = require('../utils/appError');
 
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   //1)Get currently booked tour
-
   const userId = req.params.userId;
   const cart = await Cart.find({ userId });
   //2)Create checkout session
-  console.log('Get checkout session', req.params.userId);
-
   const user = await User.findById(req.params.userId);
   const lineItems = [];
-
   try {
     for (let item of cart) {
       lineItems.push({
@@ -26,7 +22,6 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
         quantity: item.quantity,
       });
     }
-
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       mode: 'payment',
@@ -46,19 +41,14 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 });
 
 exports.createBookingCheckout = catchAsync(async (req, res, next) => {
-  console.log('inside booking controller');
   const { user } = req.query;
-  console.log('user ', user);
   if (!user) return next();
   const cartItems = await Cart.find({ userId: user });
   let totalPrice = 0;
-  console.log(cartItems);
   for (let item of cartItems) {
     totalPrice = totalPrice + item.price;
   }
-  console.log('totalprice', totalPrice);
   const productIds = await Cart.find({ userId: user }).select('productId');
-  console.log(productIds);
   await Booking.create({
     userId: user,
     product: productIds,

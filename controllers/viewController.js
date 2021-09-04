@@ -5,7 +5,7 @@ const Users = require('../model/userModel');
 // const Booking = require('../model/bookingModel');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
-
+const authController = require('../controllers/authController');
 exports.getOverview = catchAsync(async (req, res) => {
   //1)Get all products data
   const products = await Product.find();
@@ -21,6 +21,11 @@ exports.getOverview = catchAsync(async (req, res) => {
 exports.getProduct = catchAsync(async (req, res, next) => {
   //1)Get data from the requested data and also reviews and guides
   const product = await Product.findOne({ slug: req.params.slug });
+  const similarProduct = await Product.find({
+    $or: [{ color: product.color }, { category: /.*`${product.category}`.*/ }],
+  });
+  // db.inventory.find({ $or: [{ quantity: { $lt: 20 } }, { price: 10 }] });
+  console.log('similar ', similarProduct);
   if (!product)
     return next(new AppError('There is no product with this name', 404));
   //2)Build template
@@ -29,6 +34,7 @@ exports.getProduct = catchAsync(async (req, res, next) => {
   res.status(200).render('product', {
     title: `${product.name}`,
     product,
+    similarProduct,
   });
 });
 
@@ -38,10 +44,18 @@ exports.signup = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getLoginForm = (req, res) => {
-  res.status(200).render('login', {
-    title: 'Log into your account',
-  });
+exports.getLoginForm = async (req, res) => {
+  if (req.cookies.jwt) {
+    const products = await Product.find();
+    res.status(200).render('overview', {
+      title: 'All products',
+      products,
+    });
+  } else {
+    res.status(200).render('login', {
+      title: 'Log into your account',
+    });
+  }
 };
 
 exports.getIndex = (req, res) => {
@@ -71,10 +85,30 @@ exports.getCheckoutDetails = catchAsync(async (req, res) => {
   });
 });
 exports.getAddProduct = (req, res) => {
-  res.status(200).render('_addProduct', {
+  res.status(200).render('addProduct', {
     title: 'Adding product',
   });
 };
+exports.crud = catchAsync(async (req, res) => {
+  const products = await Product.find();
+  res.status(200).render('crud', {
+    title: 'Crud operation',
+    products,
+  });
+});
+exports.updateProduct = catchAsync(async (req, res, next) => {
+  //1)Get data from the requested data and also reviews and guides
+  const product = await Product.findOne({ slug: req.params.slug });
+  if (!product)
+    return next(new AppError('There is no product with this name', 404));
+  //2)Build template
+
+  //3)Render
+  res.status(200).render('update', {
+    title: `${product.name}`,
+    product,
+  });
+});
 // exports.getAccount = (req, res) => {
 //   res.status(200).render('account', {
 //     title: 'Your account',

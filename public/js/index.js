@@ -3,6 +3,7 @@ import { signup } from './signup';
 import { login, logout } from './login';
 import { addToCart, decrement, increment, remove } from './addToCart';
 import { bookTour } from './stripe';
+import { insertProduct, updateProduct, deleteProduct } from './productcrud';
 //DOM Elements
 const signupForm = document.querySelector('.form--signup');
 const loginForm = document.querySelector('.form--login');
@@ -13,9 +14,10 @@ const incrementBtn = document.querySelectorAll('.increment');
 const card = document.querySelectorAll('.display-card');
 const trashBtn = document.querySelectorAll('.trash');
 const bookBtn = document.getElementById('place-order-btn');
+const productDataForm = document.querySelector('.form-product-data');
+const updateDataForm = document.querySelector('.form-update-data');
+const deleteProductForm = document.querySelectorAll('.delete');
 //Values
-
-//hiiiiiiii
 
 //Delegation
 if (signupForm) {
@@ -62,16 +64,53 @@ if (logoutBtn) {
   logoutBtn.addEventListener('click', logout);
 }
 
-// if (userDataForm) {
-//   userDataForm.addEventListener('submit', (e) => {
-//     e.preventDefault();
-//     const form = new FormData();
-//     form.append('name', document.getElementById('name').value);
-//     form.append('email', document.getElementById('email').value);
-//     form.append('photo', document.getElementById('photo').files[0]);
-//     updateSettings(form, 'data');
-//   });
-// }
+if (productDataForm) {
+  productDataForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const form = new FormData();
+    var checkboxes = document.getElementsByName('categories[]');
+    var vals = '';
+    for (var i = 0, n = checkboxes.length; i < n; i++) {
+      if (checkboxes[i].checked) {
+        vals += ',' + checkboxes[i].value;
+      }
+    }
+    console.log('Values', vals);
+    console.log(document.getElementById('photo').files);
+    form.append('name', document.getElementById('name').value);
+    form.append('price', document.getElementById('price').value);
+    form.append('imageCover', document.getElementById('photo').files[0]);
+    form.append('images', document.getElementById('photo').files[0]);
+    form.append('color', document.getElementById('color').value);
+    form.append('description', document.getElementById('description').value);
+    form.append('summary', document.getElementById('summary').value);
+    form.append('category', vals);
+    insertProduct(form, 'data');
+  });
+}
+if (updateDataForm) {
+  updateDataForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const form = new FormData();
+    const id = document.getElementById('id').value;
+    form.append('name', document.getElementById('name').value);
+    form.append('price', document.getElementById('price').value);
+    form.append('imageCover', document.getElementById('photo').files[0]);
+    form.append('images', document.getElementById('photo').files[0]);
+    form.append('color', document.getElementById('color').value);
+    form.append('description', document.getElementById('description').value);
+    form.append('summary', document.getElementById('summary').value);
+    form.append('category', 'tops');
+    console.log(id);
+    updateProduct(form, id);
+  });
+}
+for (let i = 0; i < deleteProductForm.length; i++) {
+  deleteProductForm[i].addEventListener('click', (e) => {
+    const { productId } = e.target.dataset;
+    deleteProduct(productId);
+  });
+}
 // if (userPasswordForm) {
 //   userPasswordForm.addEventListener('submit', async (e) => {
 //     e.preventDefault();
@@ -109,12 +148,11 @@ if (addtocartBtn)
 for (let i = 0; i < decrementBtn.length; i++) {
   decrementBtn[i].addEventListener('click', (e) => {
     const { productId, productSize, productPrice } = e.target.dataset;
-    const { result } = decrement(productId, productSize, productPrice);
+    decrement(productId, productSize, productPrice);
     var input_quantity = document.getElementById(
       `${productId}-${productSize}`
     ).value;
     // var totalAmount = document.getElementById('totalAmount').value;
-    console.log(totalAmount);
     if (document.getElementById(`${productId}-${productSize}`).value == 1) {
       card[i].innerHTML = '';
       //removeitem(cardno);
@@ -131,7 +169,6 @@ for (let i = 0; i < incrementBtn.length; i++) {
   incrementBtn[i].addEventListener('click', (e) => {
     const { productId, productSize, productPrice } = e.target.dataset;
     const result = increment(productId, productSize, productPrice);
-    console.log('res', result.PromiseResult);
     var input_quantity = document.getElementById(
       `${productId}-${productSize}`
     ).value;
@@ -145,7 +182,6 @@ for (let i = 0; i < incrementBtn.length; i++) {
 for (let i = 0; i < trashBtn.length; i++) {
   trashBtn[i].addEventListener('click', (e) => {
     const { productId, productSize } = e.target.dataset;
-    console.log(productId, productSize);
     remove(productId, productSize);
     card[i].innerHTML = '';
   });
@@ -155,7 +191,6 @@ if (bookBtn) {
   bookBtn.addEventListener('click', (e) => {
     e.target.textContent = 'Processing...';
     const { userId } = e.target.dataset;
-    console.log('inside', userId);
     bookTour(userId);
   });
 }

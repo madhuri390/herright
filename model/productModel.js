@@ -71,10 +71,6 @@ const productSchema = new mongoose.Schema(
     category: {
       type: String,
       required: [true, 'A product must have a category'],
-      enum: {
-        values: ['kurta', 'sets', 'tops', 'jumpsuits', 'pallazos'],
-        message: 'Choose between:kurta, sets,tops,jumpsuits,pallazos',
-      },
     },
     slug: String,
     color: {

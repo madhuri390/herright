@@ -10,10 +10,14 @@ router
     productController.resizeProductimages,
     productController.createProduct
   );
+
 router
   .route('/:id')
   .get(productController.getProduct)
-  .patch(productController.updateProduct)
   .delete(productController.deleteProduct);
-
+router.use(
+  productController.uploadProductimages,
+  productController.resizeProductimages
+);
+router.route('/:id').patch(productController.updateProduct);
 module.exports = router;

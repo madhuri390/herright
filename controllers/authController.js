@@ -25,14 +25,23 @@ const createSendToken = (user, statusCode, req, res) => {
 
   // Remove password from output
   user.password = undefined;
-
-  res.status(statusCode).json({
-    status: 'success',
-    token,
-    data: {
-      user,
-    },
-  });
+  if (user.role == 'admin') {
+    res.status(statusCode).json({
+      status: 'Admin login success',
+      token,
+      data: {
+        user,
+      },
+    });
+  } else {
+    res.status(statusCode).json({
+      status: 'success',
+      token,
+      data: {
+        user,
+      },
+    });
+  }
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
@@ -44,7 +53,6 @@ exports.signup = catchAsync(async (req, res, next) => {
   });
 
   const url = `${req.protocol}://${req.get('host')}/me`;
-  // console.log(url);
   await new Email(newUser, url).sendWelcome();
 
   createSendToken(newUser, 201, req, res);
@@ -52,14 +60,18 @@ exports.signup = catchAsync(async (req, res, next) => {
 
 exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
-
   // 1) Check if email and password exist
   if (!email || !password) {
     return next(new AppError('Please provide email and password!', 400));
   }
+
   // 2) Check if user exists && password is correct
   const user = await User.findOne({ email }).select('+password');
-
+  // if (email == 'herright9@gmail.com' && password == 'herright') {
+  //   res.status(200).json({
+  //     status: 'Admin login success',
+  //   });
+  // }
   if (!user || !(await user.correctPassword(password, user.password))) {
     return next(new AppError('Incorrect email or password', 401));
   }
@@ -93,8 +105,6 @@ exports.protect = catchAsync(async (req, res, next) => {
       new AppError('You are not logged in! Please log in to get access.', 401)
     );
   }
-  console.log(token);
-  console.log(process.env.JWT_SECRET);
 
   // 2) Verification token
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
@@ -125,9 +135,11 @@ exports.protect = catchAsync(async (req, res, next) => {
 
 // Only for rendered pages, no errors!
 exports.isLoggedIn = async (req, res, next) => {
+  console.log('in logged in');
   if (req.cookies.jwt) {
     try {
       // 1) verify token
+      console.log('token verification');
       const decoded = await promisify(jwt.verify)(
         req.cookies.jwt,
         process.env.JWT_SECRET
@@ -143,9 +155,9 @@ exports.isLoggedIn = async (req, res, next) => {
       if (currentUser.changedPasswordAfter(decoded.iat)) {
         return next();
       }
-
       // THERE IS A LOGGED IN USER
       res.locals.user = currentUser;
+      console.log(req.locals.user);
       return next();
     } catch (err) {
       return next();

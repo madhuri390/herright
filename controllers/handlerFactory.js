@@ -6,7 +6,6 @@ exports.deleteOne = (Model) =>
   catchAsync(async (req, res, next) => {
     const doc = await Model.findByIdAndDelete(req.params.id);
     if (!doc) return next(new AppError('No document found by this Id', 404));
-    console.log(doc);
     res.status(204).json({
       status: 'Success',
       data: null,
@@ -41,7 +40,6 @@ exports.createOne = (Model) =>
 
 exports.getOne = (Model, popOptions) =>
   catchAsync(async (req, res, next) => {
-    console.log(Model);
     let query = Model.findById(req.params.id);
     if (popOptions) query = query.populate(popOptions);
     const doc = await query;

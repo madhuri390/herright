@@ -12,6 +12,12 @@ export const login = async (email, password) => {
       },
     });
     console.log(res.data);
+    if (res.data.status == 'Admin login success') {
+      showAlert('success', 'Admin Login Successfully.');
+      window.setTimeout(() => {
+        location.assign('/crud');
+      }, 1500);
+    }
     if (res.data.status === 'success') {
       showAlert('success', 'Login Successfully.');
       window.setTimeout(() => {

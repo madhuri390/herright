@@ -27,9 +27,9 @@ exports.uploadProductimages = upload.fields([
   },
 ]);
 exports.resizeProductimages = catchAsync(async (req, res, next) => {
+  console.log(req.files);
   if (!req.files.imageCover || !req.files.images) next();
   const name = req.body.name.replace(/\s/g, '');
-
   //Cover image
   req.body.imageCover = `product-${name}-${Date.now()}-cover.jpeg`;
   await sharp(req.files.imageCover[0].buffer)
@@ -49,6 +49,7 @@ exports.resizeProductimages = catchAsync(async (req, res, next) => {
   );
   next();
 });
+
 exports.getAllProducts = handleFactory.getAll(Product);
 exports.getProduct = handleFactory.getOne(Product);
 exports.createProduct = handleFactory.createOne(Product);

@@ -71,3 +71,24 @@ block content
                                                         | AVAILABILITY :: YES
                                                         br
                                                         | BRAND :: HERRIGHT
+        .container(style='margin-top:50px;')
+            .row
+                .col-lg-9.col-md-9
+                            .product-list
+                                .row
+                                    h3(style= "text-align:center;") We've got more options
+                                    each product in similarProduct
+                                        .col-lg-4.col-md-6
+                                            .equal-column-content.text-center(style='padding:15px;margin:10px;height:0%;')
+                                                div(class='product__item')
+                                                    .hover-product
+                                                        ul(class='product__hover')
+                                                            li
+                                                                a.image-popup(href='#')
+                                                                span(class='arrow_expand')
+                                                        a(href=`./${product.slug}`)
+                                                            img.img-fluid.image(style='cursor:pointer; width:262px; height:368px; float:left' href=`./product/${product.slug}` src=`/img/products/${product.imageCover}` )
+                                                    div(class='product__item__text')
+                                                        h6
+                                                            a(href='#')=product.name
+                                                        div(class='product__price')=product.price

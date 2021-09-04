@@ -2,14 +2,16 @@ const express = require('express');
 const viewController = require('./../controllers/viewController');
 const authController = require('./../controllers/authController');
 const bookingController = require('../controllers/bookingController');
+const productController = require('../controllers/productController');
 const router = express.Router();
 
+router.use(authController.isLoggedIn);
 router.get(
   '/',
   bookingController.createBookingCheckout,
   viewController.getOverview
 );
-router.use(authController.isLoggedIn);
+router.get('/crud', viewController.crud);
 router.get('/product/:slug', viewController.getProduct);
 router.get('/signup', viewController.signup);
 router.get('/login', viewController.getLoginForm);
@@ -21,7 +23,8 @@ router.get(
   authController.protect,
   viewController.getCheckoutDetails
 );
-router.get('/_addProduct', viewController.getAddProduct);
+router.get('/update/:slug', viewController.updateProduct);
+router.get('/addProduct', viewController.getAddProduct);
 
 // router.get('/me', authController.protect, viewController.getAccount);
 // router.get('/my-bookings', authController.protect, viewController.getMyTours);

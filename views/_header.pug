@@ -1,21 +1,21 @@
 .offcanvas-menu-overlay
-    .offcanvas-menu-wrapper
-        div(class='offcanvas__close') +
-        ul(class='offcanvas__widget')
-            li
-                span(class='icon_search search-switch')
-            li
-                a(href='wishlist.php')
-                span(class='icon_heart_alt')
-                span.heart
-            li
-                a(href='shop_details.php')
-                span(class='icon_bag_alt')
-                span.cart
-        #mobile-menu-wrap
-        div(class='offcanvas__auth')
-            a(href='/login') Login
-            a(href='register.php') Register
+.offcanvas-menu-wrapper
+    div(class='offcanvas__close') +
+    ul(class='offcanvas__widget')
+        li
+            span(class='icon_search search-switch')
+        li
+            a(href='wishlist.php')
+            span(class='icon_heart_alt')
+            span.heart
+        li
+            a(href='shop_details.php')
+            span(class='icon_bag_alt')
+            span.cart
+    #mobile-menu-wrap
+    div(class='offcanvas__auth')
+        a(href='login.php') Login
+        a(href='register.php') Register
 // Offcanvas Menu End
 // Header Section Begin
 header.header(style='position: fixed; z-index: 1030;width: 107%;')
@@ -23,17 +23,17 @@ header.header(style='position: fixed; z-index: 1030;width: 107%;')
         .row(style='background: #ffffff;')
             //.col-xl-3.col-lg-2
             div(class='header__logo' style="width:170px;margin-left:20px;")
-                a(href='/index')
+                a(href='./index.php')
                     img(src='/img/font1.png' style='width:90%' alt='')
             .col-xl-6.col-lg-7(style='max-width: 60%; flex: 0 0 60%;')
                 nav(class='header__menu' style='margin-left:50px;')
                     ul
                         li(style='padding:0 15px;')
-                            a(href='/index') Home
+                            a(href='index') Home
                         li(style='padding:0 15px;')
                             a(href='blog') About
                         li.active(style='padding:0 15px;')
-                            a(href='/') Shop
+                            a(href='') Shop
                         li(style='padding:0 15px;')
                             a(href='contact') Contact
             .col-lg-3

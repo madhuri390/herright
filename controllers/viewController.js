@@ -44,8 +44,6 @@ exports.signup = catchAsync(async (req, res, next) => {
   });
 });
 
-
-
 exports.getLoginForm = async (req, res) => {
   if (req.cookies.jwt) {
     const products = await Product.find();

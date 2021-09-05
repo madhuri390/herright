@@ -1,35 +1,44 @@
 extends base
 
 block content 
-    // Breadcrumb Section Begin
-    .breacrumb-section(style='padding-top:100px;')
-        .container(style='margin-top:0px;')
-            .row
-                .col-lg-12
-                    .breadcrumb-text
-                        a(href='/index')
-                            i(class='fa fa-home' style='width:20px')
-                            | Home
-                        a(href='/')
-                            i(class='icon_bag_alt' style='width:20px')
-                            | Shop
-    .container(style='')
+    //- main.main 
+    //-     .card-container
+    //-         each product in products
+    //-             .card
+    //-                 .card__header
+    //-                     .card__picture
+    //-                         .card__picture-overlay &nbsp;
+    //-                         img.card__picture-img(src=`/img/products/${product.imageCover}`, alt='product 1' )
+    //-                     h3.heading-tertirary
+    //-                         span=product.name
+    .container(style='margin-top:50px;')
         .row
-            .col-lg-9.col-md-9(style="margin-top: 50px;")
-                .product-list
-                    .row
-                        each product in products
-                            .col-lg-4.col-md-6
-                                .equal-column-content.text-center(style='padding:15px;margin:10px;height:0%;')
-                                    div(class='product__item')
-                                        .hover-product
-                                            ul(class='product__hover')
-                                                li
-                                                    a.image-popup(href=`/img/products/${product.images[0]}`)
-                                                    span(class='arrow_expand')
-                                            a(href=`./product/${product.slug}`)
-                                                img.img-fluid.image(style='cursor:pointer; width:262px; height:368px; float:left' href=`./product/${product.slug}` src=`/img/products/${product.imageCover}` )
-                                        div(class='product__item__text')
-                                            h6
-                                                a(href=`./product/${product.slug}` style="font-weight:bold;")=product.name
-                                            div(class='product__price')="₹ "+product.price
+            .col-lg-9.col-md-9
+                        .product-list
+                            .row
+                                each product in products
+                                    .col-lg-4.col-md-6
+                                        .equal-column-content.text-center(style='padding:15px;margin:10px;height:0%;')
+                                            div(class='product__item')
+                                                .hover-product
+                                                    ul(class='product__hover')
+                                                        li
+                                                            a.image-popup(href='#')
+                                                            span(class='arrow_expand')
+                                                    a(href=`./product/${product.slug}`)
+                                                        img.img-fluid.image(style='cursor:pointer; width:262px; height:368px; float:left' href=`./product/${product.slug}` src=`/img/products/${product.imageCover}` )
+                                                div(class='product__item__text')
+                                                    h6
+                                                        a(href='#')=product.name
+                                                    div(class='product__price')=product.price
+
+    script(src='js/jquery-3.3.1.min.js')
+    script(src='js/bootstrap.min.js')
+    script(src='js/jquery.magnific-popup.min.js')
+    script(src='js/jquery-ui.min.js')
+    script(src='js/mixitup.min.js')
+    script(src='js/jquery.countdown.min.js')
+    script(src='js/jquery.slicknav.js')
+    script(src='js/owl.carousel.min.js')
+    script(src='js/jquery.nicescroll.min.js')
+    script(src='js/main.js')

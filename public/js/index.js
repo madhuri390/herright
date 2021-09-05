@@ -1,5 +1,5 @@
 import '@babel/polyfill';
-import { signup } from './signup';
+import { signup, addAddress } from './signup';
 import { login, logout } from './login';
 import { addToCart, decrement, increment, remove } from './addToCart';
 import { bookTour } from './stripe';
@@ -17,7 +17,12 @@ const bookBtn = document.getElementById('place-order-btn');
 const productDataForm = document.querySelector('.form-product-data');
 const updateDataForm = document.querySelector('.form-update-data');
 const deleteProductForm = document.querySelectorAll('.delete');
+const addPreference = document.getElementById('addPreference');
+const addAddressBtn = document.querySelector('.form--addAddress');
+var addressRadioBtn = document.getElementsByName('addressRadio');
 //Values
+
+var addressId;
 
 //Delegation
 if (signupForm) {
@@ -68,7 +73,7 @@ if (productDataForm) {
   productDataForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const form = new FormData();
-    var checkboxes = document.getElementsByName('categories[]');
+    const addPreferencees = document.getElementsByName('categories[]');
     var vals = '';
     for (var i = 0, n = checkboxes.length; i < n; i++) {
       if (checkboxes[i].checked) {
@@ -190,7 +195,43 @@ for (let i = 0; i < trashBtn.length; i++) {
 if (bookBtn) {
   bookBtn.addEventListener('click', (e) => {
     e.target.textContent = 'Processing...';
+    for (var i = 0; i < addressRadioBtn.length; i++) {
+      if (addressRadioBtn[i].checked) {
+        addressId = addressRadioBtn[i].value;
+        break;
+      }
+    }
     const { userId } = e.target.dataset;
-    bookTour(userId);
+    bookTour(userId, addressId);
   });
+}
+
+if (addPreference)
+  addPreference.addEventListener('click', (e) => {
+    e.target.textContent = 'Processing...';
+    const result = document.getElementById('result');
+    result.style.display = 'block';
+  });
+
+if (addAddressBtn) {
+  addAddressBtn.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    console.log('Yes');
+    const userId = document.getElementById('userId').value;
+    const pincode = document.getElementById('pincode').value;
+    const city = document.getElementById('city').value;
+    const state = document.getElementById('state').value;
+    const flat = document.getElementById('flat').value;
+    const locality = document.getElementById('locality').value;
+    const landmark = document.getElementById('landmark').value;
+    console.log(userId, pincode, city, state, flat);
+    addAddress(userId, pincode, city, state, flat, locality, landmark);
+  });
+}
+
+if (addressRadioBtn) {
+  for (i = 0; i < addressRadioBtn.length; i++) {
+    if (addressRadioBtn[i].checked) {
+    }
+  }
 }

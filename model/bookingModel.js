@@ -6,6 +6,11 @@ const bookingSchema = new mongooose.Schema({
     ref: 'User',
     required: [true, 'A user id is mandatory'],
   },
+  addressId: {
+    type: mongooose.Schema.ObjectId,
+    ref: 'User',
+    required: [true, 'A address Id is mandatory'],
+  },
   product: [
     {
       productId: {

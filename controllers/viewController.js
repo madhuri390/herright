@@ -22,10 +22,9 @@ exports.getProduct = catchAsync(async (req, res, next) => {
   //1)Get data from the requested data and also reviews and guides
   const product = await Product.findOne({ slug: req.params.slug });
   const similarProduct = await Product.find({
-    $or: [{ color: product.color }, { category: /.*`${product.category}`.*/ }],
+    $or: [{ color: product.color }, { category: /.`${product.category}`./ }],
   });
   // db.inventory.find({ $or: [{ quantity: { $lt: 20 } }, { price: 10 }] });
-  console.log('similar ', similarProduct);
   if (!product)
     return next(new AppError('There is no product with this name', 404));
   //2)Build template

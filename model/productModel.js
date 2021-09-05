@@ -53,14 +53,18 @@ const productSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-    imageCover: {
-      type: String,
-      required: [true, 'A product must have a cover image'],
-    },
-    images: [
+    color: [
       {
-        type: String,
-        required: [true, 'A product must have a images'],
+        imageCover: {
+          type: String,
+          required: [true, 'A product must have a cover image'],
+        },
+        images: [
+          {
+            type: String,
+            required: [true, 'A product must have a images'],
+          },
+        ],
       },
     ],
     createdAt: {
@@ -73,10 +77,6 @@ const productSchema = new mongoose.Schema(
       required: [true, 'A product must have a category'],
     },
     slug: String,
-    color: {
-      type: String,
-      required: [true, 'A product must have color'],
-    },
   },
   {
     toJSON: { virtuals: true },

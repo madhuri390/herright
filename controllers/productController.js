@@ -88,6 +88,26 @@ exports.updateProductColor = catchAsync(async (req, res, next) => {
     data: product,
   });
 });
+exports.deleteProductColor = catchAsync(async (req, res, next) => {
+  const productId = req.params.productId;
+  const colorId = req.params.colorId;
+  const p = await Product.find({ _id: productId, 'color._id': colorId });
+  var n;
+  for await (const doc of p) {
+    n = doc.color.length;
+  }
+  if (n == 1) {
+    await Product.deleteOne({ _id: productId });
+  } else {
+    const product = await Product.update(
+      { _id: productId, 'color._id': colorId },
+      { $pull: { color: { _id: colorId } } }
+    );
+  }
+  res.status(204).json({
+    status: 'success',
+  });
+});
 exports.getAllProducts = handleFactory.getAll(Product);
 exports.getProduct = handleFactory.getOne(Product);
 exports.createProduct = handleFactory.createOne(Product);

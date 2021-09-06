@@ -26,6 +26,7 @@ const deleteProductForm = document.querySelectorAll('.delete');
 const addPreference = document.getElementById('addPreference');
 const addAddressBtn = document.querySelector('.form--addAddress');
 const addressRadioBtn = document.getElementsByName('addressRadio');
+
 //Values
 
 var addressId;
@@ -133,8 +134,8 @@ if (addColorDataForm) {
 }
 for (let i = 0; i < deleteProductForm.length; i++) {
   deleteProductForm[i].addEventListener('click', (e) => {
-    const { productId } = e.target.dataset;
-    deleteProduct(productId);
+    const { productId, colorId } = e.target.dataset;
+    deleteProduct(productId, colorId);
   });
 }
 // if (userPasswordForm) {

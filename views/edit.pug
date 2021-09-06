@@ -119,7 +119,7 @@ block content
                         th.icon(scope='col')
                             a.btn.btn-success(href=`../update/${product._id}/${c.productColor}` style='cursor:pointer;') Update
                             br
-                            button.btn.btn-danger(id=`delete-${product._id}/${c._id}` data-product-id=`${product._id}` class='delete' style='cursor:pointer;') Delete
+                            button.btn.btn-danger(id=`delete-${product._id}-${c._id}` data-product-id=`${product._id}` data-color-id=`${c._id}` class='delete' style='cursor:pointer;') Delete
             br
             br
             br

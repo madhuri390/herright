@@ -56,12 +56,13 @@ export const addColor = async (data, id) => {
     showAlert('danger', 'Sorry!Please try again.');
   }
 };
-export const deleteProduct = async (id) => {
+export const deleteProduct = async (productId, colorId) => {
   try {
     const res = await axios({
       method: 'DELETE',
-      url: `http://127.0.0.1:3000/api/v1/products/${id}`,
-      id,
+      url: `http://127.0.0.1:3000/api/v1/products/${productId}/${colorId}`,
+      productId,
+      colorId,
     });
     if (res.data === '') {
       showAlert('success', 'Deleted Successfully.');

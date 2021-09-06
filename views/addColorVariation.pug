@@ -1,0 +1,105 @@
+extends base
+
+
+block content 
+    // Breadcrumb Section Begin
+    .breacrumb-section(style='padding-top:100px;')
+        .container(style='margin-top:0px;')
+            .row
+                .col-lg-12
+                    .breadcrumb-text
+                        a(href='shop.php')
+                            i(class='icon_bag_alt' style='width:20px')
+                            | Update Product
+    .container
+        .row
+            .center(style="width:100%;padding-top:0px;")
+                h3(style='text-align:center;') Update Product
+                br
+                .col-8
+                    .full.form-div(style='padding:30px; margin-top:-40px;width:150% ')
+                        .row
+                            form.form.form-addColor-data
+                                .col-6
+                                    .form-group.col-sm-10(style='max-width:30%')
+                                        label(for='profileImage') Product image
+                                        input.form__upload(type='file' accept='image/*' id='photo' value=`${product.image}` name='images[]' multiple)
+                                    .form-group.col-sm-10
+                                            label(for='name') Name
+                                            input#name.form-control(type='text', value=`${product.name}`, required, name='name')
+                                            input#id.form-control(type='hidden', value=`${product._id}`, required, name='id')
+                                    .form-group.col-sm-10
+                                        label(for='price') Price
+                                        input#price.form-control(type='text', value=`${product.price}`, required, name='price')                                
+                                    .form-group.col-sm-10
+                                        label(for='description') Description
+                                        input#description.form-control(type='text', value=`${product.description}`, required, name='description')
+                                    .form-group.col-sm-10
+                                        label(for='summary') Summary
+                                        input#summary.form-control(type='text', value=`${product.summary}`, required, name='summary')
+                                    .form-group.col-sm-10
+                                        label(for='stock') Color
+                                        input#color.form-control(type='text', value=``, required, name='color')  
+                                button.btn.btn-primary.btn-block(type='submit' name='addColorVariation') Update product             
+                                //-         .row
+                                //-             .form-group.col-6
+                                //-                 label(for='stock' style="margin-bottom: 30px;") Select available sizes:
+                                //-                 br
+                                //-                 label(for='size' style="margin-bottom: 15px;") XS
+                                //-                 br
+                                //-                 label(for='size' style="margin-bottom: 15px;") S
+                                //-                 br
+                                //-                 label(for='size' style="margin-bottom: 15px;") M
+                                //-                 br
+                                //-                 label(for='size' style="margin-bottom: 15px;") L
+                                //-                 br
+                                //-                 label(for='size' style="margin-bottom: 15px;") XL
+                                //-                 br
+                                //-                 label(for='size' style="margin-bottom: 15px;") XXL
+                                //-                 br
+                                //-             .form-group.col-6
+                                //-                 label(for='quantiy') Quantity
+                                //-                 br
+                                //-                 br
+                                //-                 input.form-control(name='quantityxs' value='')
+                                //-                 input.form-control(name='quantitys' value='')
+                                //-                 input.form-control(name='quantitym' value='')
+                                //-                 input.form-control(name='quantityl' value='')
+                                //-                 input.form-control(name='quantityxl' value='')
+                                //-                 input.form-control(name='quantityxxl' value='')
+                                //-         .row
+                                //-             .form-group.col-6
+                                //-                 label(for='categories') Categories
+                                //-                 br
+                                //-                 input(type='checkbox' name='categories[]' value='kurtas' style="margin-right:5px;")
+                                //-                 | Kurta
+                                //-                 br
+                                //-                 input(type='checkbox' name='categories[]' value='sets' style="margin-right:5px;")
+                                //-                 | Sets
+                                //-                 br
+                                //-                 input(type='checkbox' name='categories[]' value='anarkali' style="margin-right:5px;")
+                                //-                 | Anarkali
+                                //-                 br
+                                //-                 input(type='checkbox' name='categories[]' value='Capes' style="margin-right:5px;")
+                                //-                 | Capes
+                                //-                 br
+                                //-                 input(type='checkbox' name='categories[]' value='Skirts' style="margin-right:5px;")
+                                //-                 | Skirts
+                                //-                 br
+                                //-                 input(type='checkbox' name='categories[]' value='Jackets' style="margin-right:5px;")
+                                //-                 | Jackets
+                                //-                 br
+                                //-     .form-group
+                                //-             button.btn.btn-info.btn-block(type='submit' name='update') Update product
+                                            
+            //- .form__group
+            //-   label.form__label(for='name') Name
+            //-   input#name.form__input(type='text', value='', required, name='name')
+            //- .form__group.ma-bt-md
+            //-   label.form__label(for='email') Email address
+            //-   input#email.form__input(type='email', value='', required, name='email')
+            //- .form__group.form__photo-upload
+            //-   input.form__upload(type='file' accept='image/*' id='photo' name='photo' multiple)
+            //-   label(for='photo') Choose new photo
+            //- .form__group.right
+            //-   button.btn.btn--small.btn--green Save settings

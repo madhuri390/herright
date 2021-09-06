@@ -3,7 +3,12 @@ import { signup, addAddress } from './signup';
 import { login, logout } from './login';
 import { addToCart, decrement, increment, remove } from './addToCart';
 import { bookTour } from './stripe';
-import { insertProduct, updateProduct, deleteProduct } from './productcrud';
+import {
+  insertProduct,
+  updateProduct,
+  deleteProduct,
+  addColor,
+} from './productcrud';
 //DOM Elements
 const signupForm = document.querySelector('.form--signup');
 const loginForm = document.querySelector('.form--login');
@@ -16,10 +21,11 @@ const trashBtn = document.querySelectorAll('.trash');
 const bookBtn = document.getElementById('place-order-btn');
 const productDataForm = document.querySelector('.form-product-data');
 const updateDataForm = document.querySelector('.form-update-data');
+const addColorDataForm = document.querySelector('.form-addColor-data');
 const deleteProductForm = document.querySelectorAll('.delete');
 const addPreference = document.getElementById('addPreference');
 const addAddressBtn = document.querySelector('.form--addAddress');
-var addressRadioBtn = document.getElementsByName('addressRadio');
+const addressRadioBtn = document.getElementsByName('addressRadio');
 //Values
 
 var addressId;
@@ -97,17 +103,31 @@ if (updateDataForm) {
   updateDataForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const form = new FormData();
-    const id = document.getElementById('id').value;
+    const pid = document.getElementById('pid').value;
+    const productColor = document.getElementById('productColor').value;
     form.append('name', document.getElementById('name').value);
     form.append('price', document.getElementById('price').value);
     form.append('imageCover', document.getElementById('photo').files[0]);
     form.append('images', document.getElementById('photo').files[0]);
-    form.append('color', document.getElementById('color').value);
+    form.append('productColor', document.getElementById('color').value);
     form.append('description', document.getElementById('description').value);
     form.append('summary', document.getElementById('summary').value);
     form.append('category', 'tops');
+    console.log(pid, productColor);
+    updateProduct(form, pid, productColor);
+  });
+}
+if (addColorDataForm) {
+  addColorDataForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const form = new FormData();
+    const id = document.getElementById('id').value;
+    form.append('name', document.getElementById('name').value);
+    form.append('imageCover', document.getElementById('photo').files[0]);
+    form.append('images', document.getElementById('photo').files[0]);
+    form.append('productColor', document.getElementById('color').value);
     console.log(id);
-    updateProduct(form, id);
+    addColor(form, id);
   });
 }
 for (let i = 0; i < deleteProductForm.length; i++) {
@@ -140,54 +160,61 @@ if (addtocartBtn)
     e.target.textContent = 'Processing...';
     const { productId } = e.target.dataset;
     const { productPrice } = e.target.dataset;
+    const { colorId } = e.target.dataset;
     var size = document.getElementById('size').value;
+    console.log(colorId);
     // console.log(productId, size);
     if (!size) {
       alert('Please select a size...');
     } else {
-      addToCart(productId, size, productPrice);
+      addToCart(productId, size, productPrice, colorId);
       e.target.textContent = 'Added to the cart!';
     }
   });
 
 for (let i = 0; i < decrementBtn.length; i++) {
   decrementBtn[i].addEventListener('click', (e) => {
-    const { productId, productSize, productPrice } = e.target.dataset;
-    decrement(productId, productSize, productPrice);
+    const { productId, productSize, productPrice, colorId } = e.target.dataset;
+    decrement(productId, productSize, productPrice, colorId);
     var input_quantity = document.getElementById(
-      `${productId}-${productSize}`
+      `${productId}-${productSize}-${colorId}`
     ).value;
     // var totalAmount = document.getElementById('totalAmount').value;
-    if (document.getElementById(`${productId}-${productSize}`).value == 1) {
+    if (
+      document.getElementById(`${productId}-${productSize}-${colorId}`).value ==
+      1
+    ) {
       card[i].innerHTML = '';
       //removeitem(cardno);
     }
-    document.getElementById(`${productId}-${productSize}`).value =
+    document.getElementById(`${productId}-${productSize}-${colorId}`).value =
       parseInt(input_quantity) - 1;
-    document.getElementById(`${productId}-${productSize}-price`).innerHTML =
-      (parseInt(input_quantity) - 1) * productPrice;
+    document.getElementById(
+      `${productId}-${productSize}-${colorId}-price`
+    ).innerHTML = (parseInt(input_quantity) - 1) * productPrice;
 
     // document.getElementById(`subtotal`).innerHTML = totalAmount;
   });
 }
 for (let i = 0; i < incrementBtn.length; i++) {
   incrementBtn[i].addEventListener('click', (e) => {
-    const { productId, productSize, productPrice } = e.target.dataset;
-    const result = increment(productId, productSize, productPrice);
+    const { productId, productSize, productPrice, colorId } = e.target.dataset;
+    const result = increment(productId, productSize, productPrice, colorId);
     var input_quantity = document.getElementById(
-      `${productId}-${productSize}`
+      `${productId}-${productSize}-${colorId}`
     ).value;
-    document.getElementById(`${productId}-${productSize}`).value =
+    document.getElementById(`${productId}-${productSize}-${colorId}`).value =
       parseInt(input_quantity) + 1;
-    document.getElementById(`${productId}-${productSize}-price`).innerHTML =
-      (parseInt(input_quantity) + 1) * productPrice;
+    document.getElementById(
+      `${productId}-${productSize}-${colorId}-price`
+    ).innerHTML = (parseInt(input_quantity) + 1) * productPrice;
     // document.getElementById('subtotal').innerHTML = result;
   });
 }
 for (let i = 0; i < trashBtn.length; i++) {
   trashBtn[i].addEventListener('click', (e) => {
-    const { productId, productSize } = e.target.dataset;
-    remove(productId, productSize);
+    const { productId, productSize, colorId } = e.target.dataset;
+    remove(productId, productSize, colorId);
     card[i].innerHTML = '';
   });
 }

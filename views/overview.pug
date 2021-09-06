@@ -25,11 +25,11 @@ block content
                                         .hover-product
                                             ul(class='product__hover')
                                                 li
-                                                    a.image-popup(href=`/img/products/${product.images[0]}`)
+                                                    a.image-popup(href=`/img/products/${product.color[0].imageCover}`)
                                                     span(class='arrow_expand')
-                                            a(href=`./product/${product.slug}`)
-                                                img.img-fluid.image(style='cursor:pointer; width:262px; height:368px; float:left' href=`./product/${product.slug}` src=`/img/products/${product.imageCover}` )
+                                            a(href=`./product/${product.color[0].slug}/${product.color[0]._id}`)
+                                                img.img-fluid.image(style='cursor:pointer; width:262px; height:368px; float:left' href=`./product/${product.color[0].slug}` src=`/img/products/${product.color[0].imageCover}` )
                                         div(class='product__item__text')
                                             h6
-                                                a(href=`./product/${product.slug}` style="font-weight:bold;")=product.name
+                                                a(href=`./product/${product.slug}` style="font-weight:bold;")=product.color[0].name
                                             div(class='product__price')="₹ "+product.price

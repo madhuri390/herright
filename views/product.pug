@@ -11,30 +11,34 @@ block content
                         a(href='shop.php')
                             i(class='icon_bag_alt' style='width:20px')
                             | Shop
-                        span=product.name
+                        span=product.color[0].name
+    each c in product.color
+        if c._id!=pcolor 
+            a(href=`../${c.slug}/${c._id}`)=c.productColor 
     .container(style="margin-top:50px;")
         .row
             .col-md-5
                 #carouselExampleControls.carousel.slide(data-ride='carousel')
                     .carousel-inner
                         .carousel-item.active
-                            img.d-block(src=`/img/products/${product.images[0]}` style="max-width:100%;" alt='First slide')
+                            each c in product.color
+                                if c._id==pcolor 
+                                    img.d-block(src=`/img/products/${c.images[0]}` style="max-width:100%;" alt='First slide')
 
-                        - for (var i = 0; i < product.images.length; ++i) {
-
-
-                            .carousel-item
-                                img.d-block(src=`/img/products/${product.images[i]}` alt='Second slide' style="max-width:100%;" )
-                        -}
+                                    - for (var i = 0; i < c.images.length; ++i) {
+                                        .carousel-item
+                                            img.d-block(src=`/img/products/${c.images[i]}` alt='Second slide' style="max-width:100%;" )
+                                    -}
                     a.carousel-control-prev(href='#carouselExampleControls' role='button' data-slide='prev')
                         span.carousel-control-prev-icon(aria-hidden='true')
                         span.sr-only Previous
                     a.carousel-control-next(href='#carouselExampleControls' role='button' data-slide='next')
                         span.carousel-control-next-icon(aria-hidden='true')
-                        span.sr-only Next             
+                        span.sr-only Next  
+                      
             .col-md-7
                 p.newarrival.text-center NEW
-                h2(style="font-weight:bold;")=product.name 
+                h2(style="font-weight:bold;")=product.color[0].name 
                 h5(style="font-weight:bold;margin-top:20px;color:black;")="₹ "+product.price 
                 p(style="margin-top:20px;color:black;")=product.description
                 p(style="color:black;font-weight:bold;")="Choose the size:"
@@ -46,7 +50,7 @@ block content
                     option(value='L') L
                     option(value='XL') XL
                 br
-                button.btn.btn--green.span-all-rows#add-to-cart(data-product-id=`${product.id}` data-product-price=`${product.price}` style='margin-top:50px;background:black;text-transform:uppercase;border-radius:50px;width:50%;color:white') Add to cart
+                button.btn.btn--green.span-all-rows#add-to-cart(data-product-id=`${product.id}` data-product-price=`${product.price}` data-color-id=`${pcolor}` style='margin-top:50px;background:black;text-transform:uppercase;border-radius:50px;width:50%;color:white') Add to cart
                 .faq-section.spad
                     .faq-container
                         .row
@@ -70,24 +74,24 @@ block content
                                                         | AVAILABILITY :: YES
                                                         br
                                                         | BRAND :: HERRIGHT
-        .container(style='margin-top:50px;')
-            .row
-                .col-lg-9.col-md-9
-                    .product-list
-                        .row
-                            h3(style= "text-align:center;") We've got more options
-                            each product in similarProduct
-                                .col-lg-4.col-md-6
-                                    .equal-column-content.text-center(style='padding:15px;margin:10px;height:0%;')
-                                        div(class='product__item')
-                                            .hover-product
-                                                ul(class='product__hover')
-                                                    li
-                                                        a.image-popup(href=`/img/products/${product.images[0]}`)
-                                                            span(class='arrow_expand')
-                                                a(href=`/${product.slug}`)
-                                                    img.img-fluid.image(style='cursor:pointer; width:262px; height:368px; float:left' href=`./product/${product.slug}` src=`/img/products/${product.imageCover}` )
-                                            div(class='product__item__text')
-                                                h6
-                                                    a(href=`/img/products/${product.images[0]}`)=product.name
-                                                div(class='product__price')=product.price
+        //- .container(style='margin-top:50px;')
+        //-     .row
+        //-         .col-lg-9.col-md-9
+        //-             .product-list
+        //-                 .row
+        //-                     h3(style= "text-align:center;") We've got more options
+        //-                     each product in similarProduct
+        //-                         .col-lg-4.col-md-6
+        //-                             .equal-column-content.text-center(style='padding:15px;margin:10px;height:0%;')
+        //-                                 div(class='product__item')
+        //-                                     .hover-product
+        //-                                         ul(class='product__hover')
+        //-                                             li
+        //-                                                 a.image-popup(href=`/img/products/${product.color[0].images[0]}`)
+        //-                                                     span(class='arrow_expand')
+        //-                                         a(href=`/${product.slug}`)
+        //-                                             img.img-fluid.image(style='cursor:pointer; width:262px; height:368px; float:left' href=`./product/${product.slug}` src=`/img/products/${product.imageCover}` )
+        //-                                     div(class='product__item__text')
+        //-                                         h6
+        //-                                             a(href=`/img/products/${product.color[0].images[0]}`)=product.color[0].name
+        //-                                         div(class='product__price')=product.price

@@ -60,23 +60,31 @@ block content
                                     button.btn.site-btn Add Address 
                     br
                     .col-lg-6
-                        -let totalAmount=0
-                        each item in cartItems
-                            .card.p-4(class='display-card')
-                                .row(style="margin-left:60px;")
-                                    div(class='col-md-2 col-11 mx-auto  d-flex justify-content-center align-items-center  product_img')
-                                        a(href=`/product/${item.productId.slug}`)
-                                        img(src=`/img/products/${item.productId.imageCover}` style='max-width: 140px; margin-right: 50px; margin-left: 20px' alt=item.productId.name)
-                                    .col-md-8.col-11.mx-auto.px-4.mt-2.justify-content-center
-                                        .row
-                                            .col-8.card-title
-                                                h3(class='mb-4 product_name' style=' color: black;font-size: 1.4rem;text-transform: capitalize;font-weight: 500;')=`${item.productId.name} x ${item.quantity}` 
-                                                p.mb-2=`Color:${item.productId.color}`
-                                                p.mb-2=`Category:${item.productId.category}`
-                                                p.mb-3=`Size:${item.size}`
-                                                p.mb-4=`Quantity:${item.quantity}`
-                                                p.mb-5=`Price:${item.price}`
-                                                -totalAmount=totalAmount+item.price
+                    -let totalAmount=0
+                    each item in cartItems
+                        .card.p-4(class='display-card')
+                            .row
+                                // Cart Images div
+                                div(class='col-md-2 col-11 mx-auto  d-flex justify-content-center align-items-center  product_img')
+                                    each c in item.productId.color
+                                        if new String(c._id).valueOf()==new String(item.colorId).valueOf()
+                                            a(href=`/product/${c.slug}/${c._id}`)
+                                            img(src=`/img/products/${c.imageCover}` style='max-width: 140px; margin-right: 50px; margin-left: 20px' alt=c.name)
+                                            // Product Details
+                                            .col-md-8.col-11.mx-auto.px-4.mt-2.justify-content-center
+                                                .row
+                                                    // product name
+                                                    .col-8.card-title
+                                                    h3(class='mb-4 product_name' style=' color: black;font-size: 1.4rem;text-transform: capitalize;font-weight: 500;')=c.name
+                                                    p.mb-2=`Color :${c.productColor}`
+                                                    p.mb-2=`Category:${item.productId.category}`
+                                                    p.mb-3=`Size:${item.size}`
+                                                    p.mb-4=`Quantity:${item.quantity}`
+                                                    p.mb-5=`Price:${item.price}`
+                                                    -totalAmount=totalAmount+item.price
+                                            
+                                                
+                            
                     
                     .checkout-content(style="text-align:center;margin-top:50px;")
                         .place-order

@@ -13,11 +13,17 @@ router
 
 router
   .route('/:id')
+  .patch(
+    productController.uploadProductimages,
+    productController.resizeProductimages,
+    productController.addVariation
+  )
   .get(productController.getProduct)
   .delete(productController.deleteProduct);
 router.use(
   productController.uploadProductimages,
   productController.resizeProductimages
 );
-router.route('/:id').patch(productController.updateProduct);
+router.route('/:pid/:productColor').patch(productController.updateProductColor);
+
 module.exports = router;

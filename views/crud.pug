@@ -110,16 +110,15 @@ block content
                     tr
                     th.icon(scope='col' style='font-size: 15px;font-weight: lighter;')=`${item.name}` 
                     th(scope='col')
-                        img(src=`/img/products/${item.imageCover}` style='max-width:100px;')
+                        img(src=`/img/products/${item.color[0].imageCover}` style='max-width:100px;')
                     th(scope='col' style='font-size: 15px;font-weight: lighter;')=`${item.price}`  
                     th(scope='col' style='font-size: 15px;font-weight: lighter;')=`${item.description}`
                     th(scope='col' style='font-size: 15px;font-weight: lighter;')=`${item.category}` 
-                    th(scope='col' style='font-size: 15px;font-weight: lighter;')=`${item.color}`
                     th(scope='col' style='font-size: 15px;font-weight: lighter;')  
                     th.icon(scope='col')
-                        a.btn.btn-success(href=`./update/${item.slug}` style='cursor:pointer;') View
+                        a.btn.btn-success(href=`./edit/${item._id}` style='cursor:pointer;') View
                         br
-                        button.btn.btn-danger(id=`delete-${item._id}` data-product-id=`${item._id}` class='delete' style='cursor:pointer;') Delete
+                        a.btn.btn-danger(href=`./addVariation/${item._id}` data-product-id=`${item._id}`  style='cursor:pointer;') Add Color Variation
             br
             br
             br

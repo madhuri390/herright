@@ -27,7 +27,8 @@ block content
                                     .form-group.col-sm-10
                                             label(for='name') Name
                                             input#name.form-control(type='text', value=`${product.name}`, required, name='name')
-                                            input#id.form-control(type='hidden', value=`${product._id}`, required, name='id')
+                                            input#pid.form-control(type='hidden', value=`${product._id}`, required, name='id')
+                                            input#productColor.form-control(type='hidden', value=`${productColor}`, required, name='id')
                                     .form-group.col-sm-10
                                         label(for='price') Price
                                         input#price.form-control(type='text', value=`${product.price}`, required, name='price')                                
@@ -38,8 +39,11 @@ block content
                                         label(for='summary') Summary
                                         input#summary.form-control(type='text', value=`${product.summary}`, required, name='summary')
                                     .form-group.col-sm-10
-                                        label(for='stock') Color
-                                        input#color.form-control(type='text', value=`${product.color}`, required, name='color')  
+                                    each c in product.color
+                                        -console.log(c.productColor,productColor);
+                                        if c.productColor==productColor
+                                            label(for='stock') Color
+                                            input#color.form-control(type='text', value=`${c.productColor}`, required, name='color')  
                                 button.btn.btn-primary.btn-block(type='submit' name='update') Update product             
                                 //-         .row
                                 //-             .form-group.col-6

@@ -29,6 +29,16 @@ exports.updateOne = (Model) =>
 
 exports.createOne = (Model) =>
   catchAsync(async (req, res, next) => {
+    if (req.body.images && req.body.imageCover) {
+      const color = {
+        name: req.body.name,
+        images: req.body.images,
+        imageCover: req.body.imageCover,
+        productColor: req.body.productColor,
+        slug: req.body.name.replace(/\s/g, '') + req.body.productColor,
+      };
+      req.body.color = color;
+    }
     const doc = await Model.create(req.body);
     res.status(201).json({
       status: 'success',

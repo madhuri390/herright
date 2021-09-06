@@ -6,6 +6,11 @@ const cartSchema = new mongooose.Schema({
     ref: 'User',
     required: [true, 'A User must add a product'],
   },
+  colorId: {
+    type: mongooose.Schema.ObjectId,
+    ref: 'Product',
+    required: [true, 'A color Id must add a product'],
+  },
   productId: {
     type: mongooose.Schema.ObjectId,
     ref: 'Product',
@@ -29,7 +34,12 @@ const cartSchema = new mongooose.Schema({
   },
 });
 cartSchema.pre(/^find/, function (next) {
-  this.populate('userId').populate('productId');
+  this.populate('userId')
+    .populate('productId')
+    .populate({
+      path: 'product.color',
+      populate: { path: 'color' },
+    });
   next();
 });
 const Cart = mongooose.model('Cart', cartSchema);

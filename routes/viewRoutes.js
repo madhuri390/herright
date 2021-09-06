@@ -12,7 +12,7 @@ router.get(
   viewController.getOverview
 );
 router.get('/crud', viewController.crud);
-router.get('/product/:slug', viewController.getProduct);
+router.get('/product/:slug/:id', viewController.getProduct);
 router.get('/signup', viewController.signup);
 router.get('/login', viewController.getLoginForm);
 router.get('/index', viewController.getIndex);
@@ -23,8 +23,11 @@ router.get(
   authController.protect,
   viewController.getCheckoutDetails
 );
-router.get('/update/:slug', viewController.updateProduct);
+router.get('/addVariation/:id', viewController.addColorVariation);
+router.get('/edit/:id', viewController.editproduct);
+router.get('/update/:pid/:productColor', viewController.updateProduct);
 router.get('/addProduct', viewController.getAddProduct);
+router.get('/customerdetails', viewController.getCustomerDetails);
 
 // router.get('/me', authController.protect, viewController.getAccount);
 // router.get('/my-bookings', authController.protect, viewController.getMyTours);

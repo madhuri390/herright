@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { showAlert } from './alert';
-export const addToCart = async (productId, size, price) => {
+export const addToCart = async (productId, size, price, colorId) => {
   console.log(price);
   try {
     const res = await axios({
@@ -10,6 +10,7 @@ export const addToCart = async (productId, size, price) => {
         productId,
         size,
         price,
+        colorId,
       },
     });
     if (res.data.status === 'success') {
@@ -22,7 +23,7 @@ export const addToCart = async (productId, size, price) => {
     showAlert('error', err.response.data.message);
   }
 };
-export const decrement = async (productId, size, price) => {
+export const decrement = async (productId, size, price, colorId) => {
   try {
     const res = await axios({
       method: 'POST',
@@ -31,6 +32,7 @@ export const decrement = async (productId, size, price) => {
         productId,
         size,
         price,
+        colorId,
       },
     });
     if (res.data.status === 'success') {
@@ -42,7 +44,7 @@ export const decrement = async (productId, size, price) => {
     showAlert('error', err.response.data.message);
   }
 };
-export const increment = async (productId, size, price) => {
+export const increment = async (productId, size, price, colorId) => {
   try {
     const res = await axios({
       method: 'POST',
@@ -51,6 +53,7 @@ export const increment = async (productId, size, price) => {
         productId,
         size,
         price,
+        colorId,
       },
     });
     if (res.data.status === 'success') {
@@ -63,7 +66,7 @@ export const increment = async (productId, size, price) => {
     showAlert('error', err.response.data.message);
   }
 };
-export const remove = async (productId, size) => {
+export const remove = async (productId, size, colorId) => {
   try {
     const res = await axios({
       method: 'POST',
@@ -71,6 +74,7 @@ export const remove = async (productId, size) => {
       data: {
         productId,
         size,
+        colorId,
       },
     });
     if (res.data.status === 'success') {

@@ -51,7 +51,10 @@ exports.createBookingCheckout = catchAsync(async (req, res, next) => {
   for (let item of cartItems) {
     totalPrice = totalPrice + item.price;
   }
-  const productIds = await Cart.find({ userId: user }).select('productId');
+  const productIds = await Cart.find({ userId: user })
+    .select('productId')
+    .select('colorId')
+    .select('size');
   await Booking.create({
     userId: user,
     addressId: address,

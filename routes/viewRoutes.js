@@ -27,7 +27,8 @@ router.get('/addVariation/:id', viewController.addColorVariation);
 router.get('/edit/:id', viewController.editproduct);
 router.get('/update/:pid/:productColor', viewController.updateProduct);
 router.get('/addProduct', viewController.getAddProduct);
-router.get('/customerdetails', viewController.getCustomerDetails);
+router.get('/customerDetails', viewController.getCustomerDetails);
+router.get('/customerOrders', viewController.getCustomerOrders);
 
 // router.get('/me', authController.protect, viewController.getAccount);
 // router.get('/my-bookings', authController.protect, viewController.getMyTours);

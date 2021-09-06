@@ -39,13 +39,14 @@ const bookingSchema = new mongooose.Schema({
     default: Date.now(),
   },
 });
-// bookingSchema.pre(/^find/, function (next) {
-//   this.populate('userId').populate({
-//     path: 'product',
-//     select: 'productId',
-//   });
-//   next();
-// });
+bookingSchema.pre(/^find/, function (next) {
+  this.populate('userId').populate({
+    path: 'product',
+    select: 'productId',
+  });
+
+  next();
+});
 const Booking = mongooose.model('Booking', bookingSchema);
 
 module.exports = Booking;

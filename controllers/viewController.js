@@ -113,6 +113,20 @@ exports.updateProduct = catchAsync(async (req, res, next) => {
     productColor,
   });
 });
+exports.getFilterProducts = catchAsync(async (req, res, next) => {
+  //1)Get data from the requested data and also reviews and guides
+  const attribute = req.params.attribute;
+  const value = req.params.value;
+  const products = await Product.find({ category: { $in: [value] } });
+  if (!products)
+    return next(new AppError('There is no product with this name', 404));
+  //2)Build template
+  //3)Render
+  res.status(200).render('overview', {
+    title: `Products`,
+    products,
+  });
+});
 exports.addColorVariation = catchAsync(async (req, res, next) => {
   //1)Get data from the requested data and also reviews and guides
   const product = await Product.findOne({ _id: req.params.id });

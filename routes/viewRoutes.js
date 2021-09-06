@@ -23,6 +23,7 @@ router.get(
   authController.protect,
   viewController.getCheckoutDetails
 );
+router.get('/:attribute/:value', viewController.getFilterProducts);
 router.get('/addVariation/:id', viewController.addColorVariation);
 router.get('/edit/:id', viewController.editproduct);
 router.get('/update/:pid/:productColor', viewController.updateProduct);

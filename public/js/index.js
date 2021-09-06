@@ -81,18 +81,19 @@ if (productDataForm) {
     const form = new FormData();
     const addPreferencees = document.getElementsByName('categories[]');
     var vals = '';
-    for (var i = 0, n = checkboxes.length; i < n; i++) {
-      if (checkboxes[i].checked) {
-        vals += ',' + checkboxes[i].value;
+    for (var i = 0, n = addPreferencees.length; i < n; i++) {
+      if (addPreferencees[i].checked) {
+        vals += addPreferencees[i].value;
       }
     }
+
     console.log('Values', vals);
     console.log(document.getElementById('photo').files);
     form.append('name', document.getElementById('name').value);
     form.append('price', document.getElementById('price').value);
     form.append('imageCover', document.getElementById('photo').files[0]);
     form.append('images', document.getElementById('photo').files[0]);
-    form.append('color', document.getElementById('color').value);
+    form.append('productColor', document.getElementById('color').value);
     form.append('description', document.getElementById('description').value);
     form.append('summary', document.getElementById('summary').value);
     form.append('category', vals);

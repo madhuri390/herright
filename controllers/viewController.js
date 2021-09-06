@@ -2,7 +2,7 @@ const Product = require('../model/productModel');
 const Cart = require('../model/cartModel');
 const Users = require('../model/userModel');
 // const User = require('../model/userModel');
-// const Booking = require('../model/bookingModel');
+const Booking = require('../model/bookingModel');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 const authController = require('../controllers/authController');
@@ -161,6 +161,16 @@ exports.getCustomerDetails = catchAsync(async (req, res) => {
   //     res.send('No documents found');
   //   }
   // });
+});
+
+exports.getCustomerOrders = catchAsync(async (req, res) => {
+  const orders = await Booking.find({});
+  const products = await Product.find({});
+  res.status(200).render('customerOrders', {
+    title: 'Get customer Details',
+    orders,
+    products,
+  });
 });
 // exports.getAccount = (req, res) => {
 //   res.status(200).render('account', {

@@ -38,6 +38,7 @@ exports.createOne = (Model) =>
         slug: req.body.name.replace(/\s/g, '') + req.body.productColor,
       };
       req.body.color = color;
+      console.log(req.body.color);
     }
     const doc = await Model.create(req.body);
     res.status(201).json({

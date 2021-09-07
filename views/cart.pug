@@ -27,9 +27,9 @@ block content
                                 // product name
                                 .col-8.card-title
                                 h3(class='mb-4 product_name' style=' color: black;font-size: 1.4rem;text-transform: capitalize;font-weight: 500;')=c.name
-                                p.mb-2=`Color: ${c.productColor}`
-                                p.mb-2=`Category: ${item.productId.category}`
-                                p.mb-3=`Size: ${item.size}`
+                                p.mb-2=`COLOR: ${c.productColor}`
+                                p.mb-2=`CATEGORY: ${item.productId.category}`
+                                p.mb-3=`SIZE: ${item.size}`
                                 .btn-increment-decrement(class='decrement' data-product-Id=`${item.productId.id}`,data-product-size=`${item.size}`,data-product-price=`${item.productId.price}`,data-color-id=`${new String(c._id).valueOf()}`) -
                                 input.input-quantity(id=`${item.productId.id}-${item.size}-${new String(c._id).valueOf()}` value=`${item.quantity}`)
                                 .btn-increment-decrement(class='increment' data-product-Id=`${item.productId.id}`,data-product-size=`${item.size}`,data-product-price=`${item.productId.price}`,data-color-id=`${new String(c._id).valueOf()}`)  +

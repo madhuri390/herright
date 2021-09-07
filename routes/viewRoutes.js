@@ -6,12 +6,15 @@ const productController = require('../controllers/productController');
 const router = express.Router();
 
 router.use(authController.isLoggedIn);
+
 router.get(
   '/',
   bookingController.createBookingCheckout,
   viewController.getOverview
 );
+router.get('/edit/:id', viewController.editproduct);
 router.get('/crud', viewController.crud);
+router.get('/addVariation/:id', viewController.addColorVariation);
 router.get('/product/:slug/:id', viewController.getProduct);
 router.get('/signup', viewController.signup);
 router.get('/login', viewController.getLoginForm);
@@ -26,8 +29,8 @@ router.get(
   viewController.getCheckoutDetails
 );
 router.get('/:attribute/:value', viewController.getFilterProducts);
-router.get('/addVariation/:id', viewController.addColorVariation);
-router.get('/edit/:id', viewController.editproduct);
+
+
 router.get('/update/:pid/:productColor', viewController.updateProduct);
 router.get('/addProduct', viewController.getAddProduct);
 router.get('/customerDetails', viewController.getCustomerDetails);

@@ -6,9 +6,13 @@ block content
             .carousel-inner
                 .carousel-item.active
                     img.d-block(src='/img/move1.jpeg' style="width:100%" alt='First slide')
-                - for (var i = 0; i < 1; ++i) {
-                    .carousel-item
-                        img.d-block(src='/img/move2.jpeg' alt='Second slide' style="width:100%" )
+                - for (var i = 0; i < 2; ++i) {
+                    -if(i==0)
+                        .carousel-item
+                            img.d-block(src='/img/move2.jpeg' alt='Second slide' style="width:100%" )
+                    -else
+                        .carousel-item
+                            img.d-block(src='/img/move3.jpg' alt='Second slide' style="width:100%" )
                 -}
             a.carousel-control-prev(href='#carouselExampleControls' role='button' data-slide='prev')
                 span.carousel-control-prev-icon(aria-hidden='true')
@@ -65,43 +69,44 @@ block content
                         h6 Payment Secure
                         p 100% secure payment
     // Services Section End
-    .banner-section.spad
+    .banner-section.spad(style="width:99%;")
         .container-fluid(style='text-align: center;')
             .row
-                .col-lg-2
+                .col-lg-2(style="padding: 1px;")
                     .single-banner
                         img(src='/img/insta-1.jpg' alt='')
                         .inner-text
                             a(href='shop.php?categories=anarkali')
                             h4(style="font-size: 15px;background: #00000038;") @ Herright_shop
-                .col-lg-2
+                .col-lg-2(style="padding: 1px;")
                     .single-banner
                         img(src='/img/insta-2.jpg' alt='')
                         .inner-text
                             a(href='shop.php?categories=anarkali')
                             h4(style="font-size: 15px;background: #00000038;") @ Herright_shop
-                .col-lg-2
+                .col-lg-2(style="padding: 1px;")
                     .single-banner
                         img(src='/img/insta-3.jpg' alt='')
                         .inner-text
                             a(href='shop.php?categories=anarkali')
                             h4(style="font-size: 15px;background: #00000038;") @ Herright_shop
-                .col-lg-2
+                .col-lg-2(style="padding: 1px;")
                     .single-banner
                         img(src='/img/insta-4.jpg' alt='')
                         .inner-text
                             a(href='shop.php?categories=kurtas')
                             h4(style="font-size: 15px;background: #00000038;") @ Herright_shop
-                .col-lg-2
+                .col-lg-2(style="padding: 1px;")
                     .single-banner
                         img(src='/img/insta-5.jpg' alt='')
                         .inner-text
                             a(href='shop.php?categories=skirts')
                             h4(style="font-size: 15px;background: #00000038;") @ Herright_shop
-                .col-lg-2
+                .col-lg-2(style="padding: 1px;")
                     .single-banner
                         img(src='/img/insta-6.jpg' alt='')
                         .inner-text
                             a(href='shop.php?categories=anarkali')
                             h4(style="font-size: 15px;background: #00000038;") @ Herright_shop
+
             

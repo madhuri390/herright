@@ -29,9 +29,11 @@ block content
                         h3 Customer Orders
                         table.table.table-striped.table-dark
                             col(style='width:15%')
-                            col(style='width:15%')
                             col(style='width:20%')
+                            col(style='width:15%')
                             col(style='width:10%')
+                            col(style='width:15%')
+                            col(style='width:5%')
                             col(style='width:10%')
                             col(style='width:10%')
                             thead
@@ -42,15 +44,17 @@ block content
                                 th(scope='col') Product Image
                                 th(scope='col') Product Details 
                                 th(scope='col') Product Size
+                                th(scope='col') Ordered on
+                                th(scope='col') Order Status
                         each order in orders
                             //- -console.log(order)
                             //- -console.log(address)
                             table.table
                                 col(style='width:15%')
-                                col(style='width:15%')
                                 col(style='width:20%')
-                                col(style='width:50%')
-
+                                col(style='width:15%')
+                                col(style='width:10%')
+                                col(style='width:10%')
                                 tr
                                 th.icon(scope='col' style='font-size: 15px;font-weight: lighter;')=`${order._id}` 
                                 th(scope='col' style='font-size: 15px;font-weight: lighter;') Id: #{order.userId._id} Name: #{order.userId.name}, Email: #{order.userId.email}, Phone : #{order.userId.phoneNumber}
@@ -62,28 +66,20 @@ block content
                                 th(scope='col' style='font-size: 15px;font-weight: lighter;')
                                     each p1 in order.product
                                         each p2 in products 
-                                            -console.log(new String(p1.productId).valueOf()==new String(p2._id).valueOf())
                                             if(new String(p1.productId).valueOf()==new String(p2._id).valueOf())
-                                                each c in p2.color  
-                                                    -console.log(new String(c._id).valueOf()==new String(p1.colorId).valueOf())
+                                                each c in p2.color 
                                                     if(new String(c._id).valueOf()==new String(p1.colorId).valueOf())
                                                         table.table(style="margin-bottom:0rem;")
                                                             col(style='width:10%')
-                                                            col(style='width:30%')
-                                                            col(style='width:30%')
+                                                            col(style='width:15%')
+                                                            col(style='width:5%')
                                                             tr
                                                             th(scope='col' style='font-size: 15px;font-weight: lighter;')
                                                                 img(src=`/img/products/${c.imageCover}` style='max-width:100px;') 
-                                                            th(scope='col' style='font-size: 15px;font-weight: lighter;') Product name: #{c.name}, Product Color: #{c.productColor}
-                                                            th(scope='col' style='font-size: 15px;font-weight: lighter;') #{p1.size}
-                                            
-
-                                 
-                            
-                            
-
-                            
-                
+                                                            th(scope='col' style='font-size: 15px;font-weight: lighter;') Product name: #{c.name}, Product Color: #{c.productColor}, Product Quantity: #{p1.quantity},Unit Product Price: #{p1.price}
+                                                            th(scope='col' style='font-size: 15px;font-weight: lighter;') #{p1.size} 
+                                th(scope='col' style='font-size: 15px;font-weight: lighter;') #{order.createdAt}
+                                th(scope='col' style='font-size: 15px;font-weight: lighter;') Order Placed     
             br
             br
             br

@@ -32,7 +32,7 @@ export const signup = async (
       },
     });
     if (res.data.status === 'success') {
-      showAlert('success', 'Login Successfully');
+      showAlert('success', 'Registered  Successfully');
       window.setTimeout(() => {
         location.assign('/');
       }, 1500);

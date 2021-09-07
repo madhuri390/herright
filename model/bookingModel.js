@@ -27,9 +27,12 @@ const bookingSchema = new mongooose.Schema({
         type: String,
         required: [true, 'A Product must require a size'],
       },
+      quantity: {
+        type: Number,
+        required: [true, 'A Product must require a quantity'],
+      },
     },
   ],
-
   price: {
     type: Number,
     required: [true, 'A booking must include a price'],

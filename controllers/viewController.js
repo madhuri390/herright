@@ -23,9 +23,9 @@ exports.getProduct = catchAsync(async (req, res, next) => {
 
   const product = await Product.findOne({ 'color.slug': req.params.slug });
   const pcolor = req.params.id;
-  // const similarProduct = await Product.find({
-  //   $or: [{ color: product.color }, { category: /.`${product.category}`./ }],
-  // });
+  const similarProducts = await Product.find({
+    category: { $in: [product.category] },
+  });
   // db.inventory.find({ $or: [{ quantity: { $lt: 20 } }, { price: 10 }] });
   if (!product)
     return next(new AppError('There is no product with this name', 404));
@@ -36,7 +36,7 @@ exports.getProduct = catchAsync(async (req, res, next) => {
     title: `${product.name}`,
     product,
     pcolor,
-    // similarProduct,
+    similarProducts,
   });
 });
 
@@ -134,6 +134,7 @@ exports.getFilterProducts = catchAsync(async (req, res, next) => {
     return next(new AppError('There is no product with this name', 404));
   //2)Build template
   //3)Render
+
   res.status(200).render('overview', {
     title: `Products`,
     products,

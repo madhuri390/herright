@@ -45,11 +45,19 @@ const createSendToken = (user, statusCode, req, res) => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
+  const address = {
+    flat: req.body.flat,
+    state: req.body.state,
+    pincode: req.body.pincode,
+    city: req.body.city,
+  };
   const newUser = await User.create({
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
+    phoneNumber: req.body.phoneNumber,
+    address: address,
   });
 
   const url = `${req.protocol}://${req.get('host')}/me`;
@@ -67,11 +75,6 @@ exports.login = catchAsync(async (req, res, next) => {
 
   // 2) Check if user exists && password is correct
   const user = await User.findOne({ email }).select('+password');
-  // if (email == 'herright9@gmail.com' && password == 'herright') {
-  //   res.status(200).json({
-  //     status: 'Admin login success',
-  //   });
-  // }
   if (!user || !(await user.correctPassword(password, user.password))) {
     return next(new AppError('Incorrect email or password', 401));
   }
@@ -135,11 +138,9 @@ exports.protect = catchAsync(async (req, res, next) => {
 
 // Only for rendered pages, no errors!
 exports.isLoggedIn = async (req, res, next) => {
-  console.log('in logged in');
   if (req.cookies.jwt) {
     try {
       // 1) verify token
-      console.log('token verification');
       const decoded = await promisify(jwt.verify)(
         req.cookies.jwt,
         process.env.JWT_SECRET
@@ -157,7 +158,6 @@ exports.isLoggedIn = async (req, res, next) => {
       }
       // THERE IS A LOGGED IN USER
       res.locals.user = currentUser;
-      console.log(req.locals.user);
       return next();
     } catch (err) {
       return next();
@@ -211,6 +211,24 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
       500
     );
   }
+});
+
+exports.addAddress = catchAsync(async (req, res, next) => {
+  const userId = req.body.userId;
+  const address = {
+    flat: req.body.flat,
+    state: req.body.state,
+    pincode: req.body.pincode,
+    city: req.body.city,
+  };
+  const user = await User.updateOne(
+    { _id: userId },
+    { $push: { address: address } }
+  );
+  res.status(200).json({
+    status: 'success',
+    data: user,
+  });
 });
 
 exports.resetPassword = catchAsync(async (req, res, next) => {

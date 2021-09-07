@@ -27,7 +27,6 @@ exports.uploadProductimages = upload.fields([
   },
 ]);
 exports.resizeProductimages = catchAsync(async (req, res, next) => {
-  console.log(req.files);
   if (!req.files.imageCover || !req.files.images) next();
   const name = req.body.name.replace(/\s/g, '');
   //Cover image
@@ -50,6 +49,65 @@ exports.resizeProductimages = catchAsync(async (req, res, next) => {
   next();
 });
 
+exports.addVariation = catchAsync(async (req, res, next) => {
+  const productId = req.params.id;
+  const color = {
+    name: req.body.name,
+    images: req.body.images,
+    imageCover: req.body.imageCover,
+    productColor: req.body.productColor,
+    slug: req.body.name.replace(/\s/g, '') + req.body.productColor,
+  };
+  req.body.color = color;
+  const product = await Product.updateOne(
+    { _id: productId },
+    { $push: { color: color } }
+  );
+  res.status(200).json({
+    status: 'success',
+    data: product,
+  });
+});
+exports.updateProductColor = catchAsync(async (req, res, next) => {
+  console.log('In update');
+  const productId = req.params.pid;
+  const productColor = req.params.productColor;
+  const product = await Product.updateOne(
+    { _id: productId, 'color.productColor': productColor },
+    {
+      $set: {
+        'color.$.name': req.body.name,
+        'color.$.images': req.body.images,
+        'color.$.imageCover': req.body.imageCover,
+        'color.$.productColor': req.body.productColor,
+      },
+    }
+  );
+  res.status(200).json({
+    status: 'success',
+    data: product,
+  });
+});
+exports.deleteProductColor = catchAsync(async (req, res, next) => {
+  const productId = req.params.productId;
+  const colorId = req.params.colorId;
+  const p = await Product.find({ _id: productId, 'color._id': colorId });
+  var n;
+  for await (const doc of p) {
+    n = doc.color.length;
+  }
+  if (n == 1) {
+    await Product.deleteOne({ _id: productId });
+  } else {
+    const product = await Product.update(
+      { _id: productId, 'color._id': colorId },
+      { $pull: { color: { _id: colorId } } }
+    );
+  }
+  res.status(204).json({
+    status: 'success',
+  });
+});
 exports.getAllProducts = handleFactory.getAll(Product);
 exports.getProduct = handleFactory.getOne(Product);
 exports.createProduct = handleFactory.createOne(Product);

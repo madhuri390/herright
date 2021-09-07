@@ -9,6 +9,7 @@ const AppError = require('../utils/appError');
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   //1)Get currently booked tour
   const userId = req.params.userId;
+  const addressId = req.params.addressId;
   const cart = await Cart.find({ userId });
   //2)Create checkout session
   const user = await User.findById(req.params.userId);
@@ -17,7 +18,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     for (let item of cart) {
       lineItems.push({
         name: item.productId.name,
-        amount: item.productId.price,
+        amount: item.productId.price * 100,
         currency: 'INR',
         quantity: item.quantity,
       });
@@ -25,7 +26,9 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       mode: 'payment',
-      success_url: `${req.protocol}://${req.get('host')}/?user=${userId}`,
+      success_url: `${req.protocol}://${req.get(
+        'host'
+      )}/?user=${userId}&address=${addressId}`,
       cancel_url: `${req.protocol}://${req.get('host')}`,
       line_items: lineItems,
     });
@@ -41,16 +44,20 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 });
 
 exports.createBookingCheckout = catchAsync(async (req, res, next) => {
-  const { user } = req.query;
+  const { user, address } = req.query;
   if (!user) return next();
   const cartItems = await Cart.find({ userId: user });
   let totalPrice = 0;
   for (let item of cartItems) {
     totalPrice = totalPrice + item.price;
   }
-  const productIds = await Cart.find({ userId: user }).select('productId');
+  const productIds = await Cart.find({ userId: user })
+    .select('productId')
+    .select('colorId')
+    .select('size');
   await Booking.create({
     userId: user,
+    addressId: address,
     product: productIds,
     price: totalPrice,
   });

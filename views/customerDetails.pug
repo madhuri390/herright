@@ -1,0 +1,84 @@
+
+extends base
+
+block content 
+    //- Header Section Begin
+    if user.role=='admin'
+        .container3
+        .row
+            .col-4
+            .nav-item
+                .canter1
+                .container
+                    <div class="nav-depart">
+                    <div class="depart-btn">
+                    <i class="ti-menu"></i>
+                    <span>All departments</span>
+                    <ul class="depart-hover">
+                    <li class="active"><a href="#">Women’s Clothing</a></li>
+                    <li><a href="#">Men’s Clothing</a></li>
+                    <li><a href="#">Underwear</a></li>
+                    <li><a href="#">Kid's Clothing</a></li>
+                    <li><a href="#">Brand Fashion</a></li>
+                    <li><a href="#">Accessories/Shoes</a></li>
+                    <li><a href="#">Luxury Brands</a></li>
+                    <li><a href="#">Brand Outdoor Apparel</a></li>
+                    </ul>
+                    </div>
+                    </div>
+                    .position-fixed(style='float:right; margin-right:50px; position: -webkit-sticky; position:sticky;')
+                    nav.full-height(style='width:246px;  background:black;position:relative; height: 100vh;')
+                        ul
+                        .logo(style='margin-left:10px;')
+                            a(href='./index.html')
+                            img(0='' src='img/font1.png' alt='' style='margin-top:30px;' padding:0='')
+                        li(style='list-style-type: none; margin-top: 20px; width:250px;')
+                            a(href='customerdetails' style='text-decoration:none; color:white ;font-size:20px ') View customer details
+                        li(style='list-style-type: none; margin-top: 20px; width:250px;')
+                            a(href='shop_cart.php' style='text-decoration:none; color:white ;font-size:20px ') Insert products
+                        li(style='list-style-type: none; margin-top: 20px; width:250px;')
+                            a(href='productlist.php' style='text-decoration:none; color:white ;font-size:20px ') View Products
+                        li(style='list-style-type: none; margin-top: 20px; width:250px;')
+                            a(href='adminorders.php' style='text-decoration:none; color:white ;font-size:20px ') View Orders
+                    #mobile-menu-wrap
+            .wrapper(style='padding:0px;max-width: 78%;margin-left: -154px;')
+            h3 Customer Details
+            
+            table.table.table-striped.table-dark
+                col(style='width:10%')
+                col(style='width:10%')
+                col(style='width:10%')
+                col(style='width:5%')
+                col(style='width:10%')
+                thead
+                tr
+                    th(scope='col') User Name
+                    th(scope='col') Email
+                    th(scope='col') Phone Number
+                    th(scope='col') Address
+            each user in customers
+                if user.role!='admin'
+                    table.table
+                        col(style='width:10%')
+                        col(style='width:10%')
+                        col(style='width:20%')
+                        col(style='width:5%')
+                        col(style='width:20%')
+                        col(style='width:10%')
+                        col(style='width:5%')
+                        col(style='width:5%')
+                        tr
+                        th.icon(scope='col' style='font-size: 15px;font-weight: lighter;')=`${user.name}` 
+                        th(scope='col' style='font-size: 15px;font-weight: lighter;')=`${user.email}`  
+                        th(scope='col' style='font-size: 15px;font-weight: lighter;')=`${user.phoneNumber}`
+                        each add in user.address
+                            th(scope='col' style='font-size: 15px;font-weight: lighter;') #{add.flat},#{add.city},#{add.state},#{add.pincode}
+                            br
+                        th(scope='col' style='font-size: 15px;font-weight: lighter;')  
+                    
+                br
+                br
+                br
+                br
+    else 
+        h2='No user'

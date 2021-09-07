@@ -13,6 +13,35 @@ block content
                         a(href='/')
                             i(class='icon_bag_alt' style='width:20px')
                             | Shop
+    section.shop.spad
+    .container
+        .row
+        .col-lg-3.col-md-3
+            .shop__sidebar
+            .sidebar__categories
+                .section-title
+                h4 Categories
+                .categories__accordion
+                #accordionExample.accordion
+                    .card
+                    .card-heading.active
+                        a(data-toggle='collapse' data-target='#collapseOne') Women
+                    #collapseOne.collapse.show(data-parent='#accordionExample')
+                        .card-body
+                        ul
+                            li
+                            a(href='/category/kurta') Kurtas
+                            li
+                            a(href='/category/Sets') Sets
+                            li
+                            a(href='/category/Tops') Tops
+                            li
+                            a(href='/category/Suits') JumpSuit
+                            li
+                            a(href='/category/Pallazos') Pallazos
+                            li
+                            a(href='/category/Jackets') Jackets
+
     .container(style='')
         .row
             .col-lg-9.col-md-9(style="margin-top: 50px;")
@@ -25,11 +54,11 @@ block content
                                         .hover-product
                                             ul(class='product__hover')
                                                 li
-                                                    a.image-popup(href=`/img/products/${product.images[0]}`)
+                                                    a.image-popup(href=`/img/products/${product.color[0].imageCover}`)
                                                     span(class='arrow_expand')
-                                            a(href=`./product/${product.slug}`)
-                                                img.img-fluid.image(style='cursor:pointer; width:262px; height:368px; float:left' href=`./product/${product.slug}` src=`/img/products/${product.imageCover}` )
+                                            a(href=`./product/${product.color[0].slug}/${product.color[0]._id}`)
+                                                img.img-fluid.image(style='cursor:pointer; width:262px; height:368px; float:left' href=`./product/${product.color[0].slug}` src=`/img/products/${product.color[0].imageCover}` )
                                         div(class='product__item__text')
                                             h6
-                                                a(href=`./product/${product.slug}` style="font-weight:bold;")=product.name
+                                                a(href=`./product/${product.slug}` style="font-weight:bold;")=product.color[0].name
                                             div(class='product__price')="₹ "+product.price

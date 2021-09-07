@@ -18,7 +18,6 @@ const productSchema = new mongoose.Schema(
       ],
       //validate: [validator.isAlpha, 'Tour name must only contain characters'],
     },
-    slug: String,
     ratingsAverage: {
       type: Number,
       default: 4.5,
@@ -53,14 +52,38 @@ const productSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-    imageCover: {
-      type: String,
-      required: [true, 'A product must have a cover image'],
-    },
-    images: [
+    color: [
       {
-        type: String,
-        required: [true, 'A product must have a images'],
+        slug: String,
+        name: {
+          type: String,
+          required: [true, 'A product must have a name'],
+          unique: true,
+          trim: true,
+          maxlength: [
+            40,
+            'A product name must have les or equal to 40 characters',
+          ],
+          minlength: [
+            10,
+            'A product name must have more or equal to 10 characters',
+          ],
+          //validate: [validator.isAlpha, 'Tour name must only contain characters'],
+        },
+        productColor: {
+          type: String,
+          required: [true, 'A product must have a color'],
+        },
+        imageCover: {
+          type: String,
+          required: [true, 'A product must have a cover image'],
+        },
+        images: [
+          {
+            type: String,
+            required: [true, 'A product must have a images'],
+          },
+        ],
       },
     ],
     createdAt: {
@@ -72,11 +95,6 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: [true, 'A product must have a category'],
     },
-    slug: String,
-    color: {
-      type: String,
-      required: [true, 'A product must have color'],
-    },
   },
   {
     toJSON: { virtuals: true },
@@ -85,7 +103,10 @@ const productSchema = new mongoose.Schema(
 );
 productSchema.index({ slug: 1 });
 productSchema.pre('save', function (next) {
-  this.slug = slugify(this.name, { lower: true });
+  console.log(this.color[0].name);
+  this.slug = slugify(this.color[0].name + this.color[0].productColor, {
+    lower: true,
+  });
   next();
 });
 const Product = mongoose.model('Product', productSchema);

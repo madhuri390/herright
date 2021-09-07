@@ -21,28 +21,32 @@ const userSchema = new mongoose.Schema({
     unique: true,
     validate: [validator.isMobilePhone, 'Please provide a valid email'],
   },
-  pincode: {
-    type: Number,
-    required: [true, 'Please provide your valid pincode'],
-  },
-  locality: {
-    type: String,
-  },
-  city: {
-    type: String,
-    required: [true, 'Please provide your city'],
-  },
-  state: {
-    type: String,
-    required: [true, 'Please provide your state'],
-  },
-  flat: {
-    type: String,
-    required: [true, 'Please provide your flat Number'],
-  },
-  landmark: {
-    type: String,
-  },
+  address: [
+    {
+      pincode: {
+        type: Number,
+        required: [true, 'Please provide your valid pincode'],
+      },
+      locality: {
+        type: String,
+      },
+      city: {
+        type: String,
+        required: [true, 'Please provide your city'],
+      },
+      state: {
+        type: String,
+        required: [true, 'Please provide your state'],
+      },
+      flat: {
+        type: String,
+        required: [true, 'Please provide your flat Number'],
+      },
+      landmark: {
+        type: String,
+      },
+    },
+  ],
   role: {
     type: String,
     enum: ['user', 'admin'],

@@ -28,64 +28,62 @@ block content
                                             p.card-text=`${address .city}`
                                             p.card-text=`${address .state}`
                                             p.card-text=`${address .pincode}`
-                                p.card-text(id='phone')=`${user.phoneNumber}`
+                                p(style="font-weight:bold;font-size:18px;").card-text(id='phone')="PHONE NO : "+`${user.phoneNumber}`
                             br
                             br
-                    .col-lg-6
-                        button.btn.btn--green.span-all-rows#addPreference(style='margin-top:50px;background:black;text-transform:uppercase;border-radius:50px;width:50%;color:white') Add Preference
-                        #result(style='display:none' )
-                            form.form.form--addAddress
-                                input#userId(type='hidden' name='userId' value=`${user._id}`)
-                                .group-input
-                                label(for='zip') Pincode*
-                                input#pincode(type='text')
-                                .showFeedBack
-                                .group-input
-                                label(for='zip') City*
-                                input#city(type='text')
-                                .showFeedBack
-                                .group-input
-                                label(for='city') State*
-                                input#state(type='text' autocomplete='off')
-                                .showFeedBack
-                                .group-input
-                                label(for='city') Locality / Area / Street *
-                                input#locality(type='text' autocomplete='off')
-                                .group-input
-                                label(for='city') Flat no / Building Name*
-                                input#flat(type='text' autocomplete='off')
-                                .group-input
-                                label(for='city') Landmark (optional)
-                                input#landmark(type='text' autocomplete='off')
-                                button.btn.site-btn Add Address 
+                    
+                            button.btn.btn--green.span-all-rows#addPreference(style='margin-top:50px;background:black;text-transform:uppercase;border-radius:50px;width:50%;color:white') Add Preference
+                            #result(style='display:none' )
+                                form.form.form--addAddress
+                                    input#userId(type='hidden' name='userId' value=`${user._id}`)
+                                    .group-input
+                                    label(for='zip') Pincode*
+                                    input#pincode(type='text')
+                                    .showFeedBack
+                                    .group-input
+                                    label(for='zip') City*
+                                    input#city(type='text')
+                                    .showFeedBack
+                                    .group-input
+                                    label(for='city') State*
+                                    input#state(type='text' autocomplete='off')
+                                    .showFeedBack
+                                    .group-input
+                                    label(for='city') Locality / Area / Street *
+                                    input#locality(type='text' autocomplete='off')
+                                    .group-input
+                                    label(for='city') Flat no / Building Name*
+                                    input#flat(type='text' autocomplete='off')
+                                    .group-input
+                                    label(for='city') Landmark (optional)
+                                    input#landmark(type='text' autocomplete='off')
+                                    button.btn.site-btn Add Address 
                     br
                     .col-lg-6
-                    -let totalAmount=0
-                    each item in cartItems
-                        .card.p-4(class='display-card')
-                            .row
-                                // Cart Images div
-                                div(class='col-md-2 col-11 mx-auto  d-flex justify-content-center align-items-center  product_img')
+                        -let totalAmount=0
+                        each item in cartItems
+                            .card.p-4(class='display-card')
+                                .row(style="margin-left:60px;")
                                     each c in item.productId.color
                                         if new String(c._id).valueOf()==new String(item.colorId).valueOf()
-                                            a(href=`/product/${c.slug}/${c._id}`)
-                                            img(src=`/img/products/${c.imageCover}` style='max-width: 140px; margin-right: 50px; margin-left: 20px' alt=c.name)
-                                            // Product Details
+                                            div(class='col-md-2 col-11 mx-auto  d-flex justify-content-center align-items-center  product_img')
+                                                a(href=`/product/${c.slug}/${c._id}`)
+                                                img(src=`/img/products/${c.imageCover}` style='max-width: 140px; margin-right: 50px; margin-left: 20px' alt=c.name)
                                             .col-md-8.col-11.mx-auto.px-4.mt-2.justify-content-center
                                                 .row
                                                     // product name
                                                     .col-8.card-title
-                                                    h3(class='mb-4 product_name' style=' color: black;font-size: 1.4rem;text-transform: capitalize;font-weight: 500;')=c.name
-                                                    p.mb-2=`Color :${c.productColor}`
-                                                    p.mb-2=`Category:${item.productId.category}`
-                                                    p.mb-3=`Size:${item.size}`
-                                                    p.mb-4=`Quantity:${item.quantity}`
-                                                    p.mb-5=`Price:${item.price}`
-                                                    -totalAmount=totalAmount+item.price
-                                            
+                                                        h3(class='mb-4 product_name' style=' color: black;font-size: 1.4rem;text-transform: capitalize;font-weight: 500;')=c.name
+                                                        p.mb-2=`COLOR: ${c.productColor}`
+                                                        p.mb-2=`CATEGORY: ${item.productId.category}`
+                                                        p.mb-3=`SIZE: ${item.size}`
+                                                        p.mb-4=`QUANTITY: ${item.quantity}`
+                                                        p.mb-5=`PRICE: ${item.price}`
+                                                        -totalAmount=totalAmount+item.price
                                                 
-                            
-                    
+                                                    
+                                
+                        
                     .checkout-content(style="text-align:center;margin-top:50px;")
                         .place-order
                             .order-total(style="width: 50%;padding:50px;margin-left:270px;")

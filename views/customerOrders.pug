@@ -5,91 +5,77 @@ block content
     //- Header Section Begin
     if user.role=='admin'
         .container3
-        .row
-            .col-4
-            .nav-item
-                .canter1
-                .container
-                    <div class="nav-depart">
-                    <div class="depart-btn">
-                    <i class="ti-menu"></i>
-                    <span>All departments</span>
-                    <ul class="depart-hover">
-                    <li class="active"><a href="#">Women’s Clothing</a></li>
-                    <li><a href="#">Men’s Clothing</a></li>
-                    <li><a href="#">Underwear</a></li>
-                    <li><a href="#">Kid's Clothing</a></li>
-                    <li><a href="#">Brand Fashion</a></li>
-                    <li><a href="#">Accessories/Shoes</a></li>
-                    <li><a href="#">Luxury Brands</a></li>
-                    <li><a href="#">Brand Outdoor Apparel</a></li>
-                    </ul>
-                    </div>
-                    </div>
-                    .position-fixed(style='float:right; margin-right:50px; position: -webkit-sticky; position:sticky;')
-                    nav.full-height(style='width:246px;  background:black;position:relative; height: 100vh;')
-                        ul
-                        .logo(style='margin-left:10px;')
-                            a(href='./index.html')
-                            img(0='' src='img/font1.png' alt='' style='margin-top:30px;' padding:0='')
-                        li(style='list-style-type: none; margin-top: 20px; width:250px;')
-                            a(href='customerdetails' style='text-decoration:none; color:white ;font-size:20px ') View customer details
-                        li(style='list-style-type: none; margin-top: 20px; width:250px;')
-                            a(href='shop_cart.php' style='text-decoration:none; color:white ;font-size:20px ') Insert products
-                        li(style='list-style-type: none; margin-top: 20px; width:250px;')
-                            a(href='productlist.php' style='text-decoration:none; color:white ;font-size:20px ') View Products
-                        li(style='list-style-type: none; margin-top: 20px; width:250px;')
-                            a(href='adminorders.php' style='text-decoration:none; color:white ;font-size:20px ') View Orders
-                    #mobile-menu-wrap
-            .wrapper(style='padding:0px;max-width: 78%;margin-left: -154px;')
-            h3 Customer Details
-            
-            table.table.table-striped.table-dark
-                col(style='width:10%')
-                col(style='width:10%')
-                col(style='width:10%')
-                col(style='width:5%')
-                col(style='width:10%')
-                thead
-                tr
-                    th(scope='col') Booking Id
-                    th(scope='col') Customer Details
-                    th(scope='col') Address
-                    th(scope='col') Product Image
-                    th(scope='col') Product Details 
-                    th(scope='col') Product Size
-            each order in orders
-                //- -console.log(order)
-                //- -console.log(address)
-                table.table
-                    col(style='width:10%')
-                    col(style='width:10%')
-                    col(style='width:20%')
-                    col(style='width:5%')
-                    col(style='width:20%')
-                    col(style='width:10%')
-                    col(style='width:5%')
-                    col(style='width:5%')
-                    tr
-                    th.icon(scope='col' style='font-size: 15px;font-weight: lighter;')=`${order._id}` 
-                    th(scope='col' style='font-size: 15px;font-weight: lighter;') Id: #{order.userId._id} Name: #{order.userId.name}, Email: #{order.userId.email}, Phone : #{order.userId.phoneNumber}
-                    
-                    each add in order.userId.address
-                        
-                        if (new String(add._id).valueOf()==new String(order.addressId).valueOf())
-                            th(scope='col' style='font-size: 15px;font-weight: lighter;') #{add.flat},#{add.city},#{add.state},#{add.pincode}
-                            br
-                    each p1 in order.product
-                        each p2 in products 
-                            -console.log(new String(p1.productId).valueOf()==new String(p2._id).valueOf())
-                            if(new String(p1.productId).valueOf()==new String(p2._id).valueOf())
-                                each c in p2.color  
-                                    -console.log(new String(c._id).valueOf()==new String(p1.colorId).valueOf())
-                                    if(new String(c._id).valueOf()==new String(p1.colorId).valueOf())
-                                        th(scope='col' style='font-size: 15px;font-weight: lighter;')
-                                            img(src=`/img/products/${c.imageCover}` style='max-width:100px;') 
-                                        th(scope='col' style='font-size: 15px;font-weight: lighter;') Product name: #{c.name}, Product Color: #{c.productColor}
-                                        th(scope='col' style='font-size: 15px;font-weight: lighter;') #{p1.size}
+            .row(style="width:100%;")
+                .col-4(style="margin-top:85px;")
+                    .nav-item
+                        .canter1
+                            .container                                
+                                .position-fixed(style='float:right;margin-left:-15px; margin-right:15px; position: -webkit-sticky; position:sticky;z-index:50')
+                                    nav.full-height(style='width:246px;  background:black;position:relative; height: 100vh;')
+                                        ul(style="margin-left:20px;")
+                                            .logo(style='margin-left:10px;')
+                                                a(href='./index')
+                                                img(0='' src='img/font1.png' alt='' style='margin-top:30px;' padding:0='')
+                                            li(style='list-style-type: none; margin-top: 20px; width:250px;')
+                                                a(href='customerDetails' style='text-decoration:none; color:white ;font-size:20px ') view customer details
+                                            li(style='list-style-type: none; margin-top: 20px; width:250px;')
+                                                a(href='addProduct' style='text-decoration:none; color:white ;font-size:20px ') Insert products
+                                            li(style='list-style-type: none; margin-top: 20px; width:250px;')
+                                                a(href='crud' style='text-decoration:none; color:white ;font-size:20px ') View Products
+                                            li(style='list-style-type: none; margin-top: 20px; width:250px;')
+                                                a(href='customerOrders' style='text-decoration:none; color:white ;font-size:20px ') View Orders
+                #mobile-menu-wrap(style="margin-top:40px;")
+                    .wrapper(style='padding:0px;width:98%;margin-left: 280px;')
+                        h3 Customer Orders
+                        table.table.table-striped.table-dark
+                            col(style='width:15%')
+                            col(style='width:15%')
+                            col(style='width:20%')
+                            col(style='width:10%')
+                            col(style='width:10%')
+                            col(style='width:10%')
+                            thead
+                            tr
+                                th(scope='col') Booking Id
+                                th(scope='col') Customer Details
+                                th(scope='col') Address
+                                th(scope='col') Product Image
+                                th(scope='col') Product Details 
+                                th(scope='col') Product Size
+                        each order in orders
+                            //- -console.log(order)
+                            //- -console.log(address)
+                            table.table
+                                col(style='width:15%')
+                                col(style='width:15%')
+                                col(style='width:20%')
+                                col(style='width:50%')
+
+                                tr
+                                th.icon(scope='col' style='font-size: 15px;font-weight: lighter;')=`${order._id}` 
+                                th(scope='col' style='font-size: 15px;font-weight: lighter;') Id: #{order.userId._id} Name: #{order.userId.name}, Email: #{order.userId.email}, Phone : #{order.userId.phoneNumber}
+                                
+                                each add in order.userId.address
+                                    if (new String(add._id).valueOf()==new String(order.addressId).valueOf())
+                                        th(scope='col' style='font-size: 15px;font-weight: lighter;') #{add.flat},#{add.city},#{add.state},#{add.pincode}
+                                        br
+                                th(scope='col' style='font-size: 15px;font-weight: lighter;')
+                                    each p1 in order.product
+                                        each p2 in products 
+                                            -console.log(new String(p1.productId).valueOf()==new String(p2._id).valueOf())
+                                            if(new String(p1.productId).valueOf()==new String(p2._id).valueOf())
+                                                each c in p2.color  
+                                                    -console.log(new String(c._id).valueOf()==new String(p1.colorId).valueOf())
+                                                    if(new String(c._id).valueOf()==new String(p1.colorId).valueOf())
+                                                        table.table(style="margin-bottom:0rem;")
+                                                            col(style='width:10%')
+                                                            col(style='width:30%')
+                                                            col(style='width:30%')
+                                                            tr
+                                                            th(scope='col' style='font-size: 15px;font-weight: lighter;')
+                                                                img(src=`/img/products/${c.imageCover}` style='max-width:100px;') 
+                                                            th(scope='col' style='font-size: 15px;font-weight: lighter;') Product name: #{c.name}, Product Color: #{c.productColor}
+                                                            th(scope='col' style='font-size: 15px;font-weight: lighter;') #{p1.size}
                                             
 
                                  

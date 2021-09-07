@@ -32,17 +32,16 @@ block content
                     a.carousel-control-next(href='#carouselExampleControls' role='button' data-slide='next')
                         span.carousel-control-next-icon(aria-hidden='true')
                         span.sr-only Next  
-                      
+            span.u-visually-hidden(style='position: absolute !important;overflow: hidden;clip: rect(0 0 0 0);height: 1px;width: 1px;margin: -1px;padding: 0;border: 0;') White         
             .col-md-7
                 p.newarrival.text-center NEW
                 h2(style="font-weight:bold;")=product.color[0].name 
                 h5(style="font-weight:bold;margin-top:20px;color:black;")="₹ "+product.price 
                 p(style="margin-top:20px;color:black;")=product.description
                 p(style="color:black;font-weight:bold;")="Choose the color:"
-                each c in product.color
-                    if c._id!=pcolor 
-                        p 
-                            a(href=`../${c.slug}/${c._id}`)=c.productColor 
+                each c in product.color 
+                    p 
+                        a(href=`../${c.slug}/${c._id}` style=`hover:${c.productColor};color:${c.productColor};cursor:pointer;`)=c.productColor 
                 p(style="color:black;font-weight:bold;")="Choose the size:"
                 select#size.sorting(name='size' style='max-width: 300px;margin-left: 20px;padding:10px;font-size: 16px;color: #4c4c4c;max-width: 300px;border-radius: 0;border: 1px solid #ECEDEE;height: 40px;line-height: 35px;')
                     option(value='' selected) Choose an option
@@ -65,7 +64,7 @@ block content
                                                 p(style="margin-left: 26px;font-size: 24px;color:black;font-weight: bold;") DESCRIPTION
                                                 #collapseOne.collapse(data-parent='#accordionExample')
                                                     .card-body
-                                                        p Hand micropleated ikat print maxi dress with sweetheart neckline 
+                                                        p=`${product.summary}`
                                         .card
                                             .card-heading(style='padding:6px;')
                                                 a(data-toggle='collapse' data-target='#collapseTwo' style='font-size:18px;font-weight:bold;')
@@ -76,24 +75,23 @@ block content
                                                         | AVAILABILITY :: YES
                                                         br
                                                         | BRAND :: HERRIGHT
-    //- .container(style='margin-top:50px;')
-    //-     .row
-    //-         .col-lg-9.col-md-9
-    //-             .product-list
-    //-                 .row
-    //-                     h3(style= "text-align:center;") We've got more options
-    //-                         each product in similarProduct
-    //-                             .col-lg-4.col-md-6
-    //-                                 .equal-column-content.text-center(style='padding:15px;margin:10px;height:0%;')
-    //-                                     div(class='product__item')
-    //-                                         .hover-product
-    //-                                             ul(class='product__hover')
-    //-                                                 li
-    //-                                                     a.image-popup(href=`/img/products/${product.color[0].images[0]}`)
-    //-                                                         span(class='arrow_expand')
-    //-                                             a(href=`/${product.slug}`)
-    //-                                                 img.img-fluid.image(style='cursor:pointer; width:262px; height:368px; float:left' href=`./product/${product.slug}` src=`/img/products/${product.imageCover}` )
-    //-                                         div(class='product__item__text')
-    //-                                             h6
-    //-                                                 a(href=`/img/products/${product.color[0].images[0]}`)=product.color[0].name
-    //-                                             div(class='product__price')=product.price
+        .col-lg-9.col-md-9(style="margin-top: 50px;")
+            .product-list
+                .row
+                    h3 WE'VE GOT MORE OPTIONS
+                    each p in similarProducts
+                        if new String(p._id).valueOf()!=new String(product._id).valueOf()
+                            .col-lg-4.col-md-6
+                                .equal-column-content.text-center(style='padding:15px;margin:10px;height:0%;')
+                                    div(class='product__item')
+                                        .hover-product
+                                            ul(class='product__hover')
+                                                li
+                                                    a.image-popup(href=`/img/products/${p.color[0].imageCover}`)
+                                                    span(class='arrow_expand')
+                                            a(href=`/product/${p.color[0].slug}/${p.color[0]._id}`)
+                                                img.img-fluid.image(style='cursor:pointer; width:262px; height:368px; float:left' href=`./product/${product.color[0].slug}` src=`/img/products/${p.color[0].imageCover}` )
+                                        div(class='product__item__text')
+                                            h6
+                                                a(href=`./product/${p.slug}` style="font-weight:bold;")=p.color[0].name
+                                            div(class='product__price')="₹ "+p.price

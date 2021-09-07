@@ -2,52 +2,34 @@ extends base
 
 block content 
     //- Header Section Begin
-    if user.role=='admin'
-        .container3
-            .row(style="width:100%;")
-                .col-4(style="margin-top:85px;")
-                    .nav-item
-                        .canter1
-                            .container                                
-                                .position-fixed(style='float:right;margin-left:-15px; margin-right:15px; position: -webkit-sticky; position:sticky;z-index:50')
-                                    nav.full-height(style='width:246px;  background:black;position:relative; height: 100vh;')
-                                        ul(style="margin-left:20px;")
-                                            .logo(style='margin-left:10px;')
-                                                a(href='./index')
-                                                img(0='' src='img/font1.png' alt='' style='margin-top:30px;' padding:0='')
-                                            li(style='list-style-type: none; margin-top: 20px; width:250px;')
-                                                a(href='customerDetails' style='text-decoration:none; color:white ;font-size:20px ') view customer details
-                                            li(style='list-style-type: none; margin-top: 20px; width:250px;')
-                                                a(href='addProduct' style='text-decoration:none; color:white ;font-size:20px ') Insert products
-                                            li(style='list-style-type: none; margin-top: 20px; width:250px;')
-                                                a(href='crud' style='text-decoration:none; color:white ;font-size:20px ') View Products
-                                            li(style='list-style-type: none; margin-top: 20px; width:250px;')
-                                                a(href='customerOrders' style='text-decoration:none; color:white ;font-size:20px ') View Orders
-                                    
-                #mobile-menu-wrap(style="margin-top:40px;")
-                    .wrapper(style='padding:0px;width:98%;margin-left: 280px;')
-                        h3 Products in Cart
-                        a(href='/addProduct').button.btn.btn-success(style='float: right;margin-top: -69px;') Add Product
-                        table.table.table-striped.table-dark
-                            col(style='width:15%')
-                            col(style='width:15%')
-                            col(style='width:10%')
-                            col(style='width:30%')
-                            col(style='width:10%')
-                            col(style='width:10%')
-                            col(style='width:10%')
-                            col(style='width:15%')
-                            thead
-                                tr
-                                    th(scope='col') Product Name
-                                    th(scope='col') Image
-                                    th(scope='col') Price
-                                    th(scope='col') Description
-                                    th(scope='col') Categories
-                                    th(scope='col') Color
-                                    th(scope='col') #
-                        each item in products
-                            table.table
+    if user
+        if user.role=='admin'
+            .container3
+                .row(style="width:100%;")
+                    .col-4(style="margin-top:85px;")
+                        .nav-item
+                            .canter1
+                                .container                                
+                                    .position-fixed(style='float:right;margin-left:-15px; margin-right:15px; position: -webkit-sticky; position:sticky;z-index:50')
+                                        nav.full-height(style='width:246px;  background:black;position:relative; height: 100vh;')
+                                            ul(style="margin-left:20px;")
+                                                .logo(style='margin-left:10px;')
+                                                    a(href='./index')
+                                                    img(0='' src='img/font1.png' alt='' style='margin-top:30px;' padding:0='')
+                                                li(style='list-style-type: none; margin-top: 20px; width:250px;')
+                                                    a(href='customerDetails' style='text-decoration:none; color:white ;font-size:20px ') view customer details
+                                                li(style='list-style-type: none; margin-top: 20px; width:250px;')
+                                                    a(href='addProduct' style='text-decoration:none; color:white ;font-size:20px ') Insert products
+                                                li(style='list-style-type: none; margin-top: 20px; width:250px;')
+                                                    a(href='crud' style='text-decoration:none; color:white ;font-size:20px ') View Products
+                                                li(style='list-style-type: none; margin-top: 20px; width:250px;')
+                                                    a(href='customerOrders' style='text-decoration:none; color:white ;font-size:20px ') View Orders
+                                        
+                    #mobile-menu-wrap(style="margin-top:40px;")
+                        .wrapper(style='padding:0px;width:98%;margin-left: 280px;')
+                            h3 Products in Cart
+                            a(href='/addProduct').button.btn.btn-success(style='float: right;margin-top: -69px;') Add Product
+                            table.table.table-striped.table-dark
                                 col(style='width:15%')
                                 col(style='width:15%')
                                 col(style='width:10%')
@@ -56,21 +38,44 @@ block content
                                 col(style='width:10%')
                                 col(style='width:10%')
                                 col(style='width:15%')
-                                tr
-                                th.icon(scope='col' style='font-size: 15px;font-weight: lighter;')=`${item.name}` 
-                                th(scope='col')
-                                    img(src=`/img/products/${item.color[0].imageCover}` style='max-width:100px;')
-                                th(scope='col' style='font-size: 15px;font-weight: lighter;')=`${item.price}`  
-                                th(scope='col' style='font-size: 15px;font-weight: lighter;')=`${item.description}`
-                                th(scope='col' style='font-size: 15px;font-weight: lighter;')=`${item.category}` 
-                                th(scope='col' style='font-size: 15px;font-weight: lighter;') 
-                                th.icon(scope='col')
-                                    a.btn.btn-success(href=`./edit/${item._id}` style='cursor:pointer;') View
-                                    br
-                                    a.btn.btn-danger(href=`./addVariation/${item._id}` data-product-id=`${item._id}`  style='cursor:pointer;') Add Color Variation
-                    br
-                    br
-                    br
-                    br
+                                thead
+                                    tr
+                                        th(scope='col') Product Name
+                                        th(scope='col') Image
+                                        th(scope='col') Price
+                                        th(scope='col') Description
+                                        th(scope='col') Categories
+                                        th(scope='col') Color
+                                        th(scope='col') #
+                            each item in products
+                                table.table
+                                    col(style='width:15%')
+                                    col(style='width:15%')
+                                    col(style='width:10%')
+                                    col(style='width:30%')
+                                    col(style='width:10%')
+                                    col(style='width:10%')
+                                    col(style='width:10%')
+                                    col(style='width:15%')
+                                    tr
+                                    th.icon(scope='col' style='font-size: 15px;font-weight: lighter;')=`${item.name}` 
+                                    th(scope='col')
+                                        img(src=`/img/products/${item.color[0].imageCover}` style='max-width:100px;')
+                                    th(scope='col' style='font-size: 15px;font-weight: lighter;')=`${item.price}`  
+                                    th(scope='col' style='font-size: 15px;font-weight: lighter;')=`${item.description}`
+                                    th(scope='col' style='font-size: 15px;font-weight: lighter;')=`${item.category}` 
+                                    th(scope='col' style='font-size: 15px;font-weight: lighter;') 
+                                    th.icon(scope='col')
+                                        a.btn.btn-success(href=`./edit/${item._id}` style='cursor:pointer;') View
+                                        br
+                                        a.btn.btn-danger(href=`./addVariation/${item._id}` data-product-id=`${item._id}`  style='cursor:pointer;') Add Color Variation
+                        br
+                        br
+                        br
+                        br
+        else 
+            h2='You are not authorized to use this page'
     else 
-        h2='No user'
+        h2 Please login to access'
+        a(href=`/login` style='color:White;margin-top:100px;')
+                button.site-btn.login-btn(style='border-radius:10px;') Login

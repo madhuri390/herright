@@ -7,11 +7,6 @@ const router = express.Router();
 
 router.use(authController.isLoggedIn);
 
-router.get(
-  '/',
-  bookingController.createBookingCheckout,
-  viewController.getOverview
-);
 router.get('/edit/:id', viewController.editproduct);
 router.get('/crud', viewController.crud);
 router.get('/addVariation/:id', viewController.addColorVariation);
@@ -23,13 +18,17 @@ router.get('/blog', viewController.getBlog);
 router.get('/contact', viewController.getContact);
 router.get('/cart', authController.protect, viewController.getCartDetails);
 router.get(
+  '/',
+  bookingController.createBookingCheckout,
+  viewController.getOverview
+);
+router.get(
   '/checkout/:slug',
   authController.isLoggedIn,
   authController.protect,
   viewController.getCheckoutDetails
 );
 router.get('/:attribute/:value', viewController.getFilterProducts);
-
 
 router.get('/update/:pid/:productColor', viewController.updateProduct);
 router.get('/addProduct', viewController.getAddProduct);

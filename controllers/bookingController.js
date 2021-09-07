@@ -54,7 +54,8 @@ exports.createBookingCheckout = catchAsync(async (req, res, next) => {
   const productIds = await Cart.find({ userId: user })
     .select('productId')
     .select('colorId')
-    .select('size');
+    .select('size')
+    .select('quantity');
   await Booking.create({
     userId: user,
     addressId: address,

@@ -6,18 +6,17 @@ module.exports = class Email {
     this.to = user.email;
     this.firstName = user.name.split(' ')[0];
     this.url = url;
-    this.from = `Jonas Schmedtmann <${process.env.EMAIL_FROM}>`;
+    this.from = `Her Right <${process.env.EMAIL_FROM}>`;
   }
   newTransport() {
     console.log(process.env.NODE_ENV);
     //if (process.env.NODE_ENV === 'production') {
     //Send grid
-    console.log('yes in production');
     return nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'veeramreddymadhuri9@gmail.com',
-        pass: '11_venkat',
+        user: 'herright9@gmail.com',
+        pass: 'herrightngo@9',
       },
     });
     //}

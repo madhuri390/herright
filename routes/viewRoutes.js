@@ -16,6 +16,8 @@ router.get('/product/:slug/:id', viewController.getProduct);
 router.get('/signup', viewController.signup);
 router.get('/login', viewController.getLoginForm);
 router.get('/index', viewController.getIndex);
+router.get('/blog', viewController.getBlog);
+router.get('/contact', viewController.getContact);
 router.get('/cart', authController.protect, viewController.getCartDetails);
 router.get(
   '/checkout/:slug',

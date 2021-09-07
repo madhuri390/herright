@@ -31,33 +31,33 @@ block content
                                 p.card-text(id='phone')=`${user.phoneNumber}`
                             br
                             br
-                    .col-lg-12
-                            button.btn.btn--green.span-all-rows#addPreference(style='margin-top:50px;background:black;text-transform:uppercase;border-radius:50px;width:50%;color:white') Add Preference
-                            #result(style='display:none' )
-                                form.form.form--addAddress
-                                    input#userId(type='hidden' name='userId' value=`${user._id}`)
-                                    .group-input
-                                    label(for='zip') Pincode*
-                                    input#pincode(type='text')
-                                    .showFeedBack
-                                    .group-input
-                                    label(for='zip') City*
-                                    input#city(type='text')
-                                    .showFeedBack
-                                    .group-input
-                                    label(for='city') State*
-                                    input#state(type='text' autocomplete='off')
-                                    .showFeedBack
-                                    .group-input
-                                    label(for='city') Locality / Area / Street *
-                                    input#locality(type='text' autocomplete='off')
-                                    .group-input
-                                    label(for='city') Flat no / Building Name*
-                                    input#flat(type='text' autocomplete='off')
-                                    .group-input
-                                    label(for='city') Landmark (optional)
-                                    input#landmark(type='text' autocomplete='off')
-                                    button.btn.site-btn Add Address 
+                    .col-lg-6
+                        button.btn.btn--green.span-all-rows#addPreference(style='margin-top:50px;background:black;text-transform:uppercase;border-radius:50px;width:50%;color:white') Add Preference
+                        #result(style='display:none' )
+                            form.form.form--addAddress
+                                input#userId(type='hidden' name='userId' value=`${user._id}`)
+                                .group-input
+                                label(for='zip') Pincode*
+                                input#pincode(type='text')
+                                .showFeedBack
+                                .group-input
+                                label(for='zip') City*
+                                input#city(type='text')
+                                .showFeedBack
+                                .group-input
+                                label(for='city') State*
+                                input#state(type='text' autocomplete='off')
+                                .showFeedBack
+                                .group-input
+                                label(for='city') Locality / Area / Street *
+                                input#locality(type='text' autocomplete='off')
+                                .group-input
+                                label(for='city') Flat no / Building Name*
+                                input#flat(type='text' autocomplete='off')
+                                .group-input
+                                label(for='city') Landmark (optional)
+                                input#landmark(type='text' autocomplete='off')
+                                button.btn.site-btn Add Address 
                     br
                     .col-lg-6
                     -let totalAmount=0

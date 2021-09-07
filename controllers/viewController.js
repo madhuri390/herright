@@ -66,6 +66,18 @@ exports.getIndex = (req, res) => {
   });
 };
 
+exports.getBlog = (req, res) => {
+  res.status(200).render('blog', {
+    title: 'Get to know more about us',
+  });
+};
+
+exports.getContact = (req, res) => {
+  res.status(200).render('contact', {
+    title: 'Contact us now',
+  });
+};
+
 exports.getCartDetails = catchAsync(async (req, res) => {
   const userId = req.user.id;
   //console.log(userId);

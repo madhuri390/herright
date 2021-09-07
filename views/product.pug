@@ -12,23 +12,20 @@ block content
                             i(class='icon_bag_alt' style='width:20px')
                             | Shop
                         span=product.color[0].name
-    each c in product.color
-        if c._id!=pcolor 
-            a(href=`../${c.slug}/${c._id}`)=c.productColor 
+    
     .container(style="margin-top:50px;")
         .row
             .col-md-5
                 #carouselExampleControls.carousel.slide(data-ride='carousel')
                     .carousel-inner
-                        .carousel-item.active
-                            each c in product.color
-                                if c._id==pcolor 
+                        each c in product.color
+                            if c._id==pcolor 
+                                .carousel-item.active
                                     img.d-block(src=`/img/products/${c.images[0]}` style="max-width:100%;" alt='First slide')
-
-                                    - for (var i = 0; i < c.images.length; ++i) {
-                                        .carousel-item
-                                            img.d-block(src=`/img/products/${c.images[i]}` alt='Second slide' style="max-width:100%;" )
-                                    -}
+                                - for (var i = 0; i < c.images.length; ++i) {
+                                    .carousel-item
+                                        img.d-block(src=`/img/products/${c.images[i]}` alt='Second slide' style="max-width:100%;" )
+                                -}
                     a.carousel-control-prev(href='#carouselExampleControls' role='button' data-slide='prev')
                         span.carousel-control-prev-icon(aria-hidden='true')
                         span.sr-only Previous
@@ -41,6 +38,11 @@ block content
                 h2(style="font-weight:bold;")=product.color[0].name 
                 h5(style="font-weight:bold;margin-top:20px;color:black;")="₹ "+product.price 
                 p(style="margin-top:20px;color:black;")=product.description
+                p(style="color:black;font-weight:bold;")="Choose the color:"
+                each c in product.color
+                    if c._id!=pcolor 
+                        p 
+                            a(href=`../${c.slug}/${c._id}`)=c.productColor 
                 p(style="color:black;font-weight:bold;")="Choose the size:"
                 select#size.sorting(name='size' style='max-width: 300px;margin-left: 20px;padding:10px;font-size: 16px;color: #4c4c4c;max-width: 300px;border-radius: 0;border: 1px solid #ECEDEE;height: 40px;line-height: 35px;')
                     option(value='' selected) Choose an option
@@ -74,24 +76,24 @@ block content
                                                         | AVAILABILITY :: YES
                                                         br
                                                         | BRAND :: HERRIGHT
-        //- .container(style='margin-top:50px;')
-        //-     .row
-        //-         .col-lg-9.col-md-9
-        //-             .product-list
-        //-                 .row
-        //-                     h3(style= "text-align:center;") We've got more options
-        //-                     each product in similarProduct
-        //-                         .col-lg-4.col-md-6
-        //-                             .equal-column-content.text-center(style='padding:15px;margin:10px;height:0%;')
-        //-                                 div(class='product__item')
-        //-                                     .hover-product
-        //-                                         ul(class='product__hover')
-        //-                                             li
-        //-                                                 a.image-popup(href=`/img/products/${product.color[0].images[0]}`)
-        //-                                                     span(class='arrow_expand')
-        //-                                         a(href=`/${product.slug}`)
-        //-                                             img.img-fluid.image(style='cursor:pointer; width:262px; height:368px; float:left' href=`./product/${product.slug}` src=`/img/products/${product.imageCover}` )
-        //-                                     div(class='product__item__text')
-        //-                                         h6
-        //-                                             a(href=`/img/products/${product.color[0].images[0]}`)=product.color[0].name
-        //-                                         div(class='product__price')=product.price
+    //- .container(style='margin-top:50px;')
+    //-     .row
+    //-         .col-lg-9.col-md-9
+    //-             .product-list
+    //-                 .row
+    //-                     h3(style= "text-align:center;") We've got more options
+    //-                         each product in similarProduct
+    //-                             .col-lg-4.col-md-6
+    //-                                 .equal-column-content.text-center(style='padding:15px;margin:10px;height:0%;')
+    //-                                     div(class='product__item')
+    //-                                         .hover-product
+    //-                                             ul(class='product__hover')
+    //-                                                 li
+    //-                                                     a.image-popup(href=`/img/products/${product.color[0].images[0]}`)
+    //-                                                         span(class='arrow_expand')
+    //-                                             a(href=`/${product.slug}`)
+    //-                                                 img.img-fluid.image(style='cursor:pointer; width:262px; height:368px; float:left' href=`./product/${product.slug}` src=`/img/products/${product.imageCover}` )
+    //-                                         div(class='product__item__text')
+    //-                                             h6
+    //-                                                 a(href=`/img/products/${product.color[0].images[0]}`)=product.color[0].name
+    //-                                             div(class='product__price')=product.price

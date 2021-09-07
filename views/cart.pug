@@ -2,41 +2,47 @@ extends base
 
 
 block content 
+    // Breadcrumb Section Begin
+    .breacrumb-section(style='padding-top:100px;')
+        .container(style='margin-top:0px;')
+            .row
+                .col-lg-12
+                    .breadcrumb-text
+                        a(href='shop.php')
+                            i(class='icon_bag_alt' style='width:20px')
+                            | CartPage
     -let totalAmount=0
     each item in cartItems
         .card.p-4(class='display-card')
             .row
-                // Cart Images div
-                div(class='col-md-2 col-11 mx-auto  d-flex justify-content-center align-items-center  product_img')
-                    each c in item.productId.color
-                        -console.log(new String(c._id).valueOf()==new String(item.colorId).valueOf())
-                        if new String(c._id).valueOf()==new String(item.colorId).valueOf()
+                each c in item.productId.color
+                    -console.log(new String(c._id).valueOf()==new String(item.colorId).valueOf())
+                    if new String(c._id).valueOf()==new String(item.colorId).valueOf()
+                        div(class='col-md-2 col-11 mx-auto  d-flex justify-content-center align-items-center  product_img')
                             a(href=`/product/${c.slug}/${c._id}`)
                             img(src=`/img/products/${c.imageCover}` style='max-width: 140px; margin-right: 50px; margin-left: 20px' alt=c.name)
-                            // Product Details
-                            .col-md-8.col-11.mx-auto.px-4.mt-2.justify-content-center
-                                .row
-                                    // product name
-                                    .col-8.card-title
-                                    h3(class='mb-4 product_name' style=' color: black;font-size: 1.4rem;text-transform: capitalize;font-weight: 500;')=c.name
-                                    p.mb-2=`Color :${c.productColor}`
-                                    p.mb-2=`Category:${item.productId.category}`
-                                    p.mb-3=`Size:${item.size}`
-                                    .btn-increment-decrement(class='decrement' data-product-Id=`${item.productId.id}`,data-product-size=`${item.size}`,data-product-price=`${item.productId.price}`,data-color-id=`${new String(c._id).valueOf()}`) -
-                                    input.input-quantity(id=`${item.productId.id}-${item.size}-${new String(c._id).valueOf()}` value=`${item.quantity}`)
-                                    .btn-increment-decrement(class='increment' data-product-Id=`${item.productId.id}`,data-product-size=`${item.size}`,data-product-price=`${item.productId.price}`,data-color-id=`${new String(c._id).valueOf()}`)  +
-                            
-                                    // Quantity
-                                .row
-                                    div(class='col-8 d-flex justify-content-between remove_wish')
-                                    p
-                                        i.fa.fa-trash-o(class='trash' data-product-Id=`${item.productId.id}`,data-product-size=`${item.size}` data-color-id=`${new String(c._id).valueOf()}` style='cursor:pointer;' )
-                                    p.wishlist
-                                        i.fa.fa-heart(style='cursor:pointer;')
-                                    div(class='col-4 d-flex justify-content-end price_money')
-                                    h5(id=`${item.productId.id}-${item.size}-price`)
-                                        span#itemval=item.price
-                                        -totalAmount=totalAmount+item.price
+                        // Product Details
+                        .col-md-8.col-11.mx-auto.px-4.mt-2.justify-content-center
+                            .row
+                                // product name
+                                .col-8.card-title
+                                h3(class='mb-4 product_name' style=' color: black;font-size: 1.4rem;text-transform: capitalize;font-weight: 500;')=c.name
+                                p.mb-2=`Color: ${c.productColor}`
+                                p.mb-2=`Category: ${item.productId.category}`
+                                p.mb-3=`Size: ${item.size}`
+                                .btn-increment-decrement(class='decrement' data-product-Id=`${item.productId.id}`,data-product-size=`${item.size}`,data-product-price=`${item.productId.price}`,data-color-id=`${new String(c._id).valueOf()}`) -
+                                input.input-quantity(id=`${item.productId.id}-${item.size}-${new String(c._id).valueOf()}` value=`${item.quantity}`)
+                                .btn-increment-decrement(class='increment' data-product-Id=`${item.productId.id}`,data-product-size=`${item.size}`,data-product-price=`${item.productId.price}`,data-color-id=`${new String(c._id).valueOf()}`)  +
+                        
+                                // Quantity
+                            .row
+                                div(class='col-8 d-flex justify-content-between remove_wish')
+                                p
+                                    i.fa.fa-trash-o(class='trash' data-product-Id=`${item.productId.id}`,data-product-size=`${item.size}` data-color-id=`${new String(c._id).valueOf()}` style='cursor:pointer;' )
+                                div(class='col-4 d-flex justify-content-end price_money')
+                                h5(id=`${item.productId.id}-${item.size}-price`)
+                                    span#itemval=item.price
+                                    -totalAmount=totalAmount+item.price
                             
                                 
     .wrapper

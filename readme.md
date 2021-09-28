@@ -1,6 +1,6 @@
 **E-COMMERCE WEBSITE WITH IMAGE RECOMMENDATIONS**
 
-Built application using node,express,mongo.
+#Built application using node,express,mongo.
 
 1. Load the folder “herright” into your preffered editor(ex: visual studio code etc).
 

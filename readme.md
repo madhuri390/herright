@@ -8,10 +8,10 @@ Built application using node,express,mongo.
 
 3. Open the terminal in the editor and download the packages required for the application. All of them are listed in the package.json file.
 
-To download packages in dependencies:
-npm install package_name
-To download packages in devDependencies:
-npm install package_name --save-dev
+   To download packages in dependencies:
+   npm install package_name
+   To download packages in devDependencies:
+   npm install package_name --save-dev
 
 4. In the terminal run the command: npm start
 
